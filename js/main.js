@@ -1,3 +1,4 @@
+
 /* =========================================================
    LEONARDO MÁRQUEZ — PORTAFOLIO
    Vanilla JavaScript (sin dependencias)
@@ -299,9 +300,13 @@
   }
 
   /* --------------------------------------------------------
-     12. Contact form (validation + simulated submit + toast)
+     12. Contact form
+       a) Abre WhatsApp con el mensaje pre-llenado al número de Leonardo
+       b) Envía el formulario por POST a FormSubmit.co (correo a Leonardo
+          y autorespuesta automática al cliente)
   --------------------------------------------------------- */
-  const form = document.getElementById('contact-form');
+  const WHATSAPP_NUMBER = '573132049102'; // sin "+" ni espacios
+  const form  = document.getElementById('contact-form');
   const toast = document.getElementById('toast');
 
   function showError(field, msg) {
@@ -311,14 +316,16 @@
   function clearErrors() {
     ['name','email','service','message'].forEach(f => showError(f, ''));
   }
-  function showToast() {
+  function showToast(title, desc) {
     if (!toast) return;
+    if (title) toast.querySelector('.toast-title').textContent = title;
+    if (desc)  toast.querySelector('.toast-desc').textContent  = desc;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
+    setTimeout(() => toast.classList.remove('show'), 5000);
   }
 
   if (form) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       clearErrors();
 
@@ -334,21 +341,199 @@
       if (message.length < 10){ showError('message', 'El mensaje debe tener al menos 10 caracteres'); ok = false; }
       if (!ok) return;
 
+      // 1) Mensaje preformateado para WhatsApp
+      const waText =
+        `Hola Leonardo, soy *${name}*.\n` +
+        `Me interesa el servicio: *${service}*.\n\n` +
+        `${message}\n\n` +
+        `Mi correo: ${email}`;
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
+
+      // 2) Mensaje del autoresponse al cliente
+      const autoresponse =
+        `Hola ${name}, gracias por contactar a Leonardo Márquez.\n\n` +
+        `Hemos recibido tu solicitud para el servicio: ${service}.\n\n` +
+        `Tu mensaje:\n"${message}"\n\n` +
+        `Te responderé a la mayor brevedad. Si necesitas atención inmediata, escríbeme por WhatsApp al +57 313 204 9102.\n\n` +
+        `— Leonardo Márquez`;
+      const autoField = document.getElementById('autoresponse-field');
+      if (autoField) autoField.value = autoresponse;
+
       const btn = document.getElementById('submit-btn');
       const txt = btn.querySelector('.btn-text');
       const orig = txt.textContent;
-      txt.textContent = 'ENVIANDO...';
+      txt.textContent = 'ABRIENDO WHATSAPP...';
       btn.disabled = true;
       btn.style.opacity = '0.7';
 
-      // Simulated network request
-      await new Promise(r => setTimeout(r, 1500));
+      // 3) Abre WhatsApp en pestaña nueva
+      window.open(waUrl, '_blank');
 
-      txt.textContent = orig;
-      btn.disabled = false;
-      btn.style.opacity = '';
-      form.reset();
-      showToast();
+      // 4) Envío del formulario por correo (FormSubmit) en segundo plano
+      const data = new FormData(form);
+      fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+        .catch(() => { /* silencioso: WhatsApp ya se abrió */ })
+        .finally(() => {
+          txt.textContent = orig;
+          btn.disabled = false;
+          btn.style.opacity = '';
+          form.reset();
+          showToast(
+            '¡Mensaje enviado con éxito!',
+            'Se abrió WhatsApp y recibirás un correo de confirmación.'
+          );
+        });
+    });
+  }
+
+  /* --------------------------------------------------------
+     13. Asistente IA — Chat Widget
+       Reconoce intenciones por palabras clave y responde
+       en español con tono amigable. Ofrece quick-replies
+       y deriva a WhatsApp cuando corresponde.
+  --------------------------------------------------------- */
+  const chatFab    = document.getElementById('chat-fab');
+  const chatWin    = document.getElementById('chat-window');
+  const chatClose  = document.getElementById('chat-close');
+  const chatBody   = document.getElementById('chat-body');
+  const chatQuick  = document.getElementById('chat-quick');
+  const chatForm   = document.getElementById('chat-form');
+  const chatInput  = document.getElementById('chat-input');
+
+  // Base de conocimiento del asistente
+  const KB = [
+    { id:'saludo',    keys:['hola','hey','buenas','buen dia','buen día','saludos','que tal','qué tal','hi','hello'],
+      reply: '¡Hola! Soy el asistente de Leonardo. Puedo ayudarte con información sobre <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong> o ponerte en contacto directo con él. ¿Qué necesitas?' },
+    { id:'servicios', keys:['servicio','servicios','que haces','qué haces','que ofreces','qué ofreces','que hace','qué hace'],
+      reply: 'Leonardo trabaja en <strong>tres áreas principales</strong>:<br>• <strong>Diseño Gráfico</strong> (logos, branding, redes sociales)<br>• <strong>Desarrollo Web</strong> (landing pages, e-commerce, UI/UX)<br>• <strong>Soporte y Sistemas</strong> (redes, hosting, mantenimiento)<br>¿Sobre cuál quieres saber más?' },
+    { id:'diseno',    keys:['diseno','diseño','logo','logos','branding','marca','identidad','imagen','redes sociales','flyer','afiche','social media','illustrator','photoshop'],
+      reply: 'En <strong>diseño gráfico</strong> Leonardo crea identidades visuales completas: logotipos, manuales de marca, contenido para redes sociales, material editorial y ediciones publicitarias. Trabaja con Illustrator, Photoshop, Figma y After Effects.' },
+    { id:'web',       keys:['web','pagina','página','sitio','landing','tienda','ecommerce','e-commerce','frontend','desarrollo','programacion','programación','react','html','css','javascript','app'],
+      reply: 'En <strong>desarrollo web</strong> construye landing pages, tiendas online y aplicaciones modernas con React, Tailwind y JavaScript. Diseño responsivo, animaciones fluidas y enfoque en conversión.' },
+    { id:'soporte',   keys:['soporte','sistema','sistemas','red','redes','hosting','servidor','seguridad','linux','windows','reparar','reparación','mantenimiento','computador','pc'],
+      reply: 'En <strong>soporte y sistemas</strong> ofrece configuración de hosting, administración de redes, seguridad informática y mantenimiento preventivo. También reparación de hardware y atención remota.' },
+    { id:'precio',    keys:['precio','precios','costo','costos','cobra','cobras','cuanto','cuánto','vale','valor','tarifa','presupuesto','cotizar','cotizacion','cotización'],
+      reply: 'El precio depende del alcance del proyecto. Para una <strong>cotización personalizada</strong> en pocos minutos, escríbele por WhatsApp con los detalles de lo que necesitas.<br><br><a href="https://wa.me/573132049102" target="_blank">Cotizar ahora por WhatsApp →</a>' },
+    { id:'tiempo',    keys:['tiempo','demora','demoras','dias','días','semanas','plazo','entrega','rapido','rápido','urgente','cuando','cuándo'],
+      reply: 'Los tiempos varían según la complejidad: un <strong>logo</strong> entre 3-7 días, una <strong>landing page</strong> 1-3 semanas, y un <strong>sitio completo</strong> 3-6 semanas. Para urgencias, contáctalo por WhatsApp.' },
+    { id:'experiencia',keys:['experiencia','años','años','trayectoria','curriculum','cv','sena','adso','estudios','estudia','formacion','formación'],
+      reply: 'Leonardo es estudiante de <strong>Análisis y Desarrollo de Software (SENA)</strong>, freelance de diseño gráfico desde 2021 y soporte técnico remoto desde 2022. Combina visión creativa con conocimientos técnicos sólidos.' },
+    { id:'contacto',  keys:['contacto','contactar','hablar','escribir','llamar','telefono','teléfono','celular','whatsapp','wsp','wa','correo','email','mail'],
+      reply: 'Puedes contactar a Leonardo por:<br>• <strong>WhatsApp:</strong> <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a><br>• <strong>Email:</strong> <a href="mailto:lumar.321456@gmail.com">lumar.321456@gmail.com</a><br>• <strong>Formulario:</strong> en la sección de Contacto de esta página.' },
+    { id:'ubicacion', keys:['donde','dónde','ubicacion','ubicación','ciudad','pais','país','vive','queda','colombia','sibate','sibaté','bogota','bogotá'],
+      reply: 'Leonardo está ubicado en <strong>Sibaté, Cundinamarca (Colombia)</strong>. Trabaja presencialmente en la zona y de forma remota para clientes en cualquier parte del mundo.' },
+    { id:'portafolio',keys:['portafolio','proyecto','proyectos','trabajo','trabajos','ejemplo','ejemplos','muestra','demos','ver','mostrar'],
+      reply: 'Puedes ver sus proyectos destacados en la sección <strong>Portafolio</strong> de esta misma página. Hay trabajos de diseño, desarrollo web e infraestructura. Haz clic en cualquier tarjeta para ver el detalle.' },
+    { id:'agradecer', keys:['gracias','muchas gracias','genial','perfecto','excelente','bueno','vale','ok','okay','dale'],
+      reply: '¡Con gusto! Si necesitas algo más, estoy aquí. Cuando quieras avanzar, escríbele a Leonardo por WhatsApp y te responderá lo antes posible.' },
+    { id:'despedida', keys:['adios','adiós','chao','bye','nos vemos','hasta luego'],
+      reply: '¡Hasta pronto! Que tengas un excelente día. No dudes en volver a escribir cuando quieras.' }
+  ];
+
+  const FALLBACK =
+    'No estoy seguro de entender. Puedo ayudarte con: <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong>, <strong>portafolio</strong>, <strong>experiencia</strong> o <strong>contacto</strong>. También puedes <a href="https://wa.me/573132049102" target="_blank">escribir directo por WhatsApp</a>.';
+
+  const QUICK = [
+    { label: 'Servicios',  text: 'Quiero saber qué servicios ofreces' },
+    { label: 'Precios',    text: '¿Cuánto cuesta?' },
+    { label: 'Tiempos',    text: '¿Cuánto se demora?' },
+    { label: 'Contacto',   text: '¿Cómo te contacto?' },
+    { label: 'Ubicación',  text: '¿Dónde estás?' },
+    { label: 'WhatsApp',   text: 'Quiero hablar por WhatsApp' }
+  ];
+
+  function normalize(s) {
+    return s.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita tildes
+      .replace(/[¿?¡!.,]/g, ' ')
+      .replace(/\s+/g, ' ').trim();
+  }
+
+  function findReply(text) {
+    const t = ' ' + normalize(text) + ' ';
+    let best = null, bestScore = 0;
+    for (const intent of KB) {
+      let score = 0;
+      for (const k of intent.keys) {
+        const nk = normalize(k);
+        if (t.includes(' ' + nk + ' ') || t.includes(' ' + nk) || t.includes(nk + ' ')) {
+          score += nk.length; // las palabras más largas pesan más
+        }
+      }
+      if (score > bestScore) { bestScore = score; best = intent; }
+    }
+    return best ? best.reply : FALLBACK;
+  }
+
+  function addMsg(html, who) {
+    const el = document.createElement('div');
+    el.className = 'msg ' + who;
+    el.innerHTML = html;
+    chatBody.appendChild(el);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function addTyping() {
+    const el = document.createElement('div');
+    el.className = 'typing';
+    el.id = 'typing-indicator';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    chatBody.appendChild(el);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  function removeTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  }
+
+  function renderQuickReplies() {
+    chatQuick.innerHTML = '';
+    QUICK.forEach(q => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = q.label;
+      b.addEventListener('click', () => sendUserMessage(q.text));
+      chatQuick.appendChild(b);
+    });
+  }
+
+  function sendUserMessage(text) {
+    if (!text || !text.trim()) return;
+    addMsg(text.replace(/</g, '&lt;'), 'user');
+    chatInput.value = '';
+    addTyping();
+    const delay = 600 + Math.min(text.length * 20, 1200);
+    setTimeout(() => {
+      removeTyping();
+      addMsg(findReply(text), 'bot');
+    }, delay);
+  }
+
+  let chatGreeted = false;
+  function openChat() {
+    if (!chatWin) return;
+    chatWin.classList.add('open');
+    chatWin.setAttribute('aria-hidden', 'false');
+    chatFab.classList.add('hidden');
+    if (!chatGreeted) {
+      chatGreeted = true;
+      setTimeout(() => addMsg('¡Hola! Soy el asistente de Leonardo. Puedo resolver tus dudas sobre servicios, precios, tiempos o contactarte con él. ¿En qué te ayudo?', 'bot'), 250);
+      renderQuickReplies();
+    }
+  }
+  function closeChat() {
+    if (!chatWin) return;
+    chatWin.classList.remove('open');
+    chatWin.setAttribute('aria-hidden', 'true');
+    chatFab.classList.remove('hidden');
+  }
+
+  if (chatFab)   chatFab.addEventListener('click', openChat);
+  if (chatClose) chatClose.addEventListener('click', closeChat);
+  if (chatForm) {
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendUserMessage(chatInput.value);
     });
   }
 
