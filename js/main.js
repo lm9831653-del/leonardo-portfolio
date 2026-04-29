@@ -1,4 +1,3 @@
-
 /* =========================================================
    LEONARDO MÁRQUEZ — PORTAFOLIO
    Vanilla JavaScript (sin dependencias)
@@ -7,14 +6,40 @@
 (() => {
   'use strict';
 
+  /* --------------------------------------------------------
+     0. LIMPIEZA AUTOMÁTICA DIARIA
+        Borra cualquier dato local (historial de chat, etc.)
+        cada 24 horas para que nada se acumule.
+  --------------------------------------------------------- */
+  const STORE_PREFIX = 'lm_';
+  const CLEAN_KEY    = 'lm_last_cleanup';
+  const ONE_DAY_MS   = 24 * 60 * 60 * 1000;
+
+  function dailyCleanup() {
+    try {
+      const last = parseInt(localStorage.getItem(CLEAN_KEY) || '0', 10);
+      const now  = Date.now();
+      if (!last || now - last > ONE_DAY_MS) {
+        Object.keys(localStorage)
+          .filter(k => k.startsWith(STORE_PREFIX) && k !== CLEAN_KEY)
+          .forEach(k => localStorage.removeItem(k));
+        localStorage.setItem(CLEAN_KEY, String(now));
+      }
+    } catch (e) { /* localStorage no disponible: seguimos en memoria */ }
+  }
+  dailyCleanup();
+  // Re-chequea cada hora por si el visitante deja la pestaña abierta
+  setInterval(dailyCleanup, 60 * 60 * 1000);
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch      = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
 
   /* --------------------------------------------------------
-     1. Custom Cursor
+     1. Custom Cursor (solo escritorio con mouse)
   --------------------------------------------------------- */
   const dot  = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
-  if (dot && ring && window.matchMedia('(min-width: 901px)').matches) {
+  if (dot && ring && !isTouch && window.matchMedia('(min-width: 901px)').matches) {
     let mx = 0, my = 0, rx = 0, ry = 0;
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
@@ -31,6 +56,9 @@
       el.addEventListener('mouseenter', () => ring.classList.add('active'));
       el.addEventListener('mouseleave', () => ring.classList.remove('active'));
     });
+  } else if (dot && ring) {
+    dot.style.display  = 'none';
+    ring.style.display = 'none';
   }
 
   /* --------------------------------------------------------
@@ -39,18 +67,19 @@
   const progress = document.getElementById('scroll-progress');
   const nav      = document.getElementById('nav');
   const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = ['inicio','about','services','portfolio','contact'].map(id => document.getElementById(id));
+  const sections = ['inicio','about','services','portfolio','contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
 
   function onScroll() {
     const top = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    if (progress) progress.style.width = ((top / max) * 100) + '%';
+    if (progress) progress.style.width = ((top / Math.max(max,1)) * 100) + '%';
     if (nav)      nav.classList.toggle('scrolled', top > 40);
 
-    // active section
     const y = top + window.innerHeight * 0.35;
     let current = sections[0];
-    sections.forEach(s => { if (s && s.offsetTop <= y) current = s; });
+    sections.forEach(s => { if (s.offsetTop <= y) current = s; });
     navLinks.forEach(l => {
       l.classList.toggle('active', l.getAttribute('href') === '#' + (current ? current.id : ''));
     });
@@ -118,7 +147,6 @@
       const fill  = skill.querySelector('.skill-fill');
       const pct   = skill.querySelector('.skill-pct');
       if (fill) fill.style.width = level + '%';
-
       const duration = 1500;
       const start = performance.now();
       function tick(now) {
@@ -155,11 +183,11 @@
   }
 
   /* --------------------------------------------------------
-     8. Mouse parallax for hero visual
+     8. Mouse parallax (solo escritorio)
   --------------------------------------------------------- */
   const hero = document.getElementById('inicio');
   const parallaxEls = hero ? hero.querySelectorAll('[data-parallax]') : [];
-  if (hero && parallaxEls.length && !reduceMotion) {
+  if (hero && parallaxEls.length && !reduceMotion && !isTouch) {
     hero.addEventListener('mousemove', (e) => {
       const rect = hero.getBoundingClientRect();
       const cx = (e.clientX - rect.left - rect.width / 2)  / rect.width;
@@ -190,9 +218,9 @@
   }
 
   /* --------------------------------------------------------
-     10. Tilt cards (services)
+     10. Tilt cards (services) — desactivado en táctil
   --------------------------------------------------------- */
-  if (!reduceMotion) {
+  if (!reduceMotion && !isTouch) {
     document.querySelectorAll('.tilt').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const r = card.getBoundingClientRect();
@@ -256,7 +284,6 @@
         </div>
       </article>
     `).join('');
-
     grid.querySelectorAll('.project-card').forEach(card => {
       card.addEventListener('click', () => {
         const id = +card.dataset.id;
@@ -265,7 +292,6 @@
       });
     });
   }
-
   filters.forEach(btn => {
     btn.addEventListener('click', () => {
       filters.forEach(b => b.classList.remove('active'));
@@ -277,8 +303,8 @@
 
   function openModal(p) {
     if (!modal) return;
-    document.getElementById('modal-img').src   = p.image;
-    document.getElementById('modal-img').alt   = p.title;
+    document.getElementById('modal-img').src = p.image;
+    document.getElementById('modal-img').alt = p.title;
     document.getElementById('modal-title').textContent = p.title;
     document.getElementById('modal-desc').textContent  = p.desc;
     const badge = document.getElementById('modal-badge');
@@ -300,12 +326,9 @@
   }
 
   /* --------------------------------------------------------
-     12. Contact form
-       a) Abre WhatsApp con el mensaje pre-llenado al número de Leonardo
-       b) Envía el formulario por POST a FormSubmit.co (correo a Leonardo
-          y autorespuesta automática al cliente)
+     12. Contact form: WhatsApp + Email al cliente
   --------------------------------------------------------- */
-  const WHATSAPP_NUMBER = '573132049102'; // sin "+" ni espacios
+  const WHATSAPP_NUMBER = '573132049102';
   const form  = document.getElementById('contact-form');
   const toast = document.getElementById('toast');
 
@@ -335,13 +358,13 @@
       const message = form.message.value.trim();
       let ok = true;
 
-      if (name.length < 2)    { showError('name',    'El nombre es muy corto'); ok = false; }
-      if (!/^\S+@\S+\.\S+$/.test(email)) { showError('email', 'Correo electrónico inválido'); ok = false; }
-      if (!service)           { showError('service', 'Selecciona un servicio'); ok = false; }
-      if (message.length < 10){ showError('message', 'El mensaje debe tener al menos 10 caracteres'); ok = false; }
+      if (name.length < 2)               { showError('name',    'El nombre es muy corto'); ok = false; }
+      if (!/^\S+@\S+\.\S+$/.test(email)) { showError('email',   'Correo electrónico inválido'); ok = false; }
+      if (!service)                      { showError('service', 'Selecciona un servicio'); ok = false; }
+      if (message.length < 10)           { showError('message', 'El mensaje debe tener al menos 10 caracteres'); ok = false; }
       if (!ok) return;
 
-      // 1) Mensaje preformateado para WhatsApp
+      // 1) Mensaje preformateado para WhatsApp de Leonardo
       const waText =
         `Hola Leonardo, soy *${name}*.\n` +
         `Me interesa el servicio: *${service}*.\n\n` +
@@ -349,15 +372,28 @@
         `Mi correo: ${email}`;
       const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
 
-      // 2) Mensaje del autoresponse al cliente
+      // 2) Notificación al cliente: autoresponse + CC + replyto
       const autoresponse =
-        `Hola ${name}, gracias por contactar a Leonardo Márquez.\n\n` +
-        `Hemos recibido tu solicitud para el servicio: ${service}.\n\n` +
-        `Tu mensaje:\n"${message}"\n\n` +
-        `Te responderé a la mayor brevedad. Si necesitas atención inmediata, escríbeme por WhatsApp al +57 313 204 9102.\n\n` +
-        `— Leonardo Márquez`;
-      const autoField = document.getElementById('autoresponse-field');
-      if (autoField) autoField.value = autoresponse;
+        `Hola ${name},\n\n` +
+        `Hemos recibido tu solicitud en el portafolio de Leonardo Márquez.\n\n` +
+        `------------------------------------------\n` +
+        `RESUMEN DE TU SOLICITUD\n` +
+        `------------------------------------------\n` +
+        `Servicio: ${service}\n` +
+        `Mensaje:  ${message}\n` +
+        `------------------------------------------\n\n` +
+        `Leonardo se pondrá en contacto contigo lo antes posible.\n\n` +
+        `Si necesitas atención inmediata:\n` +
+        `   WhatsApp: +57 313 204 9102\n` +
+        `   Email:    lumar.321456@gmail.com\n\n` +
+        `Gracias por confiar en nosotros.\n— Leonardo Márquez`;
+
+      const autoField    = document.getElementById('autoresponse-field');
+      const replytoField = document.getElementById('replyto-field');
+      const ccField      = document.getElementById('cc-field');
+      if (autoField)    autoField.value    = autoresponse;
+      if (replytoField) replytoField.value = email;
+      if (ccField)      ccField.value      = email; // copia al cliente
 
       const btn = document.getElementById('submit-btn');
       const txt = btn.querySelector('.btn-text');
@@ -369,7 +405,7 @@
       // 3) Abre WhatsApp en pestaña nueva
       window.open(waUrl, '_blank');
 
-      // 4) Envío del formulario por correo (FormSubmit) en segundo plano
+      // 4) Envío por correo en segundo plano
       const data = new FormData(form);
       fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
         .catch(() => { /* silencioso: WhatsApp ya se abrió */ })
@@ -378,20 +414,282 @@
           btn.disabled = false;
           btn.style.opacity = '';
           form.reset();
-          showToast(
-            '¡Mensaje enviado con éxito!',
-            'Se abrió WhatsApp y recibirás un correo de confirmación.'
-          );
+          showToast('¡Mensaje enviado con éxito!', 'WhatsApp abierto y se envió un correo de confirmación.');
         });
     });
   }
 
   /* --------------------------------------------------------
-     13. Asistente IA — Chat Widget
-       Reconoce intenciones por palabras clave y responde
-       en español con tono amigable. Ofrece quick-replies
-       y deriva a WhatsApp cuando corresponde.
+     13. ASISTENTE IA — Versión MEJORADA
+        - Base de conocimiento ampliada
+        - Tolerancia a errores ortográficos (Levenshtein)
+        - Memoria de contexto (recuerda el último tema)
+        - Respuestas variadas para sonar más natural
+        - Persistencia diaria del historial (auto-borrado)
+        - Detecta intención de contacto y deriva a WhatsApp
   --------------------------------------------------------- */
+
+  // ---- Utilidades de texto ----
+  const STOPWORDS = new Set([
+    'el','la','los','las','un','una','de','del','y','o','u','en','a','al','con',
+    'por','para','que','qué','si','no','me','te','se','le','les','lo','tu','su',
+    'mi','es','son','es','este','esta','eso','esa','muy','mas','más','aqui','aquí',
+    'alli','allí','asi','así','soy','estoy','tengo','quiero','necesito','puedo',
+    'podrias','podrías','sobre','tambien','también','pero','o','sea','hay'
+  ]);
+
+  function normalize(s) {
+    return s.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[¿?¡!.,;:()"'`´]/g, ' ')
+      .replace(/\s+/g, ' ').trim();
+  }
+
+  function tokenize(s) {
+    return normalize(s).split(' ').filter(w => w && !STOPWORDS.has(w));
+  }
+
+  // Levenshtein (distancia de edición) para palabras cortas → tolera errores
+  function lev(a, b) {
+    const m = a.length, n = b.length;
+    if (Math.abs(m - n) > 2) return 99;
+    const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+    for (let i = 0; i <= m; i++) dp[i][0] = i;
+    for (let j = 0; j <= n; j++) dp[0][j] = j;
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1; j <= n; j++) {
+        const cost = a[i-1] === b[j-1] ? 0 : 1;
+        dp[i][j] = Math.min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + cost);
+      }
+    }
+    return dp[m][n];
+  }
+
+  // ¿Las palabras coinciden con tolerancia a typos?
+  function fuzzyMatch(token, target) {
+    if (token === target) return 1;
+    if (token.length >= 4 && target.includes(token)) return 0.85;
+    if (target.length >= 4 && token.includes(target)) return 0.85;
+    const dist = lev(token, target);
+    if (token.length <= 4 && dist === 0) return 1;
+    if (token.length <= 5 && dist === 1) return 0.7;
+    if (token.length >= 6 && dist <= 2)  return 0.6;
+    return 0;
+  }
+
+  // ---- Variantes aleatorias ----
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  // ---- Base de conocimiento ----
+  const KB = [
+    { id:'saludo',
+      keys:['hola','buenas','holi','holaa','saludos','hey','que tal','qué tal','buen dia','buen día','buenas tardes','buenas noches','buenos dias','buenos días','hi','hello'],
+      replies: [
+        '¡Hola! Soy el asistente virtual de Leonardo. Puedo ayudarte con información sobre <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos de entrega</strong> o ponerte en contacto directo con él. ¿En qué te puedo ayudar?',
+        '¡Hey! Bienvenido al portafolio de Leonardo. Soy su asistente. ¿Quieres saber sobre algún servicio en específico o necesitas una cotización?',
+        '¡Hola! Qué bueno tenerte por aquí. Cuéntame qué proyecto tienes en mente y te oriento.'
+      ]},
+
+    { id:'servicios',
+      keys:['servicio','servicios','que haces','qué haces','que ofreces','qué ofreces','que vendes','qué vendes','catalogo','catálogo','en que ayudas','en qué ayudas','lo que haces'],
+      replies: [
+        'Leonardo ofrece <strong>tres áreas principales</strong>:<br><br>• <strong>Diseño Gráfico</strong> — logos, identidad de marca, redes sociales, material editorial.<br>• <strong>Desarrollo Web</strong> — landing pages, e-commerce, aplicaciones interactivas.<br>• <strong>Soporte y Sistemas</strong> — redes, hosting, seguridad, mantenimiento.<br><br>¿Sobre cuál quieres saber más?'
+      ]},
+
+    { id:'diseno', topic:'diseno',
+      keys:['diseno','diseño','disenio','logo','logos','logotipo','branding','marca','identidad','imagen','flyer','afiche','poster','banner','social media','redes sociales','illustrator','photoshop','grafico','gráfico','arte','artistico','artístico','editorial','print'],
+      replies: [
+        'En <strong>diseño gráfico</strong> Leonardo crea identidades visuales completas: logotipos, manuales de marca, contenido para redes sociales, material editorial y piezas publicitarias. Trabaja con Illustrator, Photoshop, Figma y After Effects.<br><br>¿Quieres una cotización para tu marca?',
+        'Para <strong>diseño</strong> Leonardo cubre desde un logo individual hasta sistemas completos de identidad visual. También crea plantillas para Instagram, Facebook y TikTok. ¿Qué necesitas para tu marca?'
+      ]},
+
+    { id:'web', topic:'web',
+      keys:['web','página','pagina','sitio','site','website','landing','tienda','ecommerce','e-commerce','online','plataforma','frontend','desarrollo','programacion','programación','programar','react','html','css','javascript','app','aplicacion','aplicación','wordpress','responsive','responsiva'],
+      replies: [
+        'En <strong>desarrollo web</strong> Leonardo construye landing pages, tiendas online y aplicaciones modernas con React, Tailwind y JavaScript. Diseño responsivo, animaciones fluidas y enfoque total en conversión.<br><br>¿Tienes una idea concreta? Te paso una cotización rápida.',
+        'Para <strong>web</strong> trabaja con tecnologías modernas: React, Tailwind, animaciones, integración con APIs e IA. Todo se ve impecable en celular y computadora. ¿Qué tipo de página necesitas?'
+      ]},
+
+    { id:'soporte', topic:'soporte',
+      keys:['soporte','sistema','sistemas','red','redes','hosting','servidor','servidores','seguridad','linux','windows','reparar','reparacion','reparación','mantenimiento','computador','pc','tecnico','técnico','arreglar','formatear','virus','antivirus','wifi','router','impresora'],
+      replies: [
+        'En <strong>soporte y sistemas</strong> Leonardo ofrece configuración de hosting, administración de redes, seguridad informática, mantenimiento preventivo y reparación de hardware. Atención presencial en Sibaté y remota a todo el país.',
+        'Para <strong>soporte técnico</strong> resuelve problemas de redes, hosting, servidores, seguridad, virus, lentitud, configuración de WiFi e impresoras, y mantenimiento general de equipos. ¿Qué problema tienes?'
+      ]},
+
+    { id:'precio', topic:'precio',
+      keys:['precio','precios','costo','costos','cuesta','cuestan','cobra','cobras','cuanto','cuánto','vale','valor','valor','tarifa','tarifas','presupuesto','cotizar','cotizacion','cotización','cuanto sale','cuánto sale','plata','dinero','pesos','pago','barato','caro','económico','economico'],
+      replies: [
+        'El precio depende del alcance del proyecto. Como referencia general:<br><br>• Logo simple: desde <strong>$80.000 COP</strong><br>• Identidad de marca: desde <strong>$250.000 COP</strong><br>• Landing page: desde <strong>$400.000 COP</strong><br>• Sitio web completo: desde <strong>$800.000 COP</strong><br>• Soporte técnico: desde <strong>$30.000 COP</strong> (visita)<br><br>Para una cotización exacta, escríbele por WhatsApp:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar ahora →</a>',
+        'Cada proyecto tiene un precio distinto según lo que necesites. Para darte un valor exacto en pocos minutos, lo mejor es escribirle por WhatsApp con los detalles:<br><br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a>'
+      ]},
+
+    { id:'tiempo', topic:'tiempo',
+      keys:['tiempo','tiempos','demora','demoras','tarda','tarde','dias','días','semanas','meses','plazo','plazos','entrega','rapido','rápido','urgente','cuando','cuándo','listo','disponible','disponibilidad'],
+      replies: [
+        'Los tiempos típicos son:<br><br>• <strong>Logo:</strong> 3 a 7 días<br>• <strong>Identidad de marca completa:</strong> 1 a 2 semanas<br>• <strong>Landing page:</strong> 1 a 3 semanas<br>• <strong>Sitio web completo:</strong> 3 a 6 semanas<br>• <strong>Soporte técnico:</strong> mismo día o al siguiente<br><br>Para urgencias, contáctalo por WhatsApp.',
+        'Depende de la complejidad. Un trabajo sencillo puede estar en menos de una semana, un sitio completo entre 3 y 6 semanas. Si es urgente, díselo por WhatsApp y vemos.'
+      ]},
+
+    { id:'experiencia',
+      keys:['experiencia','años','trayectoria','curriculum','cv','sena','adso','estudios','estudia','formacion','formación','quien es','quién es','quien eres','quién eres','sobre el','sobre él','acerca de','perfil'],
+      replies: [
+        'Leonardo es estudiante de <strong>Análisis y Desarrollo de Software (SENA)</strong>. Trabaja como freelance de diseño gráfico desde 2021 y en soporte técnico remoto desde 2022. Combina visión creativa con conocimientos técnicos sólidos en programación, diseño y sistemas.'
+      ]},
+
+    { id:'contacto',
+      keys:['contacto','contactar','hablar','escribir','llamar','telefono','teléfono','celular','whatsapp','wsp','wa','correo','email','mail','escribirle'],
+      replies: [
+        'Estos son sus canales de contacto:<br><br>• <strong>WhatsApp:</strong> <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a><br>• <strong>Email:</strong> <a href="mailto:lumar.321456@gmail.com">lumar.321456@gmail.com</a><br>• <strong>Formulario:</strong> baja a la sección de Contacto en esta página.<br><br>El más rápido es WhatsApp.'
+      ]},
+
+    { id:'ubicacion',
+      keys:['donde','dónde','ubicacion','ubicación','direccion','dirección','ciudad','pais','país','vive','queda','colombia','sibate','sibaté','bogota','bogotá','cundinamarca','presencial','remoto'],
+      replies: [
+        'Leonardo está en <strong>Sibaté, Cundinamarca (Colombia)</strong>. Atiende presencialmente en la zona y trabaja de forma <strong>remota</strong> con clientes en cualquier parte del mundo.'
+      ]},
+
+    { id:'portafolio',
+      keys:['portafolio','portfolio','proyecto','proyectos','trabajo','trabajos','ejemplo','ejemplos','muestra','muestras','demos','ver','mostrar','referencias'],
+      replies: [
+        'Sus proyectos están en la sección <strong>Portafolio</strong> de esta misma página. Hay 8 trabajos de diseño, desarrollo web e infraestructura. Haz clic en cualquier tarjeta para ver el detalle completo, las tecnologías usadas y la imagen.'
+      ]},
+
+    { id:'agendar', topic:'agendar',
+      keys:['agendar','reunion','reunión','cita','llamada','meet','zoom','google meet','reservar','programar reunion','programar reunión'],
+      replies: [
+        'Para agendar una reunión, lo más rápido es escribirle por WhatsApp y coordinar el horario directamente:<br><br><a href="https://wa.me/573132049102?text=Hola%20Leonardo%2C%20quiero%20agendar%20una%20reuni%C3%B3n" target="_blank">Agendar por WhatsApp →</a>'
+      ]},
+
+    { id:'pago',
+      keys:['pago','pagos','formas de pago','metodos de pago','métodos de pago','transferencia','nequi','daviplata','bancolombia','tarjeta','efectivo','paypal','anticipo'],
+      replies: [
+        'Acepta varias formas de pago: <strong>transferencia bancaria, Nequi, Daviplata y efectivo</strong>. Para proyectos grandes normalmente se trabaja con un <strong>50% de anticipo</strong> y el 50% restante a la entrega. Para confirmar con tu caso específico, escríbele por WhatsApp.'
+      ]},
+
+    { id:'garantia',
+      keys:['garantia','garantía','soporte post','despues de entregar','después de entregar','correcciones','cambios','revisiones','ajustes','retoques'],
+      replies: [
+        'Sí, todos los proyectos incluyen <strong>2 a 3 rondas de ajustes sin costo</strong> dentro del alcance acordado. Para sitios web hay además <strong>soporte por 30 días</strong> después de la entrega para corregir cualquier detalle.'
+      ]},
+
+    { id:'idioma',
+      keys:['ingles','inglés','english','espanol','español','spanish','idioma','idiomas','bilingue','bilingüe'],
+      replies: [
+        'Leonardo trabaja principalmente en <strong>español</strong>, pero puede entregar contenido y comunicarse en <strong>inglés</strong> sin problema. ¿En qué idioma necesitas tu proyecto?'
+      ]},
+
+    { id:'derivar_humano',
+      keys:['hablar con leonardo','hablar con un humano','persona real','que me responda','quiero hablar','llamar','asesor real','no eres real','eres bot','eres robot','quiero a leonardo'],
+      replies: [
+        '¡Claro! Te conecto con Leonardo directamente. Toca el botón:<br><br><a href="https://wa.me/573132049102" target="_blank">Abrir WhatsApp ahora →</a>'
+      ]},
+
+    { id:'agradecer',
+      keys:['gracias','muchas gracias','mil gracias','genial','perfecto','excelente','bueno','vale','ok','okay','dale','listo','chevere','chévere','bacano','super','súper'],
+      replies: [
+        '¡Con gusto! Si te queda otra duda estoy aquí. Cuando quieras avanzar, escríbele a Leonardo por WhatsApp.',
+        '¡Para servirte! Cualquier otra cosa que necesites, dímelo nomás.'
+      ]},
+
+    { id:'despedida',
+      keys:['adios','adiós','chao','bye','nos vemos','hasta luego','hasta pronto','me voy'],
+      replies: [
+        '¡Hasta pronto! Que tengas un excelente día. Vuelve cuando quieras.',
+        '¡Chao! Cuídate mucho. Acá estoy para cuando me necesites.'
+      ]}
+  ];
+
+  // ---- Detector de intención ----
+  function detectIntent(text) {
+    const tokens = tokenize(text);
+    if (!tokens.length) return { intent: null, score: 0 };
+    const scores = KB.map(intent => {
+      let score = 0, hits = 0;
+      intent.keys.forEach(k => {
+        const kTokens = normalize(k).split(' ');
+        let local = 0;
+        kTokens.forEach(kt => {
+          let best = 0;
+          tokens.forEach(t => {
+            const m = fuzzyMatch(t, kt);
+            if (m > best) best = m;
+          });
+          local += best;
+        });
+        if (local > 0) {
+          hits++;
+          // bonus si la frase clave completa está casi entera
+          score += local * (kTokens.length === 1 ? 1 : 1.4);
+        }
+      });
+      return { intent, score, hits };
+    });
+    scores.sort((a, b) => b.score - a.score);
+    return scores[0];
+  }
+
+  // ---- Estado del chat ----
+  const ctx = { lastTopic: null, history: [] };
+  const HISTORY_KEY = 'lm_chat_history';
+
+  function loadHistory() {
+    try {
+      const raw = localStorage.getItem(HISTORY_KEY);
+      if (raw) {
+        const obj = JSON.parse(raw);
+        if (obj && Date.now() - obj.t < ONE_DAY_MS) {
+          ctx.history   = obj.history || [];
+          ctx.lastTopic = obj.lastTopic || null;
+        }
+      }
+    } catch (e) {}
+  }
+  function saveHistory() {
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify({
+        t: Date.now(),
+        history: ctx.history.slice(-30),
+        lastTopic: ctx.lastTopic
+      }));
+    } catch (e) {}
+  }
+
+  // ---- Generador de respuesta ----
+  function generateReply(text) {
+    const { intent, score } = detectIntent(text);
+
+    // Continuación: el usuario dice "y cuanto cuesta?" después de hablar de un servicio
+    const followsPrice = /\b(cuanto|cuánto|precio|costo|vale|cuesta)\b/i.test(text);
+    if (followsPrice && ctx.lastTopic && (!intent || score < 0.7)) {
+      const map = {
+        diseno:  'El precio de un trabajo de <strong>diseño</strong> arranca desde $80.000 COP (logo simple) y sube según el alcance. Para una cotización exacta:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
+        web:     'Para <strong>desarrollo web</strong>, una landing page comienza en $400.000 COP y un sitio completo en $800.000 COP. Para tu caso específico:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
+        soporte: 'En <strong>soporte técnico</strong> el valor base es $30.000 COP por visita o sesión remota; trabajos de instalación/configuración se cotizan aparte. Más detalle:<br><a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>'
+      };
+      if (map[ctx.lastTopic]) return map[ctx.lastTopic];
+    }
+
+    if (intent && score >= 0.6) {
+      if (intent.topic) ctx.lastTopic = intent.topic;
+      return pick(intent.replies);
+    }
+
+    // Fallback inteligente: sugerencias específicas según las palabras detectadas
+    const tokens = tokenize(text);
+    const suggestions = [];
+    if (tokens.some(t => fuzzyMatch(t,'cotizar') > 0 || fuzzyMatch(t,'precio') > 0)) suggestions.push('Precios');
+    if (tokens.some(t => fuzzyMatch(t,'web') > 0 || fuzzyMatch(t,'pagina') > 0))     suggestions.push('Desarrollo Web');
+    if (tokens.some(t => fuzzyMatch(t,'logo') > 0 || fuzzyMatch(t,'diseno') > 0))    suggestions.push('Diseño Gráfico');
+
+    if (suggestions.length) {
+      return `No estoy 100% seguro de tu pregunta. ¿Te refieres a <strong>${suggestions.join('</strong> o <strong>')}</strong>? También puedes escribirle directo a Leonardo:<br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102 →</a>`;
+    }
+
+    return 'Hmm, no estoy seguro de entenderte. Puedo ayudarte con: <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong>, <strong>portafolio</strong>, <strong>contacto</strong> o <strong>ubicación</strong>.<br><br>Si prefieres hablar con Leonardo directo: <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>';
+  }
+
+  // ---- DOM del chat ----
   const chatFab    = document.getElementById('chat-fab');
   const chatWin    = document.getElementById('chat-window');
   const chatClose  = document.getElementById('chat-close');
@@ -400,79 +698,28 @@
   const chatForm   = document.getElementById('chat-form');
   const chatInput  = document.getElementById('chat-input');
 
-  // Base de conocimiento del asistente
-  const KB = [
-    { id:'saludo',    keys:['hola','hey','buenas','buen dia','buen día','saludos','que tal','qué tal','hi','hello'],
-      reply: '¡Hola! Soy el asistente de Leonardo. Puedo ayudarte con información sobre <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong> o ponerte en contacto directo con él. ¿Qué necesitas?' },
-    { id:'servicios', keys:['servicio','servicios','que haces','qué haces','que ofreces','qué ofreces','que hace','qué hace'],
-      reply: 'Leonardo trabaja en <strong>tres áreas principales</strong>:<br>• <strong>Diseño Gráfico</strong> (logos, branding, redes sociales)<br>• <strong>Desarrollo Web</strong> (landing pages, e-commerce, UI/UX)<br>• <strong>Soporte y Sistemas</strong> (redes, hosting, mantenimiento)<br>¿Sobre cuál quieres saber más?' },
-    { id:'diseno',    keys:['diseno','diseño','logo','logos','branding','marca','identidad','imagen','redes sociales','flyer','afiche','social media','illustrator','photoshop'],
-      reply: 'En <strong>diseño gráfico</strong> Leonardo crea identidades visuales completas: logotipos, manuales de marca, contenido para redes sociales, material editorial y ediciones publicitarias. Trabaja con Illustrator, Photoshop, Figma y After Effects.' },
-    { id:'web',       keys:['web','pagina','página','sitio','landing','tienda','ecommerce','e-commerce','frontend','desarrollo','programacion','programación','react','html','css','javascript','app'],
-      reply: 'En <strong>desarrollo web</strong> construye landing pages, tiendas online y aplicaciones modernas con React, Tailwind y JavaScript. Diseño responsivo, animaciones fluidas y enfoque en conversión.' },
-    { id:'soporte',   keys:['soporte','sistema','sistemas','red','redes','hosting','servidor','seguridad','linux','windows','reparar','reparación','mantenimiento','computador','pc'],
-      reply: 'En <strong>soporte y sistemas</strong> ofrece configuración de hosting, administración de redes, seguridad informática y mantenimiento preventivo. También reparación de hardware y atención remota.' },
-    { id:'precio',    keys:['precio','precios','costo','costos','cobra','cobras','cuanto','cuánto','vale','valor','tarifa','presupuesto','cotizar','cotizacion','cotización'],
-      reply: 'El precio depende del alcance del proyecto. Para una <strong>cotización personalizada</strong> en pocos minutos, escríbele por WhatsApp con los detalles de lo que necesitas.<br><br><a href="https://wa.me/573132049102" target="_blank">Cotizar ahora por WhatsApp →</a>' },
-    { id:'tiempo',    keys:['tiempo','demora','demoras','dias','días','semanas','plazo','entrega','rapido','rápido','urgente','cuando','cuándo'],
-      reply: 'Los tiempos varían según la complejidad: un <strong>logo</strong> entre 3-7 días, una <strong>landing page</strong> 1-3 semanas, y un <strong>sitio completo</strong> 3-6 semanas. Para urgencias, contáctalo por WhatsApp.' },
-    { id:'experiencia',keys:['experiencia','años','años','trayectoria','curriculum','cv','sena','adso','estudios','estudia','formacion','formación'],
-      reply: 'Leonardo es estudiante de <strong>Análisis y Desarrollo de Software (SENA)</strong>, freelance de diseño gráfico desde 2021 y soporte técnico remoto desde 2022. Combina visión creativa con conocimientos técnicos sólidos.' },
-    { id:'contacto',  keys:['contacto','contactar','hablar','escribir','llamar','telefono','teléfono','celular','whatsapp','wsp','wa','correo','email','mail'],
-      reply: 'Puedes contactar a Leonardo por:<br>• <strong>WhatsApp:</strong> <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a><br>• <strong>Email:</strong> <a href="mailto:lumar.321456@gmail.com">lumar.321456@gmail.com</a><br>• <strong>Formulario:</strong> en la sección de Contacto de esta página.' },
-    { id:'ubicacion', keys:['donde','dónde','ubicacion','ubicación','ciudad','pais','país','vive','queda','colombia','sibate','sibaté','bogota','bogotá'],
-      reply: 'Leonardo está ubicado en <strong>Sibaté, Cundinamarca (Colombia)</strong>. Trabaja presencialmente en la zona y de forma remota para clientes en cualquier parte del mundo.' },
-    { id:'portafolio',keys:['portafolio','proyecto','proyectos','trabajo','trabajos','ejemplo','ejemplos','muestra','demos','ver','mostrar'],
-      reply: 'Puedes ver sus proyectos destacados en la sección <strong>Portafolio</strong> de esta misma página. Hay trabajos de diseño, desarrollo web e infraestructura. Haz clic en cualquier tarjeta para ver el detalle.' },
-    { id:'agradecer', keys:['gracias','muchas gracias','genial','perfecto','excelente','bueno','vale','ok','okay','dale'],
-      reply: '¡Con gusto! Si necesitas algo más, estoy aquí. Cuando quieras avanzar, escríbele a Leonardo por WhatsApp y te responderá lo antes posible.' },
-    { id:'despedida', keys:['adios','adiós','chao','bye','nos vemos','hasta luego'],
-      reply: '¡Hasta pronto! Que tengas un excelente día. No dudes en volver a escribir cuando quieras.' }
-  ];
-
-  const FALLBACK =
-    'No estoy seguro de entender. Puedo ayudarte con: <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong>, <strong>portafolio</strong>, <strong>experiencia</strong> o <strong>contacto</strong>. También puedes <a href="https://wa.me/573132049102" target="_blank">escribir directo por WhatsApp</a>.';
-
   const QUICK = [
-    { label: 'Servicios',  text: 'Quiero saber qué servicios ofreces' },
+    { label: 'Servicios',  text: '¿Qué servicios ofreces?' },
     { label: 'Precios',    text: '¿Cuánto cuesta?' },
     { label: 'Tiempos',    text: '¿Cuánto se demora?' },
-    { label: 'Contacto',   text: '¿Cómo te contacto?' },
-    { label: 'Ubicación',  text: '¿Dónde estás?' },
+    { label: 'Diseño',     text: 'Cuéntame sobre diseño' },
+    { label: 'Web',        text: 'Cuéntame sobre desarrollo web' },
+    { label: 'Soporte',    text: 'Cuéntame sobre soporte técnico' },
+    { label: 'Agendar',    text: 'Quiero agendar una reunión' },
     { label: 'WhatsApp',   text: 'Quiero hablar por WhatsApp' }
   ];
 
-  function normalize(s) {
-    return s.toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita tildes
-      .replace(/[¿?¡!.,]/g, ' ')
-      .replace(/\s+/g, ' ').trim();
-  }
-
-  function findReply(text) {
-    const t = ' ' + normalize(text) + ' ';
-    let best = null, bestScore = 0;
-    for (const intent of KB) {
-      let score = 0;
-      for (const k of intent.keys) {
-        const nk = normalize(k);
-        if (t.includes(' ' + nk + ' ') || t.includes(' ' + nk) || t.includes(nk + ' ')) {
-          score += nk.length; // las palabras más largas pesan más
-        }
-      }
-      if (score > bestScore) { bestScore = score; best = intent; }
-    }
-    return best ? best.reply : FALLBACK;
-  }
-
-  function addMsg(html, who) {
+  function addMsg(html, who, save = true) {
     const el = document.createElement('div');
     el.className = 'msg ' + who;
     el.innerHTML = html;
     chatBody.appendChild(el);
     chatBody.scrollTop = chatBody.scrollHeight;
+    if (save) {
+      ctx.history.push({ who, html });
+      saveHistory();
+    }
   }
-
   function addTyping() {
     const el = document.createElement('div');
     el.className = 'typing';
@@ -485,7 +732,6 @@
     const el = document.getElementById('typing-indicator');
     if (el) el.remove();
   }
-
   function renderQuickReplies() {
     chatQuick.innerHTML = '';
     QUICK.forEach(q => {
@@ -496,16 +742,18 @@
       chatQuick.appendChild(b);
     });
   }
-
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
   function sendUserMessage(text) {
     if (!text || !text.trim()) return;
-    addMsg(text.replace(/</g, '&lt;'), 'user');
+    addMsg(escapeHtml(text), 'user');
     chatInput.value = '';
     addTyping();
-    const delay = 600 + Math.min(text.length * 20, 1200);
+    const delay = 500 + Math.min(text.length * 18, 1000);
     setTimeout(() => {
       removeTyping();
-      addMsg(findReply(text), 'bot');
+      addMsg(generateReply(text), 'bot');
     }, delay);
   }
 
@@ -515,9 +763,19 @@
     chatWin.classList.add('open');
     chatWin.setAttribute('aria-hidden', 'false');
     chatFab.classList.add('hidden');
+
     if (!chatGreeted) {
       chatGreeted = true;
-      setTimeout(() => addMsg('¡Hola! Soy el asistente de Leonardo. Puedo resolver tus dudas sobre servicios, precios, tiempos o contactarte con él. ¿En qué te ayudo?', 'bot'), 250);
+      // Si hay historial reciente, lo restauramos
+      loadHistory();
+      if (ctx.history.length > 0) {
+        ctx.history.forEach(m => addMsg(m.html, m.who, false));
+      } else {
+        setTimeout(() => addMsg(
+          '¡Hola! Soy el asistente virtual de Leonardo. Puedo resolver tus dudas sobre <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong> o conectarte con él por WhatsApp. ¿En qué te ayudo?',
+          'bot'
+        ), 250);
+      }
       renderQuickReplies();
     }
   }
@@ -537,4 +795,10 @@
     });
   }
 
+  // Cierra el chat con Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chatWin && chatWin.classList.contains('open')) closeChat();
+  });
+
 })();
+
