@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio de Leonardo Márquez — Análisis y Desarrollo Software, Diseño Gráfico, Soporte Técnico." />
+  <title>Leonardo Márquez — Portafolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">LM</a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#inicio">INICIO</a>
+        <a href="#about">SOBRE MÍ</a>
+        <a href="#services">SERVICIOS</a>
+        <a href="#portfolio">PORTAFOLIO</a>
+        <a href="#contact">CONTACTO</a>
+      </nav>
+
+      <a href="#contact" class="btn btn-cta">COTIZA AHORA</a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+      <div class="hero-grid"></div>
+
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge">CREATIVE DEVELOPER &amp; TECHNICIAN</div>
+
+          <h1 class="hero-title">
+            <span class="line-1">Innovación en</span>
+            <span class="line-2 rotating-word" id="rotating-word">Análisis</span>
+            <span class="line-3">Para el Futuro</span>
+          </h1>
+
+          <p class="hero-desc">
+            Soluciones digitales de alto impacto que transforman tu visión en una experiencia inolvidable. Diseño, código y estrategia en perfecta sintonía.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              Cotiza Ahora
+            </a>
+            <a href="#portfolio" class="btn btn-ghost">Ver Proyectos</a>
+          </div>
+
+          <div class="hero-status">
+            <span class="status-dot"></span>
+            Disponible para nuevos proyectos
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <!-- Floating icons -->
+          <div class="float-icon float-tl" data-parallax="0.6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <div class="float-icon float-tr" data-parallax="-0.4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <div class="float-icon float-bl" data-parallax="0.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="float-icon float-br" data-parallax="-0.6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2zM9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+
+          <!-- Blob behind avatar -->
+          <svg class="hero-blob" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="blob-grad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.7"/>
+                <stop offset="50%" stop-color="#d500f9" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <path id="blob-path" fill="url(#blob-grad)" d="M380.5,322.5Q334,395,248.5,396Q163,397,117.5,323.5Q72,250,111,171Q150,92,239.5,88Q329,84,378,167Q427,250,380.5,322.5Z"/>
+          </svg>
+
+          <!-- Avatar card -->
+          <div class="avatar-card" data-parallax="0.3">
+            <img src="images/leonardo-profile.jpg" alt="Leonardo Márquez" />
+            <div class="avatar-overlay"></div>
+            <div class="avatar-tag">
+              <div>
+                <div class="avatar-name">Leonardo Márquez</div>
+                <div class="avatar-role">SIBATE_CO // ADSO</div>
+              </div>
+              <span class="status-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee">
+      <div class="marquee-track">
+        <span>HTML5</span><span>CSS3</span><span>JAVASCRIPT</span><span>REACT</span><span>TAILWIND</span><span>TYPESCRIPT</span><span>FIGMA</span><span>ILLUSTRATOR</span><span>PHOTOSHOP</span><span>NODE.JS</span><span>LINUX</span><span>DOCKER</span><span>NGINX</span><span>GIT</span>
+        <span>HTML5</span><span>CSS3</span><span>JAVASCRIPT</span><span>REACT</span><span>TAILWIND</span><span>TYPESCRIPT</span><span>FIGMA</span><span>ILLUSTRATOR</span><span>PHOTOSHOP</span><span>NODE.JS</span><span>LINUX</span><span>DOCKER</span><span>NGINX</span><span>GIT</span>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-sub">CONOCE_AL_CREADOR</div>
+          <h2 class="section-title">Sobre Mí</h2>
+          <div class="section-bar"></div>
+        </div>
+
+       
+             
+              
+
+          <div class="about-content reveal">
+            <h3 class="about-headline">
+              Diseño con <span class="text-magenta">propósito</span>.<br/>
+              Desarrollo con <span class="text-cyan">precisión</span>.
+            </h3>
+
+            <p class="about-desc">
+              Soy un perfil híbrido que fusiona el ojo crítico del diseño con la lógica implacable de la ingeniería de software. No solo hago que las cosas se vean bien; construyo sistemas que funcionan de manera impecable y escalan con tu negocio.
+            </p>
+
+            <div class="pillars">
+              <div class="pillar">
+                <div class="pillar-icon cyan">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <div>
+                  <h4>Estudiante en Análisis y Desarrollo</h4>
+                  <p>Especialización en programación y desarrollo de software con enfoque en escalabilidad.</p>
+                </div>
+              </div>
+
+              <div class="pillar">
+                <div class="pillar-icon magenta">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+                </div>
+                <div>
+                  <h4>Diseñador Gráfico</h4>
+                  <p>Identidades visuales, branding de alto impacto y diseño de interfaces que convierten.</p>
+                </div>
+              </div>
+
+              <div class="pillar">
+                <div class="pillar-icon cyan">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <div>
+                  <h4>Soporte Técnico</h4>
+                  <p>Redes, hosting, mantenimiento proactivo y soluciones informáticas robustas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services section">
+      <img src="images/decor-cyborg.jpg" alt="" aria-hidden="true" class="decor decor-right" />
+      <img src="images/decor-wireframe.jpg" alt="" aria-hidden="true" class="decor decor-left" />
+
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-sub">SOLUCIONES_TECNOLÓGICAS</div>
+          <h2 class="section-title">Servicios</h2>
+          <div class="section-bar"></div>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card tilt reveal">
+            <div class="service-icon cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            </div>
+            <h3>Diseño Gráfico</h3>
+            <p>Identidad corporativa, diseño editorial, contenido para redes sociales y branding integral que destaca.</p>
+            <ul>
+              <li>Logos e identidad visual</li>
+              <li>Material para redes sociales</li>
+              <li>Diseño editorial y print</li>
+            </ul>
+          </article>
+
+          <article class="service-card tilt reveal">
+            <div class="service-icon magenta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+            <h3>Desarrollo Web</h3>
+            <p>Interfaces UI/UX intuitivas, maquetación perfecta, animaciones fluidas y experiencias de alto rendimiento.</p>
+            <ul>
+              <li>Diseño y desarrollo UI/UX</li>
+              <li>Arquitectura Frontend moderna</li>
+              <li>Animaciones interactivas</li>
+            </ul>
+          </article>
+
+          <article class="service-card tilt reveal">
+            <div class="service-icon cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <h3>Soporte &amp; Sistemas</h3>
+            <p>Configuración de infraestructura, administración de redes, seguridad robusta y mantenimiento continuo.</p>
+            <ul>
+              <li>Hosting y Cloud servers</li>
+              <li>Seguridad informática</li>
+              <li>Mantenimiento preventivo</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card reveal">
+            <div class="stat-num text-cyan" data-counter="5" data-suffix="+">0+</div>
+            <div class="stat-label">Proyectos Realizados</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-num text-magenta" data-counter="8" data-suffix="+">0+</div>
+            <div class="stat-label">Tecnologías</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-num text-cyan" data-counter="100" data-suffix="%">0%</div>
+            <div class="stat-label">Compromiso</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-num text-magenta">24/7</div>
+            <div class="stat-label">Disponibilidad</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE / EDUCATION -->
+    <section id="experience" class="experience section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-sub">EXPERIENCIA_Y_EDUCACIÓN</div>
+          <h2 class="section-title">Mi Trayectoria</h2>
+          <div class="section-bar"></div>
+        </div>
+
+        <div class="timeline-grid">
+
+          <div class="timeline-col reveal">
+            <div class="timeline-head">
+              <div class="timeline-icon cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <h3>Educación</h3>
+            </div>
+            <div class="timeline cyan-line">
+              <article class="timeline-item">
+                <span class="timeline-dot active-cyan"></span>
+                <div class="timeline-card">
+                  <div class="timeline-row">
+                    <h4>Análisis y Desarrollo de Software</h4>
+                    <span class="badge cyan">EN CURSO</span>
+                  </div>
+                  <p class="muted mono">@ SENA</p>
+                  <p>Especialización integral en programación, modelado de bases de datos, arquitectura web y análisis de sistemas empresariales.</p>
+                </div>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                  <h4>Diseño Gráfico &amp; Web</h4>
+                  <p class="muted mono">Cursos Especializados</p>
+                  <p>Dominio avanzado de Adobe Creative Suite, metodologías UI/UX, prototipado en Figma y maquetación web responsiva.</p>
+                </div>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                  <h4>Certificaciones Técnicas</h4>
+                  <p class="muted mono">En Desarrollo</p>
+                  <p>Administración Linux, configuración de redes estructuradas y fundamentos de seguridad informática.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="timeline-col reveal">
+            <div class="timeline-head">
+              <div class="timeline-icon magenta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <h3>Experiencia</h3>
+            </div>
+            <div class="timeline magenta-line">
+              <article class="timeline-item">
+                <span class="timeline-dot active-magenta"></span>
+                <div class="timeline-card">
+                  <div class="timeline-row">
+                    <h4>Diseño Gráfico Freelance</h4>
+                    <span class="badge magenta">2021 - HOY</span>
+                  </div>
+                  <p>Creación de identidades visuales memorables, diseño de logotipos corporativos y dirección de arte para campañas en redes sociales.</p>
+                </div>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                  <div class="timeline-row">
+                    <h4>Soporte Técnico Remoto</h4>
+                    <span class="badge muted-badge">2022 - HOY</span>
+                  </div>
+                  <p>Mantenimiento preventivo de sistemas, despliegue de servidores hosting, resolución de incidencias y soporte técnico a usuarios finales.</p>
+                </div>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                  <div class="timeline-row">
+                    <h4>Desarrollo Web Proyectos</h4>
+                    <span class="badge muted-badge">2023 - HOY</span>
+                  </div>
+                  <p>Implementación de landing pages de alta conversión, plataformas de e-commerce y aplicaciones web interactivas con React y Tailwind.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="portfolio section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-sub">PROYECTOS_DESTACADOS</div>
+          <h2 class="section-title">Portafolio</h2>
+          <div class="section-bar"></div>
+        </div>
+
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="Todos">Todos</button>
+          <button class="filter" data-filter="Diseño">Diseño</button>
+          <button class="filter" data-filter="Desarrollo">Desarrollo</button>
+          <button class="filter" data-filter="Sistemas">Sistemas</button>
+        </div>
+
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+
+      <!-- Project Modal -->
+      <div class="modal" id="project-modal" aria-hidden="true">
+        <div class="modal-backdrop" data-modal-close></div>
+        <div class="modal-content">
+          <button class="modal-close" data-modal-close aria-label="Cerrar">×</button>
+          <div class="modal-image"><img id="modal-img" src="" alt=""/></div>
+          <div class="modal-body">
+            <span class="badge" id="modal-badge"></span>
+            <h3 id="modal-title"></h3>
+            <p id="modal-desc"></p>
+            <div class="modal-tags-block">
+              <h5>STACK TECNOLÓGICO</h5>
+              <div class="modal-tags" id="modal-tags"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-sub">ARSENAL_TÉCNICO</div>
+          <h2 class="section-title">Habilidades</h2>
+          <div class="section-bar"></div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-cat reveal">
+            <h3 class="cat-title text-cyan"><span class="cat-line"></span>Diseño</h3>
+            <div class="skill-list">
+              <div class="skill" data-level="95"><div class="skill-row"><span>Adobe Illustrator</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+              <div class="skill" data-level="90"><div class="skill-row"><span>Photoshop</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+              <div class="skill" data-level="88"><div class="skill-row"><span>Identidad Visual</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+              <div class="skill" data-level="85"><div class="skill-row"><span>Social Media Design</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+            </div>
+          </div>
+
+          <div class="skill-cat reveal">
+            <h3 class="cat-title text-magenta"><span class="cat-line"></span>Desarrollo</h3>
+            <div class="skill-list">
+              <div class="skill" data-level="92"><div class="skill-row"><span>HTML/CSS</span><span class="skill-pct text-magenta">0%</span></div><div class="skill-bar"><div class="skill-fill magenta"></div></div></div>
+              <div class="skill" data-level="80"><div class="skill-row"><span>JavaScript</span><span class="skill-pct text-magenta">0%</span></div><div class="skill-bar"><div class="skill-fill magenta"></div></div></div>
+              <div class="skill" data-level="85"><div class="skill-row"><span>UI/UX Design</span><span class="skill-pct text-magenta">0%</span></div><div class="skill-bar"><div class="skill-fill magenta"></div></div></div>
+              <div class="skill" data-level="78"><div class="skill-row"><span>Animaciones CSS</span><span class="skill-pct text-magenta">0%</span></div><div class="skill-bar"><div class="skill-fill magenta"></div></div></div>
+            </div>
+          </div>
+
+          <div class="skill-cat reveal">
+            <h3 class="cat-title text-cyan"><span class="cat-line"></span>Sistemas</h3>
+            <div class="skill-list">
+              <div class="skill" data-level="88"><div class="skill-row"><span>Redes &amp; Seguridad</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+              <div class="skill" data-level="82"><div class="skill-row"><span>Linux/Windows Server</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+              <div class="skill" data-level="90"><div class="skill-row"><span>Hosting &amp; DNS</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+              <div class="skill" data-level="85"><div class="skill-row"><span>Mantenimiento</span><span class="skill-pct text-cyan">0%</span></div><div class="skill-bar"><div class="skill-fill cyan"></div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tools reveal">
+          <span>Illustrator</span><span>Photoshop</span><span>Figma</span><span>After Effects</span><span>VS Code</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Tailwind</span><span>Git</span><span>Linux</span><span>Docker</span><span>Nginx</span><span>WordPress</span><span>Canva</span><span>Premiere Pro</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact section">
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-sub">INICIAR_CONEXIÓN</div>
+          <h2 class="section-title">Contáctame</h2>
+          <div class="section-bar"></div>
+        </div>
+        <p class="contact-lead reveal">¿Tienes un proyecto en mente? Hablemos de cómo podemos hacerlo realidad.</p>
+
+        <div class="contact-grid">
+
+          <div class="contact-cards reveal">
+            <a href="https://wa.me/573132049102" target="_blank" rel="noreferrer" class="whatsapp-card">
+              <div class="wa-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <h4>Hablemos por WhatsApp</h4>
+              <p>Respuesta inmediata para cotizaciones y consultas.</p>
+              <div class="wa-link">+57 313 204 9102 <span>→</span></div>
+            </a>
+
+            <div class="contact-mini">
+              <a href="mailto:lumar.321456@gmail.com" class="mini-card">
+                <div class="mini-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <h5>Email</h5>
+                <p>lumar.321456@gmail.com</p>
+              </a>
+              <div class="mini-card">
+                <div class="mini-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h5>Ubicación</h5>
+                <p>Sibaté, Colombia</p>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-form reveal" id="contact-form" novalidate>
+            <div class="glow-tl"></div>
+            <div class="glow-br"></div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" placeholder="Tu nombre" required minlength="2"/>
+                <span class="form-error" id="err-name"></span>
+              </div>
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" required/>
+                <span class="form-error" id="err-email"></span>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="service">Servicio de Interés</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Selecciona un servicio</option>
+                <option value="design">Diseño Gráfico</option>
+                <option value="web">Desarrollo Web</option>
+                <option value="support">Soporte Técnico</option>
+                <option value="consulting">Consultoría Integral</option>
+                <option value="other">Otro</option>
+              </select>
+              <span class="form-error" id="err-service"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="message">Mensaje</label>
+              <textarea id="message" name="message" placeholder="Cuéntame sobre tu proyecto..." required minlength="10" rows="6"></textarea>
+              <span class="form-error" id="err-message"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
+              <span class="btn-text">ENVIAR MENSAJE</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MAP -->
+  <section class="map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63640.40798150495!2d-74.29851600788775!3d4.492580718538743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3fa0d8299ef87b%3A0x6739eeb020a67d71!2sSibat%C3%A9%2C%20Cundinamarca%2C%20Colombia!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+      width="100%" height="100%" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="map-overlay"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">LM</div>
+      <p>Diseñado &amp; desarrollado con pasión © 2026 — Leonardo Márquez</p>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <div class="toast-title">¡Mensaje enviado con éxito!</div>
+    <div class="toast-desc">Me pondré en contacto contigo muy pronto.</div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
