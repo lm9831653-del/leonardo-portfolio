@@ -141,9 +141,23 @@
           <div class="section-bar"></div>
         </div>
 
-       
-             
-              
+        <div class="about-grid">
+          <div class="about-photo reveal">
+            <div class="photo-glow"></div>
+            <div class="photo-frame">
+              <img src="images/leonardo-profile.jpg" alt="Leonardo Márquez" />
+              <div class="photo-overlay"></div>
+              <div class="photo-tag">
+                <div>
+                  <div class="avatar-name">Leonardo M.</div>
+                  <div class="avatar-role">SYS_ADMIN // DEV</div>
+                </div>
+                <div class="photo-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="about-content reveal">
             <h3 class="about-headline">
@@ -489,9 +503,16 @@
             </div>
           </div>
 
-          <form class="contact-form reveal" id="contact-form" novalidate>
+          <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/lumar.321456@gmail.com" method="POST" novalidate>
             <div class="glow-tl"></div>
             <div class="glow-br"></div>
+
+            <!-- FormSubmit config: notifica al cliente y a Leonardo -->
+            <input type="hidden" name="_subject" value="Nueva solicitud de servicio — Portafolio Leonardo Márquez"/>
+            <input type="hidden" name="_template" value="table"/>
+            <input type="hidden" name="_captcha" value="false"/>
+            <input type="hidden" name="_autoresponse" id="autoresponse-field" value=""/>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
 
             <div class="form-row">
               <div class="form-field">
@@ -510,11 +531,11 @@
               <label for="service">Servicio de Interés</label>
               <select id="service" name="service" required>
                 <option value="" disabled selected>Selecciona un servicio</option>
-                <option value="design">Diseño Gráfico</option>
-                <option value="web">Desarrollo Web</option>
-                <option value="support">Soporte Técnico</option>
-                <option value="consulting">Consultoría Integral</option>
-                <option value="other">Otro</option>
+                <option value="Diseño Gráfico">Diseño Gráfico</option>
+                <option value="Desarrollo Web">Desarrollo Web</option>
+                <option value="Soporte Técnico">Soporte Técnico</option>
+                <option value="Consultoría Integral">Consultoría Integral</option>
+                <option value="Otro">Otro</option>
               </select>
               <span class="form-error" id="err-service"></span>
             </div>
@@ -526,9 +547,10 @@
             </div>
 
             <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
-              <span class="btn-text">ENVIAR MENSAJE</span>
+              <span class="btn-text">ENVIAR POR WHATSAPP + EMAIL</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             </button>
+            <p class="form-hint">Tu mensaje se envía directamente al WhatsApp de Leonardo y recibirás un correo de confirmación.</p>
           </form>
         </div>
       </div>
@@ -558,6 +580,45 @@
     <div class="toast-desc">Me pondré en contacto contigo muy pronto.</div>
   </div>
 
+  <!-- ASISTENTE IA (Chat Widget) -->
+  <button class="chat-fab" id="chat-fab" aria-label="Abrir asistente">
+    <svg class="chat-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span class="chat-fab-pulse"></span>
+    <span class="chat-fab-badge">IA</span>
+  </button>
+
+  <div class="chat-window" id="chat-window" aria-hidden="true">
+    <div class="chat-header">
+      <div class="chat-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+          <line x1="9" y1="9" x2="9.01" y2="9"/>
+          <line x1="15" y1="9" x2="15.01" y2="9"/>
+        </svg>
+      </div>
+      <div class="chat-meta">
+        <div class="chat-name">LM Assistant <span class="chat-tag">IA</span></div>
+        <div class="chat-status"><span class="status-dot"></span>En línea — responde al instante</div>
+      </div>
+      <button class="chat-close" id="chat-close" aria-label="Cerrar">×</button>
+    </div>
+
+    <div class="chat-body" id="chat-body"></div>
+
+    <div class="chat-quick" id="chat-quick"></div>
+
+    <form class="chat-input-bar" id="chat-form" autocomplete="off">
+      <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." />
+      <button type="submit" aria-label="Enviar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+  </div>
+
   <script src="js/main.js"></script>
 </body>
 </html>
+
