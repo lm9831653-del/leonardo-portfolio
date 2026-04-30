@@ -520,8 +520,8 @@
     { id:'precio', topic:'precio',
       keys:['precio','precios','costo','costos','cuesta','cuestan','cobra','cobras','cuanto','cuánto','vale','valor','valor','tarifa','tarifas','presupuesto','cotizar','cotizacion','cotización','cuanto sale','cuánto sale','plata','dinero','pesos','pago','barato','caro','económico','economico'],
       replies: [
-        'El precio depende del alcance del proyecto. Como referencia general:<br><br>• Logo simple: desde <strong>$80.000 COP</strong><br>• Identidad de marca: desde <strong>$250.000 COP</strong><br>• Landing page: desde <strong>$400.000 COP</strong><br>• Sitio web completo: desde <strong>$800.000 COP</strong><br>• Soporte técnico: desde <strong>$30.000 COP</strong> (visita)<br><br>Para una cotización exacta, escríbele por WhatsApp:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar ahora →</a>',
-        'Cada proyecto tiene un precio distinto según lo que necesites. Para darte un valor exacto en pocos minutos, lo mejor es escribirle por WhatsApp con los detalles:<br><br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a>'
+        'Estos son los precios reales de Leonardo:<br><br><strong>Técnico en Sistemas:</strong><br>• Diagnóstico: <strong>$20.000–$30.000 COP</strong><br>• Formateo + Windows: <strong>$60.000–$80.000 COP</strong><br>• Mantenimiento integral: <strong>$80.000–$100.000 COP</strong> ⭐<br>• Limpieza física: <strong>$60.000–$70.000 COP</strong><br>• Eliminación de virus: <strong>$40.000–$60.000 COP</strong><br>• Domicilio: <strong>$30.000–$40.000 COP</strong><br><br><strong>Diseño Gráfico:</strong><br>• Logo básico: <strong>$150.000–$350.000 COP</strong> ⭐<br>• Logo + manual de marca: <strong>$400.000–$800.000 COP</strong><br>• Banner redes sociales: <strong>$30.000–$80.000 COP</strong><br>• Flyer/volante: <strong>$40.000–$80.000 COP</strong><br>• Edición video (por min): <strong>$30.000–$80.000 COP</strong><br>• Gestión redes (mensual): <strong>$200.000–$500.000 COP</strong><br><br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
+        '¿Cuánto cuesta? Aquí un resumen rápido:<br><br>• Soporte técnico: desde <strong>$20.000 COP</strong><br>• Mantenimiento integral: <strong>$80.000–$100.000 COP</strong><br>• Logo básico: <strong>$150.000–$350.000 COP</strong><br>• Logo + manual: <strong>$400.000–$800.000 COP</strong><br>• Edición de video: desde <strong>$30.000 COP/min</strong><br>• Gestión de redes: desde <strong>$200.000 COP/mes</strong><br><br>¿Cuál servicio te interesa? Te doy el precio exacto.'
       ]},
 
     { id:'tiempo', topic:'tiempo',
@@ -663,9 +663,9 @@
     const followsPrice = /\b(cuanto|cuánto|precio|costo|vale|cuesta)\b/i.test(text);
     if (followsPrice && ctx.lastTopic && (!intent || score < 0.7)) {
       const map = {
-        diseno:  'El precio de un trabajo de <strong>diseño</strong> arranca desde $80.000 COP (logo simple) y sube según el alcance. Para una cotización exacta:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
+        diseno:  'Para <strong>diseño gráfico</strong>: logo básico <strong>$150.000–$350.000 COP</strong>, logo + manual de marca <strong>$400.000–$800.000 COP</strong>, banner redes <strong>$30.000–$80.000 COP</strong>, flyer <strong>$40.000–$80.000 COP</strong>, gestión mensual de redes <strong>$200.000–$500.000 COP</strong>. Para cotización exacta:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
         web:     'Para <strong>desarrollo web</strong>, una landing page comienza en $400.000 COP y un sitio completo en $800.000 COP. Para tu caso específico:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
-        soporte: 'En <strong>soporte técnico</strong> el valor base es $30.000 COP por visita o sesión remota; trabajos de instalación/configuración se cotizan aparte. Más detalle:<br><a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>'
+        soporte: 'En <strong>soporte técnico</strong>: diagnóstico <strong>$20.000–$30.000 COP</strong>, formateo Windows <strong>$60.000–$80.000 COP</strong>, mantenimiento integral <strong>$80.000–$100.000 COP</strong>, domicilio <strong>$30.000–$40.000 COP</strong>. Más detalle:<br><a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>'
       };
       if (map[ctx.lastTopic]) return map[ctx.lastTopic];
     }
@@ -749,11 +749,34 @@
   const AI_SYSTEM_PROMPT = [
     'Eres "LM AI", el asistente personal del portafolio de Leonardo Márquez.',
     'Leonardo es Técnico en Sistemas y Diseñador Gráfico de Sibaté, Colombia.',
-    'Sus servicios incluyen: reparación y mantenimiento de PC, formateo Windows,',
-    'instalación de software, redes/WiFi, eliminación de virus, soporte a domicilio,',
-    'diseño de logos, banners, flyers, edición de video, fotografía y gestión de redes sociales.',
+    'TARIFAS EXACTAS — TÉCNICO EN SISTEMAS:',
+    'Diagnóstico y revisión: $20.000–$30.000 COP (USD $5–$8).',
+    'Formateo e instalación de Windows: $60.000–$80.000 COP (USD $15–$21), incluye drivers, programas básicos y respaldo.',
+    'Mantenimiento preventivo por hora: $25.000–$35.000 COP (USD $6–$9).',
+    'Limpieza física interna portátil/PC: $60.000–$70.000 COP (USD $15–$18), incluye cambio de pasta térmica.',
+    'Mantenimiento integral (más solicitado): $80.000–$100.000 COP (USD $21–$26), paquete completo software + físico.',
+    'Instalación de repuestos mano de obra: $30.000–$50.000 COP (USD $8–$13).',
+    'Servicio a domicilio: $30.000–$40.000 COP (USD $8–$10).',
+    'Instalación de red WiFi/repetidores: $40.000–$80.000 COP (USD $10–$21).',
+    'Eliminación de virus y malware: $40.000–$60.000 COP (USD $10–$15).',
+    'Instalación de software especializado: $30.000–$50.000 COP (USD $8–$13).',
+    'TARIFAS EXACTAS — CREATIVOS Y DISEÑO:',
+    'Edición de video simple: $30.000–$80.000 COP/minuto (USD $8–$21), ideal para reels.',
+    'Edición de video por hora: $40.000–$100.000 COP (USD $10–$26).',
+    'Diseño de logo básico (popular): $150.000–$350.000 COP (USD $38–$90), logo en vectores.',
+    'Logo + manual de identidad: $400.000–$800.000 COP (USD $103–$205).',
+    'Banner para redes sociales: $30.000–$80.000 COP c/u (USD $8–$21).',
+    'Banner para impresión/pendón: $60.000–$150.000 COP (USD $15–$38).',
+    'Edición con Photoshop: $15.000–$40.000 COP/foto (USD $4–$10).',
+    'Flyer/volante: $40.000–$80.000 COP (USD $10–$21).',
+    'Tarjeta de presentación: $40.000–$80.000 COP (USD $10–$21).',
+    'Portada YouTube/Facebook: $50.000–$120.000 COP (USD $13–$31).',
+    'Presentaciones PowerPoint/Canva: $20.000–$60.000 COP por diapositiva o lote (USD $5–$15).',
+    'Edición de fotografía: $8.000–$25.000 COP/foto (USD $2–$6).',
+    'Gestión de redes sociales (mensual): $200.000–$500.000 COP/mes (USD $51–$128), 2-4 publicaciones por semana.',
     'Contacto: WhatsApp +57 313 204 9102 — Email lumar.321456@gmail.com.',
-    'Si te preguntan por servicios, precios o agendar, recomienda contactar por WhatsApp o llenar el formulario en /contacto.html.',
+    'Si te preguntan por precios, responde con las tarifas exactas de arriba según el servicio consultado.',
+    'Para cotizaciones personalizadas o combos, recomienda WhatsApp.',
     'PERO también puedes conversar libremente de CUALQUIER tema: cultura, ciencia, historia, tecnología,',
     'consejos, recetas, programación, matemáticas, deportes, salud, viajes, estudios, ayuda con tareas, etc.',
     'Responde SIEMPRE en español, de forma clara, amigable y breve (máximo 4 frases).',
@@ -1102,3 +1125,4 @@
     document.addEventListener('DOMContentLoaded', brandFormSubmit);
   } else { brandFormSubmit(); }
 })();
+
