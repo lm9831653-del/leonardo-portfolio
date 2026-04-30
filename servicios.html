@@ -1,1 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio de Leonardo Márquez — Análisis y Desarrollo Software, Diseño Gráfico, Soporte Técnico." />
+  <title>Servicios y Tarifas — Leonardo Márquez</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Animated cyber background (mobile-optimized) -->
+  <div class="site-bg" aria-hidden="true">
+    <div class="site-bg-grid"></div>
+    <div class="site-bg-orb orb-1"></div>
+    <div class="site-bg-orb orb-2"></div>
+    <div class="site-bg-orb orb-3"></div>
+    <div class="site-bg-particles">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="site-bg-scan"></div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">LM</a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html">INICIO</a>
+        <a href="sobre-mi.html">SOBRE MÍ</a>
+        <a href="servicios.html" class="active">SERVICIOS</a>
+        <a href="portafolio.html">PORTAFOLIO</a>
+        <a href="contacto.html">CONTACTO</a>
+      </nav>
+
+      <a href="contacto.html" class="btn btn-cta">COTIZA AHORA</a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+<section id="services" class="services section">
+      <img src="images/decor-cyborg.jpg" alt="" aria-hidden="true" class="decor decor-right" />
+      <img src="images/decor-wireframe.jpg" alt="" aria-hidden="true" class="decor decor-left" />
+
+      <div class="container">
+        <div class="section-header reveal">
+          <div class="section-sub">SOLUCIONES_TECNOLÓGICAS</div>
+          <h2 class="section-title">Servicios</h2>
+          <div class="section-bar"></div>
+        </div>
+
+        <!-- TARIFAS DETALLADAS -->
+        <div class="pricing-tabs reveal">
+          <button type="button" class="pricing-tab active" data-tab="tech">Técnico en Sistemas</button>
+          <button type="button" class="pricing-tab" data-tab="design">Creativos y Diseño</button>
+        </div>
+
+        <!-- TÉCNICO EN SISTEMAS -->
+        <div class="pricing-panel active reveal" id="panel-tech">
+          <div class="pricing-grid">
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Diagn%C3%B3stico%20y%20revisi%C3%B3n">
+              <div class="price-card-image"><img src="images/svc/svc-diagnostico.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Diagnóstico y revisión</h4></div>
+              <div class="price-card-prices"><span class="cop">$20.000 – $30.000 COP</span><span class="usd">USD $5 – $8</span></div>
+              <p class="price-note">A menudo descontable si tomas el servicio.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Formateo%20e%20instalaci%C3%B3n%20de%20Windows">
+              <div class="price-card-image"><img src="images/svc/svc-formateo.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Formateo e instalación de Windows</h4></div>
+              <div class="price-card-prices"><span class="cop">$60.000 – $80.000 COP</span><span class="usd">USD $15 – $21</span></div>
+              <p class="price-note">Incluye drivers, programas básicos y respaldo.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Mantenimiento%20preventivo%20%28por%20hora%29">
+              <div class="price-card-image"><img src="images/svc/svc-mantenimiento-preventivo.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Mantenimiento preventivo (por hora)</h4></div>
+              <div class="price-card-prices"><span class="cop">$25.000 – $35.000 COP</span><span class="usd">USD $6 – $9</span></div>
+              <p class="price-note">Limpieza de software y optimización general.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Limpieza%20f%C3%ADsica%20interna%20%28port%C3%A1til/PC%29">
+              <div class="price-card-image"><img src="images/svc/svc-limpieza.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Limpieza física interna (portátil/PC)</h4></div>
+              <div class="price-card-prices"><span class="cop">$60.000 – $70.000 COP</span><span class="usd">USD $15 – $18</span></div>
+              <p class="price-note">Desarme, sopleteado y cambio de pasta térmica.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow featured" href="contacto.html?servicio=Mantenimiento%20integral">
+              <div class="price-card-image"><img src="images/svc/svc-mantenimiento-integral.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Mantenimiento integral</h4><span class="badge-pop">Más solicitado</span></div>
+              <div class="price-card-prices"><span class="cop">$80.000 – $100.000 COP</span><span class="usd">USD $21 – $26</span></div>
+              <p class="price-note">Paquete completo: software + físico.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Instalaci%C3%B3n%20de%20repuestos%20%28mano%20de%20obra%29">
+              <div class="price-card-image"><img src="images/svc/svc-repuestos.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Instalación de repuestos (mano de obra)</h4></div>
+              <div class="price-card-prices"><span class="cop">$30.000 – $50.000 COP</span><span class="usd">USD $8 – $13</span></div>
+              <p class="price-note">RAM, SSD, pantalla, teclado, etc.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Servicio%20a%20domicilio">
+              <div class="price-card-image"><img src="images/svc/svc-domicilio.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Servicio a domicilio</h4></div>
+              <div class="price-card-prices"><span class="cop">$30.000 – $40.000 COP</span><span class="usd">USD $8 – $10</span></div>
+              <p class="price-note">Recargo adicional según distancia.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Instalaci%C3%B3n%20de%20red%20WiFi%20/%20repetidores">
+              <div class="price-card-image"><img src="images/svc/svc-wifi.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Instalación de red WiFi / repetidores</h4></div>
+              <div class="price-card-prices"><span class="cop">$40.000 – $80.000 COP</span><span class="usd">USD $10 – $21</span></div>
+              <p class="price-note">Configuración básica de routers y extensores.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Eliminaci%C3%B3n%20de%20virus%20y%20malware">
+              <div class="price-card-image"><img src="images/svc/svc-virus.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Eliminación de virus y malware</h4></div>
+              <div class="price-card-prices"><span class="cop">$40.000 – $60.000 COP</span><span class="usd">USD $10 – $15</span></div>
+              <p class="price-note">Análisis, limpieza y recomendaciones de seguridad.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card cyan-glow" href="contacto.html?servicio=Instalaci%C3%B3n%20de%20software%20especializado">
+              <div class="price-card-image"><img src="images/svc/svc-software.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Instalación de software especializado</h4></div>
+              <div class="price-card-prices"><span class="cop">$30.000 – $50.000 COP</span><span class="usd">USD $8 – $13</span></div>
+              <p class="price-note">Office, antivirus, contabilidad, etc.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+          </div>
+        </div>
+
+        <!-- CREATIVOS Y DISEÑO -->
+        <div class="pricing-panel reveal" id="panel-design">
+          <div class="pricing-grid">
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Edici%C3%B3n%20de%20video%20%E2%80%94%20simple">
+              <div class="price-card-image"><img src="images/svc/svc-video-simple.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Edición de video — simple</h4></div>
+              <div class="price-card-prices"><span class="cop">$30.000 – $80.000 COP / minuto</span><span class="usd">USD $8 – $21</span></div>
+              <p class="price-note">Cortes, música, textos. Ideal para reels y redes.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Edici%C3%B3n%20de%20video%20%E2%80%94%20por%20hora">
+              <div class="price-card-image"><img src="images/svc/svc-video-hora.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Edición de video — por hora</h4></div>
+              <div class="price-card-prices"><span class="cop">$40.000 – $100.000 COP</span><span class="usd">USD $10 – $26</span></div>
+              <p class="price-note">Para proyectos largos o complejos.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow featured" href="contacto.html?servicio=Dise%C3%B1o%20de%20logo%20%E2%80%94%20b%C3%A1sico">
+              <div class="price-card-image"><img src="images/svc/svc-logo-basico.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Diseño de logo — básico</h4><span class="badge-pop">Popular</span></div>
+              <div class="price-card-prices"><span class="cop">$150.000 – $350.000 COP</span><span class="usd">USD $38 – $90</span></div>
+              <p class="price-note">Logo en vectores. Ideal para emprendimiento.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Logo%20%2B%20manual%20de%20identidad">
+              <div class="price-card-image"><img src="images/svc/svc-logo-manual.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Logo + manual de identidad</h4></div>
+              <div class="price-card-prices"><span class="cop">$400.000 – $800.000 COP</span><span class="usd">USD $103 – $205</span></div>
+              <p class="price-note">Tipografía, colores y usos correctos.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Banner%20para%20redes%20sociales">
+              <div class="price-card-image"><img src="images/svc/svc-banner-redes.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Banner para redes sociales</h4></div>
+              <div class="price-card-prices"><span class="cop">$30.000 – $80.000 COP c/u</span><span class="usd">USD $8 – $21</span></div>
+              <p class="price-note">Facebook · Instagram · LinkedIn. Tamaño adaptado.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Banner%20para%20impresi%C3%B3n%20%28pend%C3%B3n%29">
+              <div class="price-card-image"><img src="images/svc/svc-banner-impresion.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Banner para impresión (pendón)</h4></div>
+              <div class="price-card-prices"><span class="cop">$60.000 – $150.000 COP</span><span class="usd">USD $15 – $38</span></div>
+              <p class="price-note">Solo diseño, listo para plotter.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Edici%C3%B3n%20con%20Photoshop">
+              <div class="price-card-image"><img src="images/svc/svc-photoshop.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Edición con Photoshop</h4></div>
+              <div class="price-card-prices"><span class="cop">$15.000 – $40.000 COP / foto</span><span class="usd">USD $4 – $10</span></div>
+              <p class="price-note">Retoque de piel, cambio de fondo, color.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Flyer%20/%20volante">
+              <div class="price-card-image"><img src="images/svc/svc-flyer.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Flyer / volante</h4></div>
+              <div class="price-card-prices"><span class="cop">$40.000 – $80.000 COP</span><span class="usd">USD $10 – $21</span></div>
+              <p class="price-note">Digital o para impresión. Una o dos caras.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Tarjeta%20de%20presentaci%C3%B3n">
+              <div class="price-card-image"><img src="images/svc/svc-tarjeta.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Tarjeta de presentación</h4></div>
+              <div class="price-card-prices"><span class="cop">$40.000 – $80.000 COP</span><span class="usd">USD $10 – $21</span></div>
+              <p class="price-note">Diseño frente y reverso.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Portada%20YouTube%20/%20Facebook">
+              <div class="price-card-image"><img src="images/svc/svc-portada.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Portada YouTube / Facebook</h4></div>
+              <div class="price-card-prices"><span class="cop">$50.000 – $120.000 COP</span><span class="usd">USD $13 – $31</span></div>
+              <p class="price-note">Banner personalizado + foto de perfil opcional.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Presentaciones%20%28PowerPoint%20/%20Canva%29">
+              <div class="price-card-image"><img src="images/svc/svc-presentaciones.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Presentaciones (PowerPoint / Canva)</h4></div>
+              <div class="price-card-prices"><span class="cop">$20.000 – $60.000 COP</span><span class="usd">USD $5 – $15</span></div>
+              <p class="price-note">Por diapositiva o por lote, según animaciones.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow" href="contacto.html?servicio=Edici%C3%B3n%20de%20fotograf%C3%ADa">
+              <div class="price-card-image"><img src="images/svc/svc-fotografia.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Edición de fotografía</h4></div>
+              <div class="price-card-prices"><span class="cop">$8.000 – $25.000 COP / foto</span><span class="usd">USD $2 – $6</span></div>
+              <p class="price-note">Revelado digital y ajustes de color.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+            <a class="price-card magenta-glow featured" href="contacto.html?servicio=Gesti%C3%B3n%20de%20redes%20sociales">
+              <div class="price-card-image"><img src="images/svc/svc-gestion-redes.jpg" alt="" loading="lazy"/></div>
+              <div class="price-card-head"><h4>Gestión de redes sociales</h4><span class="badge-pop">Mensual</span></div>
+              <div class="price-card-prices"><span class="cop">$200.000 – $500.000 COP / mes</span><span class="usd">USD $51 – $128</span></div>
+              <p class="price-note">2 a 4 publicaciones por semana, sin pauta.</p>
+              <span class="price-card-cta">Solicitar este servicio →</span>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="pricing-cta reveal">
+          <p>¿No ves lo que buscas o quieres un combo personalizado?</p>
+          <a href="https://wa.me/573132049102" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            Cotizar por WhatsApp
+          </a>
+        </div>
+
+      </div>
+
+      <style>
+        /* Tarifas — estilos propios, integrados al tema cyberpunk */
+        .pricing-tabs{display:flex;gap:8px;justify-content:center;margin:60px auto 28px;flex-wrap:wrap;max-width:600px}
+        .pricing-tab{background:rgba(255,255,255,.04);color:#aab;border:1px solid rgba(255,255,255,.1);padding:12px 22px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:all .25s ease;text-transform:uppercase}
+        .pricing-tab:hover{color:#fff;border-color:rgba(0,229,255,.4)}
+        .pricing-tab.active{background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;border-color:transparent;box-shadow:0 8px 24px rgba(0,229,255,.25),0 4px 16px rgba(213,0,249,.25)}
+        .pricing-panel{display:none;animation:panelIn .4s ease}
+        .pricing-panel.active{display:block}
+        @keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .pricing-panel-head{text-align:center;margin-bottom:32px}
+        .pricing-panel-title{display:inline-flex;align-items:center;gap:10px;color:#fff;font-size:18px;font-weight:700;font-family:'Poppins',sans-serif}
+        .pricing-panel-sub{color:#888;font-size:12px;margin-top:6px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px}
+        .dot-cyan,.dot-magenta{width:10px;height:10px;border-radius:50%;display:inline-block}
+        .dot-cyan{background:#00e5ff;box-shadow:0 0 12px #00e5ff}
+        .dot-magenta{background:#d500f9;box-shadow:0 0 12px #d500f9}
+        .pricing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+        .price-card{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 18px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;display:flex;flex-direction:column;gap:10px}
+        .price-card.cyan-glow:hover{transform:translateY(-4px);border-color:rgba(0,229,255,.5);box-shadow:0 12px 30px rgba(0,229,255,.18)}
+        .price-card.magenta-glow:hover{transform:translateY(-4px);border-color:rgba(213,0,249,.5);box-shadow:0 12px 30px rgba(213,0,249,.18)}
+        .price-card.featured{border-color:rgba(0,229,255,.4)}
+        .price-card.magenta-glow.featured{border-color:rgba(213,0,249,.4)}
+        .price-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+        .price-card-head h4{color:#fff;font-size:15px;font-weight:600;line-height:1.35;margin:0;font-family:'Poppins',sans-serif}
+        .badge-pop{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.5px;text-transform:uppercase;padding:4px 8px;border-radius:6px;white-space:nowrap;background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;font-weight:700;align-self:flex-start}
+        .price-card-prices{display:flex;flex-direction:column;gap:2px;padding:8px 0;border-top:1px dashed rgba(255,255,255,.08);border-bottom:1px dashed rgba(255,255,255,.08)}
+        .price-card-prices .cop{color:#00e5ff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.3px}
+        .price-card.magenta-glow .price-card-prices .cop{color:#d500f9}
+        .price-card-prices .usd{color:#888;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.5px}
+        .price-note{color:#aaa;font-size:12.5px;line-height:1.5;margin:0;font-family:'Poppins',sans-serif}
+        .pricing-cta{text-align:center;margin-top:48px;padding:32px 20px;background:linear-gradient(135deg,rgba(0,229,255,.05),rgba(213,0,249,.05));border:1px dashed rgba(0,229,255,.2);border-radius:16px}
+        .pricing-cta p{color:#ccc;font-size:15px;margin:0 0 18px;font-family:'Poppins',sans-serif}
+        @media (max-width:600px){
+          .pricing-tab{padding:10px 16px;font-size:11px}
+          .pricing-grid{grid-template-columns:1fr}
+          .price-card{padding:16px 14px}
+        }
+      </style>
+
+    </section>
+  </main>
+
+
+
+<!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">LM</div>
+      <p>Diseñado &amp; desarrollado con pasión © 2026 — Leonardo Márquez</p>
+    </div>
+  </footer>
+
+<!-- TOAST -->
+  <div class="toast" id="toast">
+    <div class="toast-title">¡Mensaje enviado con éxito!</div>
+    <div class="toast-desc">Me pondré en contacto contigo muy pronto.</div>
+  </div>
+
+<!-- AI CHAT WIDGET -->
+  <button class="chat-fab" id="chat-fab" aria-label="Abrir asistente">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span class="chat-fab-label">IA</span>
+  </button>
+
+  <aside class="chat-window" id="chat-window" aria-hidden="true">
+    <header class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-avatar">LM</div>
+        <div>
+          <div class="chat-title">Asistente IA</div>
+          <div class="chat-status"><span class="dot"></span> En línea</div>
+        </div>
+      </div>
+      <button class="chat-close" id="chat-close" aria-label="Cerrar">×</button>
+    </header>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-quick" id="chat-quick"></div>
+    <form class="chat-form" id="chat-form" autocomplete="off">
+      <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." aria-label="Mensaje" />
+      <button type="submit" aria-label="Enviar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+      </button>
+    </form>
+  </aside>
+
+<style>
+    /* Chat widget — estilos propios, no afectan al resto */
+    .chat-fab{position:fixed;bottom:24px;right:24px;z-index:9998;width:64px;height:64px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;box-shadow:0 10px 30px rgba(0,229,255,.35),0 6px 20px rgba(213,0,249,.3);transition:transform .2s ease,opacity .2s ease;font-family:'JetBrains Mono',monospace}
+    .chat-fab svg{width:24px;height:24px}
+    .chat-fab-label{font-size:9px;font-weight:700;letter-spacing:1px;margin-top:2px}
+    .chat-fab:hover{transform:scale(1.08)}
+    .chat-fab.hidden{opacity:0;pointer-events:none;transform:scale(.6)}
+    .chat-window{position:fixed;bottom:24px;right:24px;z-index:9999;width:370px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 100px);background:#0a0a0f;border:1px solid rgba(0,229,255,.3);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 30px rgba(0,229,255,.15);transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:transform .25s ease,opacity .25s ease;font-family:'Poppins',sans-serif}
+    .chat-window.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+    .chat-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(135deg,rgba(0,229,255,.12),rgba(213,0,249,.12));border-bottom:1px solid rgba(255,255,255,.08)}
+    .chat-header-left{display:flex;align-items:center;gap:12px}
+    .chat-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono',monospace}
+    .chat-title{color:#fff;font-weight:600;font-size:14px;line-height:1}
+    .chat-status{color:#00e5ff;font-size:11px;display:flex;align-items:center;gap:6px;margin-top:4px;font-family:'JetBrains Mono',monospace}
+    .chat-status .dot{width:7px;height:7px;border-radius:50%;background:#00e5ff;box-shadow:0 0 8px #00e5ff;animation:pulse 1.5s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .chat-close{background:transparent;border:0;color:#fff;font-size:26px;cursor:pointer;padding:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;line-height:1;border-radius:6px;transition:background .2s}
+    .chat-close:hover{background:rgba(255,255,255,.1)}
+    .chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0a0a0f}
+    .chat-body::-webkit-scrollbar{width:6px}
+    .chat-body::-webkit-scrollbar-thumb{background:rgba(0,229,255,.25);border-radius:3px}
+    .msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.5;word-wrap:break-word;animation:msgIn .25s ease}
+    @keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .msg.bot{background:rgba(255,255,255,.06);color:#e8e8f0;align-self:flex-start;border:1px solid rgba(0,229,255,.15)}
+    .msg.user{background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;align-self:flex-end;font-weight:500}
+    .msg a{color:#00e5ff;text-decoration:underline}
+    .msg.user a{color:#0a0a0f}
+    .typing{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(0,229,255,.15);padding:10px 14px;border-radius:14px;display:flex;gap:4px}
+    .typing span{width:7px;height:7px;border-radius:50%;background:#00e5ff;animation:typing 1.2s infinite ease-in-out}
+    .typing span:nth-child(2){animation-delay:.15s}
+    .typing span:nth-child(3){animation-delay:.3s}
+    @keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+    .chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px;border-top:1px solid rgba(255,255,255,.06)}
+    .chat-quick button{background:rgba(0,229,255,.08);color:#00e5ff;border:1px solid rgba(0,229,255,.3);padding:6px 11px;border-radius:14px;font-size:11px;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:all .2s;font-weight:500}
+    .chat-quick button:hover{background:rgba(0,229,255,.18);border-color:#00e5ff;transform:translateY(-1px)}
+    .chat-form{display:flex;gap:8px;padding:12px;background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.08)}
+    .chat-form input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 13px;border-radius:10px;font-size:13px;font-family:'Poppins',sans-serif;outline:none;transition:border-color .2s}
+    .chat-form input:focus{border-color:#00e5ff}
+    .chat-form button{background:linear-gradient(135deg,#00e5ff,#d500f9);border:0;color:#0a0a0f;width:42px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+    .chat-form button:hover{transform:scale(1.05)}
+    .chat-form button svg{width:18px;height:18px}
+    @media (max-width:480px){
+      .chat-fab{bottom:16px;right:16px;width:56px;height:56px}
+      .chat-window{bottom:16px;right:16px;left:16px;width:auto;height:75vh}
+    }
+  </style>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
 
