@@ -1,1 +1,179 @@
+/* Genera y descarga un PDF resumen al enviar el formulario de contacto.
+   Usa jsPDF (cargada por CDN). Funciona en móvil y escritorio. */
+(function () {
+  'use strict';
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+
+    function fld(id) { var el = form.querySelector('#' + id); return el ? el.value.trim() : ''; }
+    function svcLabel() {
+      var sel = form.querySelector('#service');
+      if (!sel) return '';
+      var opt = sel.options[sel.selectedIndex];
+      return opt ? opt.text : sel.value;
+    }
+    function todayStr() {
+      var d = new Date();
+      var dd = String(d.getDate()).padStart(2, '0');
+      var mm = String(d.getMonth() + 1).padStart(2, '0');
+      var yyyy = d.getFullYear();
+      var hh = String(d.getHours()).padStart(2, '0');
+      var mi = String(d.getMinutes()).padStart(2, '0');
+      return dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + mi;
+    }
+    function refCode() {
+      var t = Date.now().toString(36).toUpperCase();
+      return 'LM-' + t.slice(-6);
+    }
+    function safeFile(s) {
+      return (s || 'cliente')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9_-]+/g, '_').slice(0, 30) || 'cliente';
+    }
+
+    function buildAndDownload() {
+      if (!window.jspdf || !window.jspdf.jsPDF) {
+        console.warn('jsPDF no disponible aún');
+        return;
+      }
+      try {
+        var jsPDF = window.jspdf.jsPDF;
+        var doc = new jsPDF({ unit: 'pt', format: 'a4' });
+
+        var W = doc.internal.pageSize.getWidth();
+        var H = doc.internal.pageSize.getHeight();
+        var ref = refCode();
+
+        // ----- Fondo oscuro de header -----
+        doc.setFillColor(8, 10, 22);
+        doc.rect(0, 0, W, 130, 'F');
+
+        // Banda cyan superior
+        doc.setFillColor(0, 229, 255);
+        doc.rect(0, 0, W, 4, 'F');
+        // Banda magenta debajo del header
+        doc.setFillColor(213, 0, 249);
+        doc.rect(0, 130, W, 3, 'F');
+
+        // ----- Logo "LM" en caja con borde cyan -----
+        doc.setDrawColor(0, 229, 255);
+        doc.setLineWidth(2);
+        doc.roundedRect(40, 32, 64, 64, 10, 10, 'S');
+        doc.setTextColor(0, 229, 255);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(30);
+        doc.text('LM', 72, 76, { align: 'center' });
+
+        // Nombre y subtítulo
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(20);
+        doc.text('Leonardo Marquez', 122, 64);
+        doc.setTextColor(0, 229, 255);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        doc.text('SYS_ADMIN  //  DEV  //  DESIGN', 122, 82);
+
+        // Datos de contacto en el header (columna derecha)
+        doc.setTextColor(180, 200, 220);
+        doc.setFontSize(9);
+        doc.text('WhatsApp:  +57 313 204 9102', W - 40, 50, { align: 'right' });
+        doc.text('Email:     lumar.321456@gmail.com', W - 40, 66, { align: 'right' });
+        doc.text('Sibate, Colombia', W - 40, 82, { align: 'right' });
+
+        // ----- Título principal -----
+        doc.setTextColor(20, 20, 30);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(22);
+        doc.text('Comprobante de solicitud', 40, 180);
+
+        // Línea divisoria
+        doc.setDrawColor(0, 229, 255);
+        doc.setLineWidth(0.8);
+        doc.line(40, 192, W - 40, 192);
+
+        // Frase
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(11);
+        doc.setTextColor(70, 70, 90);
+        var frase = '"Gracias por confiar en mi trabajo: convierto ideas en sistemas y disenos que funcionan."';
+        doc.text(doc.splitTextToSize(frase, W - 80), 40, 218);
+
+        // ----- Bloque de datos -----
+        var y = 270;
+        var labelColor = [0, 145, 175];
+        var valueColor = [25, 25, 35];
+        var rowGap = 38;
+
+        function row(label, value) {
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor.apply(doc, labelColor);
+          doc.text(label.toUpperCase(), 40, y);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(13);
+          doc.setTextColor.apply(doc, valueColor);
+          var lines = doc.splitTextToSize(value || '—', W - 80);
+          doc.text(lines, 40, y + 16);
+          y += 16 + (lines.length - 1) * 14 + 22;
+        }
+
+        row('Cliente',      fld('name'));
+        row('Email',        fld('email'));
+        row('Servicio solicitado', svcLabel());
+        row('Mensaje',      fld('message'));
+        row('Referencia',   ref);
+        row('Fecha',        todayStr());
+
+        // ----- Caja de “proximos pasos” -----
+        if (y < H - 200) {
+          doc.setFillColor(245, 250, 255);
+          doc.setDrawColor(0, 229, 255);
+          doc.roundedRect(40, y, W - 80, 110, 8, 8, 'FD');
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(11);
+          doc.setTextColor(0, 145, 175);
+          doc.text('PROXIMOS PASOS', 56, y + 24);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(10);
+          doc.setTextColor(40, 40, 55);
+          var steps = [
+            '1.  Te respondere en menos de 24 horas con detalles y precio final.',
+            '2.  Si necesitas algo urgente, escribeme directo por WhatsApp.',
+            '3.  Conserva esta referencia (' + ref + ') para nuestra comunicacion.',
+          ];
+          doc.text(steps, 56, y + 44, { lineHeightFactor: 1.5 });
+        }
+
+        // ----- Footer -----
+        doc.setFillColor(8, 10, 22);
+        doc.rect(0, H - 50, W, 50, 'F');
+        doc.setFillColor(213, 0, 249);
+        doc.rect(0, H - 50, W, 3, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(9);
+        doc.text('LM  ·  Leonardo Marquez', 40, H - 22);
+        doc.setTextColor(0, 229, 255);
+        doc.text('lumar.321456@gmail.com   ·   +57 313 204 9102', W - 40, H - 22, { align: 'right' });
+
+        var fname = 'Solicitud_' + safeFile(fld('name')) + '_' + ref + '.pdf';
+        doc.save(fname);
+      } catch (e) {
+        console.error('Error generando PDF:', e);
+      }
+    }
+
+    // Hook submit: generar PDF y permitir que FormSubmit reciba el envio
+    form.addEventListener('submit', function () {
+      // Pequeno delay para que el navegador inicie la descarga antes de salir
+      try { buildAndDownload(); } catch (e) { console.error(e); }
+    }, { capture: true });
+  });
+})();
 
