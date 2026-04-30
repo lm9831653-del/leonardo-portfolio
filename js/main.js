@@ -699,14 +699,14 @@
   const chatInput  = document.getElementById('chat-input');
 
   const QUICK = [
-    { label: 'Servicios',  text: '¿Qué servicios ofreces?' },
-    { label: 'Precios',    text: '¿Cuánto cuesta?' },
-    { label: 'Tiempos',    text: '¿Cuánto se demora?' },
-    { label: 'Diseño',     text: 'Cuéntame sobre diseño' },
-    { label: 'Web',        text: 'Cuéntame sobre desarrollo web' },
-    { label: 'Soporte',    text: 'Cuéntame sobre soporte técnico' },
-    { label: 'Agendar',    text: 'Quiero agendar una reunión' },
-    { label: 'WhatsApp',   text: 'Quiero hablar por WhatsApp' }
+    { label: 'Servicios',     text: '¿Qué servicios ofreces?' },
+    { label: 'Precios',       text: '¿Cuánto cuesta?' },
+    { label: 'Soporte',       text: 'Cuéntame sobre soporte técnico' },
+    { label: 'Diseño',        text: 'Cuéntame sobre diseño' },
+    { label: 'Agendar',       text: 'Quiero agendar una reunión' },
+    { label: 'WhatsApp',      text: 'Quiero hablar por WhatsApp' },
+    { label: '💡 Tema libre', text: 'Cuéntame algo curioso de tecnología' },
+    { label: '🧠 Pregúntame', text: 'Pregúntame lo que quieras, puedo hablar de cualquier tema.' }
   ];
 
   function addMsg(html, who, save = true) {
@@ -745,16 +745,88 @@
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   }
+  // ===== Cerebro IA online (Pollinations.ai, sin API key) =====
+  const AI_SYSTEM_PROMPT = [
+    'Eres "LM AI", el asistente personal del portafolio de Leonardo Márquez.',
+    'Leonardo es Técnico en Sistemas y Diseñador Gráfico de Sibaté, Colombia.',
+    'Sus servicios incluyen: reparación y mantenimiento de PC, formateo Windows,',
+    'instalación de software, redes/WiFi, eliminación de virus, soporte a domicilio,',
+    'diseño de logos, banners, flyers, edición de video, fotografía y gestión de redes sociales.',
+    'Contacto: WhatsApp +57 313 204 9102 — Email lumar.321456@gmail.com.',
+    'Si te preguntan por servicios, precios o agendar, recomienda contactar por WhatsApp o llenar el formulario en /contacto.html.',
+    'PERO también puedes conversar libremente de CUALQUIER tema: cultura, ciencia, historia, tecnología,',
+    'consejos, recetas, programación, matemáticas, deportes, salud, viajes, estudios, ayuda con tareas, etc.',
+    'Responde SIEMPRE en español, de forma clara, amigable y breve (máximo 4 frases).',
+    'No uses Markdown ni asteriscos; usa texto plano. Si el usuario pide código, devuélvelo claro.',
+    'Si no sabes algo, dilo con honestidad.'
+  ].join(' ');
+
+  function buildAIPrompt(userText) {
+    // Toma las últimas 4 interacciones para contexto
+    const recent = ctx.history.slice(-8);
+    const lines = [];
+    lines.push('SISTEMA: ' + AI_SYSTEM_PROMPT);
+    recent.forEach(m => {
+      const t = String(m.html || '').replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim();
+      if (!t) return;
+      lines.push((m.who === 'user' ? 'USUARIO: ' : 'ASISTENTE: ') + t);
+    });
+    lines.push('USUARIO: ' + userText);
+    lines.push('ASISTENTE:');
+    return lines.join('\n');
+  }
+
+  function aiToHtml(text) {
+    const safe = escapeHtml(String(text).trim());
+    // links automáticos a wa.me y mailto
+    return safe
+      .replace(/\n+/g, '<br>')
+      .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noreferrer">$1</a>')
+      .replace(/(\+?57[\s-]?313[\s-]?204[\s-]?9102)/g,
+               '<a href="https://wa.me/573132049102" target="_blank" rel="noreferrer">$1</a>')
+      .replace(/(lumar\.321456@gmail\.com)/g,
+               '<a href="mailto:$1">$1</a>');
+  }
+
+  async function fetchSmartReply(userText) {
+    const prompt = buildAIPrompt(userText);
+    const url = 'https://text.pollinations.ai/' + encodeURIComponent(prompt)
+              + '?model=openai&seed=' + Math.floor(Math.random() * 99999);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 18000);
+    try {
+      const r = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
+      clearTimeout(timer);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const txt = (await r.text()).trim();
+      if (!txt || txt.length < 2) throw new Error('empty');
+      // El servicio puede a veces devolver JSON con un mensaje de error
+      if (/^\s*[{[]/.test(txt) && /error/i.test(txt)) throw new Error('upstream error');
+      return txt;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   function sendUserMessage(text) {
     if (!text || !text.trim()) return;
     addMsg(escapeHtml(text), 'user');
     chatInput.value = '';
     addTyping();
-    const delay = 500 + Math.min(text.length * 18, 1000);
-    setTimeout(() => {
-      removeTyping();
-      addMsg(generateReply(text), 'bot');
-    }, delay);
+
+    // Intenta IA online; si falla, usa el motor local
+    fetchSmartReply(text)
+      .then(reply => {
+        removeTyping();
+        addMsg(aiToHtml(reply), 'bot');
+      })
+      .catch(() => {
+        // pequeño delay para que se vea natural
+        setTimeout(() => {
+          removeTyping();
+          addMsg(generateReply(text), 'bot');
+        }, 200);
+      });
   }
 
   let chatGreeted = false;
@@ -772,7 +844,7 @@
         ctx.history.forEach(m => addMsg(m.html, m.who, false));
       } else {
         setTimeout(() => addMsg(
-          '¡Hola! Soy el asistente virtual de Leonardo. Puedo resolver tus dudas sobre <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong> o conectarte con él por WhatsApp. ¿En qué te ayudo?',
+          '¡Hola! Soy <strong>LM AI</strong>, el asistente de Leonardo. Puedo hablarte de sus <strong>servicios</strong>, <strong>precios</strong> y <strong>tiempos</strong>, o también <strong>conversar de cualquier tema</strong>: tecnología, ciencia, recetas, ayuda con tareas… ¿En qué te ayudo?',
           'bot'
         ), 250);
       }
@@ -800,5 +872,233 @@
     if (e.key === 'Escape' && chatWin && chatWin.classList.contains('open')) closeChat();
   });
 
+  /* --------------------------------------------------------
+     14. Tabs de tarifas (Servicios)
+  --------------------------------------------------------- */
+  const pricingTabs   = document.querySelectorAll('.pricing-tab');
+  const pricingPanels = {
+    tech:   document.getElementById('panel-tech'),
+    design: document.getElementById('panel-design')
+  };
+  pricingTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      pricingTabs.forEach(t => t.classList.toggle('active', t === tab));
+      Object.entries(pricingPanels).forEach(([k, panel]) => {
+        if (panel) panel.classList.toggle('active', k === target);
+      });
+    });
+  });
+
 })();
 
+
+// --- service-prefill ---
+(function () {
+  if (typeof window === 'undefined') return;
+  function init () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var srv = params.get('servicio');
+      if (!srv) return;
+
+      var msgEl = form.querySelector('#message');
+      if (msgEl && !msgEl.value) {
+        msgEl.value = 'Hola Leonardo, me interesa el servicio: "' + srv + '". ¿Podrías darme más información y agendar?';
+      }
+
+      // Try to map the requested service to one of the select options
+      var sel = form.querySelector('#service');
+      if (sel) {
+        var t = srv.toLowerCase();
+        var pick = '';
+        if (/(logo|banner|flyer|tarjeta|portada|fotograf|video|presentaci|photoshop|gesti.n de redes)/.test(t)) {
+          pick = 'design';
+        } else if (/(web|sitio|html|p.gina)/.test(t)) {
+          pick = 'web';
+        } else if (/(diagn.stico|formateo|mantenimiento|limpieza|repuesto|domicilio|wifi|virus|software|red)/.test(t)) {
+          pick = 'support';
+        } else if (/(consultor)/.test(t)) {
+          pick = 'consulting';
+        } else {
+          pick = 'other';
+        }
+        sel.value = pick;
+      }
+
+      // Scroll to the form smoothly
+      var contactSec = document.getElementById('contact');
+      if (contactSec) {
+        setTimeout(function () {
+          contactSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+      }
+
+      // Highlight the form briefly
+      form.classList.add('prefilled');
+      setTimeout(function () { form.classList.remove('prefilled'); }, 2200);
+    } catch (e) { /* no-op */ }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
+
+
+// --- v3: voice + email branding ---
+(function () {
+  if (typeof window === 'undefined') return;
+
+  /* =========== Voice (Text-to-Speech) for chat replies =========== */
+  var VOICE_KEY = 'lm_chat_voice';
+  var voiceOn = (function () {
+    try { return localStorage.getItem(VOICE_KEY) !== '0'; } catch (e) { return true; }
+  })();
+
+  function injectVoiceButton() {
+    var header = document.querySelector('.chat-window .chat-header');
+    var closeBtn = document.querySelector('.chat-window .chat-close');
+    if (!header || !closeBtn || header.querySelector('.chat-voice')) return;
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'chat-voice ' + (voiceOn ? 'on' : 'off');
+    btn.setAttribute('aria-label', 'Activar/desactivar voz');
+    btn.title = voiceOn ? 'Voz activada — clic para silenciar' : 'Voz silenciada — clic para activar';
+    btn.innerHTML = voiceIconSVG(voiceOn);
+    btn.addEventListener('click', function () {
+      voiceOn = !voiceOn;
+      try { localStorage.setItem(VOICE_KEY, voiceOn ? '1' : '0'); } catch (e) {}
+      btn.classList.toggle('on', voiceOn);
+      btn.classList.toggle('off', !voiceOn);
+      btn.innerHTML = voiceIconSVG(voiceOn);
+      btn.title = voiceOn ? 'Voz activada — clic para silenciar' : 'Voz silenciada — clic para activar';
+      if (!voiceOn && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    });
+    closeBtn.parentNode.insertBefore(btn, closeBtn);
+  }
+  function voiceIconSVG(on) {
+    return on
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19 12c0-2.5-1.4-4.6-3.5-5.6"/><path d="M16 12c0-1.4-.7-2.5-1.7-3.1"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>';
+  }
+
+  function speakText(text) {
+    if (!voiceOn) return;
+    if (!('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      var clean = String(text)
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&[a-z]+;/gi, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (!clean) return;
+      // Cap length to avoid super long readings
+      if (clean.length > 360) clean = clean.slice(0, 360) + '…';
+      var u = new SpeechSynthesisUtterance(clean);
+      u.lang  = 'es-ES';
+      u.rate  = 1.02;
+      u.pitch = 1.0;
+      u.volume = 1.0;
+      // Pick a Spanish voice if available
+      var voices = window.speechSynthesis.getVoices();
+      var sp = voices.find(function (v) { return /^es/i.test(v.lang); });
+      if (sp) u.voice = sp;
+      window.speechSynthesis.speak(u);
+    } catch (e) { /* noop */ }
+  }
+
+  // Hook into the chat: wrap addMsg if present so bot replies are spoken.
+  function hookChatVoice() {
+    var body = document.getElementById('chat-body');
+    if (!body || body.__voiceHooked) return;
+    body.__voiceHooked = true;
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (n) {
+          if (n.nodeType === 1 && n.classList && n.classList.contains('msg') && n.classList.contains('bot')) {
+            speakText(n.innerText || n.textContent || '');
+          }
+        });
+      });
+    });
+    observer.observe(body, { childList: true });
+  }
+
+  // Initialise once DOM is ready
+  function initVoice() {
+    injectVoiceButton();
+    hookChatVoice();
+    // Trigger voice list load (some browsers need this)
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = function () { /* refresh */ };
+      window.speechSynthesis.getVoices();
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVoice);
+  } else { initVoice(); }
+
+  /* =========== Email branding for FormSubmit =========== */
+  function brandFormSubmit() {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var nameEl    = form.querySelector('#name');
+    var emailEl   = form.querySelector('#email');
+    var serviceEl = form.querySelector('#service');
+    var msgEl     = form.querySelector('#message');
+    var subjEl    = form.querySelector('input[name="_subject"]');
+    var autoEl    = form.querySelector('#autoresponse-field');
+    var replyEl   = form.querySelector('#replyto-field');
+
+    function svcLabel() {
+      if (!serviceEl) return '';
+      var opt = serviceEl.options[serviceEl.selectedIndex];
+      return opt ? opt.text : serviceEl.value;
+    }
+    function buildAutoresponse() {
+      var nm = (nameEl && nameEl.value || 'amigo').trim();
+      var sv = svcLabel() || 'tu solicitud';
+      return [
+        '════════════════════════════════',
+        '   ⚡  L M  ·  LEONARDO MÁRQUEZ',
+        '   SYS_ADMIN // DEV // DESIGN',
+        '════════════════════════════════',
+        '',
+        'Hola ' + nm + ',',
+        '',
+        '¡Gracias por escribir! Recibí tu solicitud:',
+        '➜ Servicio: ' + sv,
+        '',
+        'Te contactaré en menos de 24 horas para darte detalles, precio final y agendar.',
+        'Mientras tanto, revisa tu carpeta de descargas: te dejé un PDF con el resumen y mis datos de contacto.',
+        '',
+        '📞 WhatsApp:  +57 313 204 9102',
+        '✉️  Email:    lumar.321456@gmail.com',
+        '📍 Ubicación: Sibaté, Colombia',
+        '',
+        '— Leonardo Márquez (LM)',
+        '   "Convierto ideas en sistemas y diseños que funcionan."',
+      ].join('\n');
+    }
+    function syncFields() {
+      if (subjEl && serviceEl) {
+        var sv = svcLabel();
+        subjEl.value = sv ? ('🛠 Nueva solicitud: ' + sv + ' — ' + (nameEl && nameEl.value || '')) :
+                            'Nueva solicitud — Portafolio Leonardo Márquez';
+      }
+      if (autoEl) autoEl.value = buildAutoresponse();
+      if (replyEl && emailEl) replyEl.value = emailEl.value || '';
+    }
+    ['input', 'change'].forEach(function (ev) {
+      form.addEventListener(ev, syncFields);
+    });
+    syncFields();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', brandFormSubmit);
+  } else { brandFormSubmit(); }
+})();
