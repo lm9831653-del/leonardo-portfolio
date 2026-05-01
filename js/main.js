@@ -686,7 +686,7 @@
       return `No estoy 100% seguro de tu pregunta. ¿Te refieres a <strong>${suggestions.join('</strong> o <strong>')}</strong>? También puedes escribirle directo a Leonardo:<br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102 →</a>`;
     }
 
-    return 'Hmm, no estoy seguro de entenderte. Puedo ayudarte con: <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong>, <strong>portafolio</strong>, <strong>contacto</strong> o <strong>ubicación</strong>.<br><br>Si prefieres hablar con Leonardo directo: <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>';
+    return 'Solo puedo ayudarte con temas del portafolio de Leonardo. Puedo responderte sobre: <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong>, <strong>portafolio</strong>, <strong>contacto</strong> o <strong>ubicación</strong>.<br><br>¿Tienes alguna duda sobre alguno de estos temas? O si prefieres hablar directamente: <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>';
   }
 
   // ---- DOM del chat ----
@@ -699,14 +699,14 @@
   const chatInput  = document.getElementById('chat-input');
 
   const QUICK = [
-    { label: 'Servicios',     text: '¿Qué servicios ofreces?' },
-    { label: 'Precios',       text: '¿Cuánto cuesta?' },
-    { label: 'Soporte',       text: 'Cuéntame sobre soporte técnico' },
-    { label: 'Diseño',        text: 'Cuéntame sobre diseño' },
-    { label: 'Agendar',       text: 'Quiero agendar una reunión' },
-    { label: 'WhatsApp',      text: 'Quiero hablar por WhatsApp' },
-    { label: '💡 Tema libre', text: 'Cuéntame algo curioso de tecnología' },
-    { label: '🧠 Pregúntame', text: 'Pregúntame lo que quieras, puedo hablar de cualquier tema.' }
+    { label: 'Servicios',  text: '¿Qué servicios ofreces?' },
+    { label: 'Precios',    text: '¿Cuánto cuesta?' },
+    { label: 'Soporte',    text: 'Cuéntame sobre soporte técnico' },
+    { label: 'Diseño',     text: 'Cuéntame sobre diseño' },
+    { label: 'Portafolio', text: '¿Puedo ver tus proyectos?' },
+    { label: 'Agendar',    text: 'Quiero agendar una reunión' },
+    { label: 'Contacto',   text: '¿Cómo puedo contactar a Leonardo?' },
+    { label: 'WhatsApp',   text: 'Quiero hablar por WhatsApp' }
   ];
 
   function addMsg(html, who, save = true) {
@@ -747,8 +747,12 @@
   }
   // ===== Cerebro IA online (Pollinations.ai, sin API key) =====
   const AI_SYSTEM_PROMPT = [
-    'Eres "LM AI", el asistente personal del portafolio de Leonardo Márquez.',
-    'Leonardo es Técnico en Sistemas y Diseñador Gráfico de Sibaté, Colombia.',
+    'Eres "LM AI", el asistente exclusivo del portafolio de Leonardo Márquez.',
+    'REGLA ABSOLUTA E INQUEBRANTABLE: Solo puedes responder preguntas sobre el portafolio de Leonardo Márquez.',
+    'Los únicos temas permitidos son: servicios de soporte técnico, servicios de diseño gráfico, desarrollo web, precios, tiempos de entrega, proyectos del portafolio, información sobre Leonardo, ubicación, formas de contacto, formas de pago y garantías.',
+    'Si el usuario pregunta CUALQUIER otra cosa (recetas, ciencia, historia, deportes, tecnología general, matemáticas, chistes, noticias, consejos personales, o cualquier tema ajeno al portafolio), debes responder EXACTAMENTE esto: "Solo puedo ayudarte con temas del portafolio de Leonardo Márquez. Puedes preguntarme sobre servicios, precios, tiempos, proyectos o contacto."',
+    'NO improvises. NO respondas preguntas fuera del portafolio bajo ninguna circunstancia.',
+    'Leonardo es Técnico en Sistemas y Diseñador Gráfico de Sibaté, Cundinamarca, Colombia.',
     'PRECIOS EN PESOS COLOMBIANOS (COP) Y SU EQUIVALENTE EN DÓLARES (USD):',
     '--- SOPORTE TÉCNICO ---',
     'Diagnóstico y revisión técnica: $35.000-$45.000 COP (USD $9-$12).',
@@ -774,14 +778,9 @@
     'Portada para Facebook / YouTube / Twitter: $45.000 COP (USD $12).',
     'Presentación (PPT o Canva, hasta 10 diapositivas): $80.000 COP (USD $21).',
     'Gestión de redes sociales (community manager, 3 publicaciones/semana, mensual): $180.000 COP (USD $50).',
-    'Todos los precios son en pesos colombianos (COP). El equivalente en dólares es aproximado según la tasa de cambio.',
     'Contacto: WhatsApp +57 313 204 9102 — Email lumar.321456@gmail.com.',
-    'Si te preguntan por servicios, precios o agendar, recomienda contactar por WhatsApp o llenar el formulario en /contacto.html.',
-    'PERO también puedes conversar libremente de CUALQUIER tema: cultura, ciencia, historia, tecnología,',
-    'consejos, recetas, programación, matemáticas, deportes, salud, viajes, estudios, ayuda con tareas, etc.',
     'Responde SIEMPRE en español, de forma clara, amigable y breve (máximo 4 frases).',
-    'No uses Markdown ni asteriscos; usa texto plano. Si el usuario pide código, devuélvelo claro.',
-    'Si no sabes algo, dilo con honestidad.'
+    'No uses Markdown ni asteriscos; usa texto plano.'
   ].join(' ');
 
   function buildAIPrompt(userText) {
@@ -831,11 +830,38 @@
     }
   }
 
+  // IDs de intents considerados "del portafolio"
+  const PORTFOLIO_INTENTS = new Set([
+    'saludo','servicios','diseno','web','soporte','precio','tiempo',
+    'experiencia','contacto','ubicacion','portafolio','agendar','pago',
+    'garantia','idioma','derivar_humano','agradecer','despedida'
+  ]);
+
+  function isPortfolioMessage(text) {
+    const { intent, score } = detectIntent(text);
+    // Si coincide con algún intent del portafolio con puntuación suficiente
+    if (intent && PORTFOLIO_INTENTS.has(intent.id) && score >= 0.5) return true;
+    // Saludo corto (hola, hi, etc.) siempre es válido
+    if (/^\s*(hola|hello|hi|buenas|hey|saludos)\s*$/i.test(text.trim())) return true;
+    return false;
+  }
+
+  const OFF_TOPIC_MSG = 'Solo puedo ayudarte con temas del portafolio de Leonardo Márquez. Puedes preguntarme sobre <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong>, <strong>proyectos</strong> o <strong>contacto</strong>.';
+
   function sendUserMessage(text) {
     if (!text || !text.trim()) return;
     addMsg(escapeHtml(text), 'user');
     chatInput.value = '';
     addTyping();
+
+    // Filtro de tema: si la pregunta no es del portafolio, responder de inmediato sin llamar a la IA online
+    if (!isPortfolioMessage(text)) {
+      setTimeout(() => {
+        removeTyping();
+        addMsg(OFF_TOPIC_MSG, 'bot');
+      }, 350);
+      return;
+    }
 
     // Intenta IA online; si falla, usa el motor local
     fetchSmartReply(text)
@@ -867,7 +893,7 @@
         ctx.history.forEach(m => addMsg(m.html, m.who, false));
       } else {
         setTimeout(() => addMsg(
-          '¡Hola! Soy <strong>LM AI</strong>, el asistente de Leonardo. Puedo hablarte de sus <strong>servicios</strong>, <strong>precios</strong> y <strong>tiempos</strong>, o también <strong>conversar de cualquier tema</strong>: tecnología, ciencia, recetas, ayuda con tareas… ¿En qué te ayudo?',
+          '¡Hola! Soy <strong>LM AI</strong>, el asistente de Leonardo Márquez. Puedo ayudarte con información sobre sus <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos de entrega</strong>, <strong>portafolio</strong> y <strong>contacto</strong>. ¿En qué te puedo ayudar?',
           'bot'
         ), 250);
       }
