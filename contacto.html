@@ -98,11 +98,37 @@
               <label for="service">Servicio de Interés</label>
               <select id="service" name="service" required>
                 <option value="" disabled selected>Selecciona un servicio</option>
-                <option value="design">Diseño Gráfico</option>
-                <option value="web">Desarrollo Web</option>
-                <option value="support">Soporte Técnico</option>
-                <option value="consulting">Consultoría Integral</option>
-                <option value="other">Otro</option>
+                <optgroup label="— Soporte Técnico —">
+                  <option value="Diagnóstico y revisión técnica — $35.000–$45.000 COP (USD $9–$12)">Diagnóstico y revisión técnica — $35.000–$45.000 COP</option>
+                  <option value="Formateo + instalación de Windows y drivers — $80.000–$100.000 COP (USD $21–$26)">Formateo + instalación de Windows y drivers — $80.000–$100.000 COP</option>
+                  <option value="Mantenimiento preventivo (optimización del sistema) — $60.000–$75.000 COP (USD $15–$19)">Mantenimiento preventivo — $60.000–$75.000 COP</option>
+                  <option value="Limpieza física interna (con cambio de pasta térmica) — $70.000–$85.000 COP (USD $18–$22)">Limpieza física interna (pasta térmica) — $70.000–$85.000 COP</option>
+                  <option value="Mantenimiento integral (limpieza física + formateo) — $120.000–$140.000 COP (USD $31–$36)">Mantenimiento integral (limpieza + formateo) — $120.000–$140.000 COP</option>
+                  <option value="Instalación de repuestos (disco, RAM, pantalla, etc.) — $45.000–$60.000 COP (USD $12–$15)">Instalación de repuestos (RAM, disco, pantalla) — $45.000–$60.000 COP</option>
+                  <option value="Eliminación de virus y malware — $55.000–$70.000 COP (USD $14–$18)">Eliminación de virus y malware — $55.000–$70.000 COP</option>
+                  <option value="Instalación y configuración de red WiFi / repetidor — $55.000–$70.000 COP (USD $14–$18)">Red WiFi / repetidor — $55.000–$70.000 COP</option>
+                  <option value="Instalación de software especializado — $45.000–$60.000 COP (USD $12–$15)">Instalación de software especializado — $45.000–$60.000 COP</option>
+                  <option value="Servicio a domicilio (recargo adicional) — $25.000–$35.000 COP (USD $6–$9)">Servicio a domicilio (recargo) — $25.000–$35.000 COP</option>
+                </optgroup>
+                <optgroup label="— Diseño Gráfico y Multimedia —">
+                  <option value="Diseño de logo básico (vector, 2 revisiones) — $60.000 COP (USD $15)">Diseño de logo básico (vector, 2 revisiones) — $60.000 COP</option>
+                  <option value="Logo + manual de identidad básico — $100.000 COP (USD $27)">Logo + manual de identidad básico — $100.000 COP</option>
+                  <option value="Banner para redes sociales (Facebook, Instagram, LinkedIn) — $35.000 COP (USD $9)">Banner para redes sociales — $35.000 COP</option>
+                  <option value="Banner para impresión (pendón, solo diseño) — $60.000 COP (USD $15)">Banner para impresión (pendón) — $60.000 COP</option>
+                  <option value="Flyer o volante digital o impreso — $35.000 COP (USD $9)">Flyer o volante digital / impreso — $35.000 COP</option>
+                  <option value="Tarjeta de presentación (diseño frente y reverso) — $30.000 COP (USD $8)">Tarjeta de presentación — $30.000 COP</option>
+                  <option value="Edición de video corto (reel, hasta 1 min) — $180.000 COP (USD $50)">Edición de video corto (reel, hasta 1 min) — $180.000 COP</option>
+                  <option value="Edición de video para YouTube (por pieza entregada) — $253.000 COP (USD $70)">Edición de video para YouTube (por pieza) — $253.000 COP</option>
+                  <option value="Retoque de foto (Photoshop: fondo, luz, limpieza) — $25.000 COP (USD $6)">Retoque de foto (Photoshop) — $25.000 COP</option>
+                  <option value="Portada para Facebook / YouTube / Twitter — $45.000 COP (USD $12)">Portada para Facebook / YouTube / Twitter — $45.000 COP</option>
+                  <option value="Presentación (PPT o Canva, hasta 10 diapositivas) — $80.000 COP (USD $21)">Presentación (PPT o Canva, hasta 10 diap.) — $80.000 COP</option>
+                  <option value="Gestión de redes sociales (community manager, 3 publicaciones/semana, mensual) — $180.000 COP (USD $50)">Gestión de redes sociales (mensual) — $180.000 COP</option>
+                </optgroup>
+                <optgroup label="— Otros —">
+                  <option value="Desarrollo Web">Desarrollo Web</option>
+                  <option value="Consultoría Integral">Consultoría Integral</option>
+                  <option value="Otro">Otro</option>
+                </optgroup>
               </select>
               <span class="form-error" id="err-service"></span>
             </div>
