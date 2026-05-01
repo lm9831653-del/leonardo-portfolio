@@ -480,123 +480,232 @@
   // ---- Variantes aleatorias ----
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-  // ---- Base de conocimiento ----
+  // ---- Base de conocimiento COMPLETA (todas las páginas) ----
   const KB = [
     { id:'saludo',
-      keys:['hola','buenas','holi','holaa','saludos','hey','que tal','qué tal','buen dia','buen día','buenas tardes','buenas noches','buenos dias','buenos días','hi','hello'],
+      keys:['hola','buenas','holi','holaa','saludos','hey','que tal','qué tal','buen dia','buen día','buenas tardes','buenas noches','buenos dias','buenos días','hi','hello','bienvenido'],
       replies: [
-        '¡Hola! Soy el asistente virtual de Leonardo. Puedo ayudarte con información sobre <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos de entrega</strong> o ponerte en contacto directo con él. ¿En qué te puedo ayudar?',
-        '¡Hey! Bienvenido al portafolio de Leonardo. Soy su asistente. ¿Quieres saber sobre algún servicio en específico o necesitas una cotización?',
-        '¡Hola! Qué bueno tenerte por aquí. Cuéntame qué proyecto tienes en mente y te oriento.'
+        '¡Hola, bienvenido! Soy el asistente de Leonardo Márquez. Estoy aquí para orientarte sobre sus <strong>servicios</strong>, <strong>precios</strong>, <strong>proyectos</strong> y más. ¿Con qué te puedo ayudar hoy?',
+        '¡Hey! Qué bueno que estés por aquí. Soy el asistente de Leonardo, cuéntame qué necesitas y te ayudo con lo que sea del portafolio.',
+        '¡Hola! Bienvenido al portafolio de Leonardo Márquez. Puedo contarte sobre sus servicios de diseño, soporte técnico o desarrollo web. ¿Por dónde arrancamos?'
       ]},
 
     { id:'servicios',
-      keys:['servicio','servicios','que haces','qué haces','que ofreces','qué ofreces','que vendes','qué vendes','catalogo','catálogo','en que ayudas','en qué ayudas','lo que haces'],
+      keys:['servicio','servicios','que haces','qué haces','que ofreces','qué ofreces','que vendes','qué vendes','catalogo','catálogo','en que ayudas','en qué ayudas','lo que haces','areas','áreas','especialidad'],
       replies: [
-        'Leonardo ofrece <strong>tres áreas principales</strong>:<br><br>• <strong>Diseño Gráfico</strong> — logos, identidad de marca, redes sociales, material editorial.<br>• <strong>Desarrollo Web</strong> — landing pages, e-commerce, aplicaciones interactivas.<br>• <strong>Soporte y Sistemas</strong> — redes, hosting, seguridad, mantenimiento.<br><br>¿Sobre cuál quieres saber más?'
+        'Leonardo trabaja en <strong>tres áreas</strong> que se complementan muy bien:<br><br>• <strong>Diseño Gráfico & Multimedia</strong> — logos, branding, videos, redes sociales, presentaciones.<br>• <strong>Desarrollo Web</strong> — landing pages, e-commerce y apps modernas con React y JavaScript.<br>• <strong>Soporte y Sistemas</strong> — mantenimiento de PCs, redes, virus, hosting y seguridad.<br><br>¿Sobre cuál quieres saber más detalle?',
+        'En el portafolio ofrece diseño gráfico (logos, flyers, videos, gestión de redes), desarrollo web (páginas responsivas, apps con IA) y soporte técnico (mantenimiento, reparaciones, redes, virus). Todo en un solo lugar. ¿Qué necesitas tú?',
+        '¡Buena pregunta! Básicamente Leonardo es un perfil híbrido: diseña identidades visuales, construye páginas web modernas y también arregla y mantiene computadores y redes. ¿En cuál área te puedo orientar?'
       ]},
 
     { id:'diseno', topic:'diseno',
-      keys:['diseno','diseño','disenio','logo','logos','logotipo','branding','marca','identidad','imagen','flyer','afiche','poster','banner','social media','redes sociales','illustrator','photoshop','grafico','gráfico','arte','artistico','artístico','editorial','print'],
+      keys:['diseno','diseño','disenio','logo','logos','logotipo','branding','marca','identidad visual','imagen corporativa','flyer','afiche','poster','banner','redes sociales','social media','illustrator','photoshop','figma','after effects','grafico','gráfico','arte','editorial','print','tarjeta','portada','video','reel','presentacion','presentación','canva','ppt','fotografia','fotografía','retoque','gestion redes','gestión redes','community manager'],
       replies: [
-        'En <strong>diseño gráfico</strong> Leonardo crea identidades visuales completas: logotipos, manuales de marca, contenido para redes sociales, material editorial y piezas publicitarias. Trabaja con Illustrator, Photoshop, Figma y After Effects.<br><br>¿Quieres una cotización para tu marca?',
-        'Para <strong>diseño</strong> Leonardo cubre desde un logo individual hasta sistemas completos de identidad visual. También crea plantillas para Instagram, Facebook y TikTok. ¿Qué necesitas para tu marca?'
+        'En <strong>diseño</strong> Leonardo cubre desde un logo básico hasta identidades visuales completas. Los servicios más pedidos son: logo ($60.000), banner para redes ($35.000), flyer ($35.000), tarjeta de presentación ($30.000) y gestión de redes sociales ($180.000/mes). Trabaja con Illustrator, Photoshop, Figma y After Effects. ¿Qué necesitas exactamente?',
+        'Para diseño gráfico hay bastante variedad: logos, banners, flyers, videos (reels y YouTube), presentaciones en PPT/Canva, retoque de fotos y hasta manejo completo de redes sociales como community manager. ¿Cuál te interesa?',
+        'Leonardo lleva desde 2021 haciendo diseño freelance — logos corporativos, identidades de marca, contenido para Instagram, Facebook y TikTok, y material impreso. ¿Qué tienes en mente para tu marca o negocio?'
+      ]},
+
+    { id:'logo', topic:'diseno',
+      keys:['logo basico','logo básico','logotipo','hacer logo','diseñar logo','disenar logo','logo empresa','logo negocio','logo emprendimiento','manual de identidad','manual de marca','branding completo'],
+      replies: [
+        'Para logos Leonardo tiene dos opciones: el <strong>logo básico en vectores con 2 revisiones por $60.000 COP</strong> (ideal para emprendimientos) o el <strong>logo + manual de identidad básico por $100.000 COP</strong> que incluye tipografía, colores y usos correctos. ¿Cuál se ajusta mejor a lo que buscas?',
+        'Un logo básico (vectores, 2 revisiones) sale en <strong>$60.000 COP (≈ USD $15)</strong>. Si además quieres el manual de marca con tipografía y paleta de colores, el paquete completo es <strong>$100.000 COP (≈ USD $27)</strong>. Entrega en 3 a 7 días. ¿Te interesa?'
+      ]},
+
+    { id:'video', topic:'diseno',
+      keys:['video','videos','edicion video','edición video','reel','reels','youtube','tiktok','editar video','video corto','video largo','montaje'],
+      replies: [
+        'Para videos Leonardo ofrece <strong>edición de reel/video corto (hasta 1 min) por $180.000 COP</strong> — incluye cortes, música y textos, perfecto para Instagram o TikTok. Para videos de <strong>YouTube o proyectos más largos son $253.000 COP por pieza</strong>. ¿De qué tipo sería tu video?',
+        'La edición de video es uno de los servicios creativos: reel de hasta 1 minuto ($180.000) o video para YouTube ($253.000 por pieza). Si tienes el material grabado, él se encarga del montaje, música y efectos. ¿Qué necesitas?'
+      ]},
+
+    { id:'gestion_redes', topic:'diseno',
+      keys:['gestion redes','gestión redes','community manager','administrar redes','manejar redes','publicaciones instagram','publicaciones facebook','redes mes','manejo redes','content manager'],
+      replies: [
+        'La <strong>gestión de redes sociales</strong> cuesta <strong>$180.000 COP al mes</strong> (≈ USD $50) e incluye 3 publicaciones por semana como community manager. Ideal si no tienes tiempo de manejar tu Instagram o Facebook. ¿Cuántas redes manejarías?'
       ]},
 
     { id:'web', topic:'web',
-      keys:['web','página','pagina','sitio','site','website','landing','tienda','ecommerce','e-commerce','online','plataforma','frontend','desarrollo','programacion','programación','programar','react','html','css','javascript','app','aplicacion','aplicación','wordpress','responsive','responsiva'],
+      keys:['web','página','pagina','sitio','site','website','landing','tienda','ecommerce','e-commerce','online','plataforma','frontend','desarrollo web','programacion','programación','programar','react','html','css','javascript','app','aplicacion','aplicación','wordpress','responsive','responsiva','pagina web','hacer pagina'],
       replies: [
-        'En <strong>desarrollo web</strong> Leonardo construye landing pages, tiendas online y aplicaciones modernas con React, Tailwind y JavaScript. Diseño responsivo, animaciones fluidas y enfoque total en conversión.<br><br>¿Tienes una idea concreta? Te paso una cotización rápida.',
-        'Para <strong>web</strong> trabaja con tecnologías modernas: React, Tailwind, animaciones, integración con APIs e IA. Todo se ve impecable en celular y computadora. ¿Qué tipo de página necesitas?'
+        'Para <strong>desarrollo web</strong> Leonardo construye desde landing pages sencillas hasta aplicaciones completas con React, Tailwind CSS y JavaScript. Todo responsivo, animado y optimizado. Las landing pages arrancan en $400.000 COP y sitios más completos desde $800.000 COP. ¿Tienes una idea en mente?',
+        'En web trabaja con tecnologías modernas: React, Tailwind, integraciones con APIs e incluso IA. Ha hecho landing pages, e-commerce y plataformas interactivas. ¿Qué tipo de página necesitas y para qué es?',
+        'Desde 2023 Leonardo lleva proyectos web: páginas de alta conversión, tiendas online y apps con componentes modernos. El diseño siempre queda perfecto en celular y escritorio. Cuéntame tu idea y te digo si puede ayudarte.'
       ]},
 
     { id:'soporte', topic:'soporte',
-      keys:['soporte','sistema','sistemas','red','redes','hosting','servidor','servidores','seguridad','linux','windows','reparar','reparacion','reparación','mantenimiento','computador','pc','tecnico','técnico','arreglar','formatear','virus','antivirus','wifi','router','impresora'],
+      keys:['soporte','soporte tecnico','soporte técnico','sistema','sistemas','reparar','reparacion','reparación','mantenimiento','computador','computadora','laptop','portatil','portátil','pc','tecnico','técnico','arreglar','formatear','formateo','virus','antivirus','malware','wifi','router','red','redes','impresora','lento','lentitud','windows','linux','disco duro','ram','pantalla','teclado','pasta termica','pasta térmica','limpieza pc','limpieza computador'],
       replies: [
-        'En <strong>soporte y sistemas</strong> Leonardo ofrece configuración de hosting, administración de redes, seguridad informática, mantenimiento preventivo y reparación de hardware. Atención presencial en Sibaté y remota a todo el país.',
-        'Para <strong>soporte técnico</strong> resuelve problemas de redes, hosting, servidores, seguridad, virus, lentitud, configuración de WiFi e impresoras, y mantenimiento general de equipos. ¿Qué problema tienes?'
+        'Para <strong>soporte técnico</strong> Leonardo ofrece diagnóstico, formateo, mantenimiento preventivo, limpieza física, eliminación de virus, instalación de WiFi, reparación de hardware y más. Atiende presencialmente en Sibaté y de manera remota a nivel nacional. ¿Qué problema tienes con tu equipo?',
+        'Si tu computador está lento, con virus, necesita limpieza, formateo o algún repuesto, Leonardo lo puede revisar. El servicio más completo es el <strong>mantenimiento integral ($120.000–$140.000 COP)</strong> que incluye limpieza física + formateo. ¿Qué le pasa al equipo?',
+        'En soporte técnico maneja todo: mantenimiento preventivo, limpieza interna con cambio de pasta térmica, eliminación de virus, configuración de WiFi, instalación de repuestos (RAM, SSD, pantalla) y mucho más. ¿Cuál es el problema?'
+      ]},
+
+    { id:'formateo', topic:'soporte',
+      keys:['formateo','formatear','reinstalar windows','windows','instalar windows','drivers','sistema lento','computador lento','laptop lenta','resetear pc','factory reset'],
+      replies: [
+        'El <strong>formateo e instalación de Windows</strong> cuesta entre <strong>$80.000 y $100.000 COP (≈ USD $21–$26)</strong> e incluye drivers, programas básicos y respaldo de datos. Si además quieres limpieza física, el paquete completo (mantenimiento integral) sale entre $120.000 y $140.000. ¿Solo formateo o también limpieza?'
+      ]},
+
+    { id:'mantenimiento', topic:'soporte',
+      keys:['mantenimiento','mantenimiento preventivo','mantenimiento integral','limpieza fisica','limpieza física','limpieza interna','pasta termica','pasta térmica','limpiar computador','limpiar laptop','optimizar','optimización'],
+      replies: [
+        'Hay dos opciones de mantenimiento: el <strong>preventivo por $60.000–$75.000 COP</strong> (limpieza de software y optimización) y la <strong>limpieza física interna por $70.000–$85.000 COP</strong> (desarme, sopleteado y cambio de pasta térmica). Si quieres los dos juntos, el <strong>mantenimiento integral sale $120.000–$140.000 COP</strong> — ese es el más solicitado. ¿Cuál necesitas?',
+        'El mantenimiento integral ($120.000–$140.000 COP) es el paquete más completo: incluye limpieza física del hardware más optimización del sistema operativo. Para un equipo muy lento o caliente, esa es la mejor opción. ¿Te interesa?'
+      ]},
+
+    { id:'virus_wifi', topic:'soporte',
+      keys:['virus','malware','ransomware','spyware','eliminar virus','quitar virus','computador infectado','wifi','red wifi','router','configurar wifi','internet lento','no hay internet','repetidor','extensor'],
+      replies: [
+        'Para <strong>virus y malware</strong>, el servicio cuesta entre <strong>$55.000 y $70.000 COP</strong> e incluye análisis completo, limpieza y recomendaciones de seguridad. Para <strong>WiFi y redes</strong>, la configuración de router o repetidor también cuesta entre $55.000 y $70.000 COP. ¿Cuál es tu caso?'
       ]},
 
     { id:'precio', topic:'precio',
-      keys:['precio','precios','costo','costos','cuesta','cuestan','cobra','cobras','cuanto','cuánto','vale','valor','valor','tarifa','tarifas','presupuesto','cotizar','cotizacion','cotización','cuanto sale','cuánto sale','plata','dinero','pesos','pago','barato','caro','económico','economico'],
+      keys:['precio','precios','costo','costos','cuesta','cuestan','cobra','cobras','cuanto','cuánto','vale','valor','tarifa','tarifas','presupuesto','cotizar','cotizacion','cotización','cuanto sale','cuánto sale','plata','dinero','pesos','barato','caro','económico','economico','mas barato','más barato'],
       replies: [
-        'Precios en <strong>pesos colombianos (COP)</strong> con equivalente en USD:<br><br><strong>Soporte Técnico:</strong><br>• Diagnóstico: $35.000–$45.000 COP (USD $9–$12)<br>• Formateo + Windows: $80.000–$100.000 COP (USD $21–$26)<br>• Mantenimiento preventivo: $60.000–$75.000 COP (USD $15–$19)<br>• Limpieza física interna: $70.000–$85.000 COP (USD $18–$22)<br>• Mantenimiento integral: $120.000–$140.000 COP (USD $31–$36)<br>• Instalación de repuestos: $45.000–$60.000 COP (USD $12–$15)<br>• Eliminación de virus: $55.000–$70.000 COP (USD $14–$18)<br>• WiFi / red: $55.000–$70.000 COP (USD $14–$18)<br>• Software especializado: $45.000–$60.000 COP (USD $12–$15)<br>• Domicilio: $25.000–$35.000 COP (USD $6–$9)<br><br><strong>Diseño Gráfico:</strong><br>• Logo básico: $60.000 COP (USD $15)<br>• Logo + manual de identidad: $100.000 COP (USD $27)<br>• Banner redes sociales: $35.000 COP (USD $9)<br>• Banner para impresión: $60.000 COP (USD $15)<br>• Flyer / volante: $35.000 COP (USD $9)<br>• Tarjeta de presentación: $30.000 COP (USD $8)<br>• Video corto (reel, 1 min): $180.000 COP (USD $50)<br>• Video YouTube (por pieza): $253.000 COP (USD $70)<br>• Retoque de foto: $25.000 COP (USD $6)<br>• Portada redes: $45.000 COP (USD $12)<br>• Presentación (hasta 10 diap.): $80.000 COP (USD $21)<br>• Gestión redes sociales (mensual): $180.000 COP (USD $50)<br><br>¿Quieres cotizar algo específico?<br><a href="https://wa.me/573132049102" target="_blank">Cotizar ahora →</a>',
-        'Cada proyecto tiene un precio distinto según lo que necesites. Para darte un valor exacto en pocos minutos, lo mejor es escribirle por WhatsApp con los detalles:<br><br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a>'
+        'Acá te doy todos los precios:<br><br><strong>Soporte Técnico (COP):</strong><br>• Diagnóstico: $35.000–$45.000<br>• Formateo + Windows: $80.000–$100.000<br>• Mantenimiento preventivo: $60.000–$75.000<br>• Limpieza física interna: $70.000–$85.000<br>• Mantenimiento integral ⭐: $120.000–$140.000<br>• Instalación de repuestos: $45.000–$60.000<br>• Virus/malware: $55.000–$70.000<br>• WiFi/red: $55.000–$70.000<br>• Software especializado: $45.000–$60.000<br>• Domicilio: $25.000–$35.000 (recargo)<br><br><strong>Diseño & Multimedia (COP):</strong><br>• Logo básico: $60.000<br>• Logo + identidad: $100.000<br>• Banner redes: $35.000<br>• Banner impresión: $60.000<br>• Flyer/volante: $35.000<br>• Tarjeta presentación: $30.000<br>• Retoque foto: $25.000/foto<br>• Portada FB/YT/Twitter: $45.000<br>• Presentación PPT (10 diapos): $80.000<br>• Video reel (1 min): $180.000<br>• Video YouTube: $253.000/pieza<br>• Gestión redes sociales: $180.000/mes<br><br>¿Quieres cotizar algo en específico? <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>',
+        'Los precios van desde $25.000 COP para un retoque de foto hasta $253.000 COP para edición de video YouTube. El servicio más solicitado en soporte es el mantenimiento integral ($120.000–$140.000) y en diseño el logo básico ($60.000). ¿Qué servicio te interesa cotizar?'
       ]},
 
     { id:'tiempo', topic:'tiempo',
-      keys:['tiempo','tiempos','demora','demoras','tarda','tarde','dias','días','semanas','meses','plazo','plazos','entrega','rapido','rápido','urgente','cuando','cuándo','listo','disponible','disponibilidad'],
+      keys:['tiempo','tiempos','demora','demoras','tarda','tarde','dias','días','semanas','meses','plazo','plazos','entrega','rapido','rápido','urgente','cuando','cuándo','listo','disponible','disponibilidad','cuanto tiempo','cuánto tiempo'],
       replies: [
-        'Los tiempos típicos son:<br><br>• <strong>Logo:</strong> 3 a 7 días<br>• <strong>Identidad de marca completa:</strong> 1 a 2 semanas<br>• <strong>Landing page:</strong> 1 a 3 semanas<br>• <strong>Sitio web completo:</strong> 3 a 6 semanas<br>• <strong>Soporte técnico:</strong> mismo día o al siguiente<br><br>Para urgencias, contáctalo por WhatsApp.',
-        'Depende de la complejidad. Un trabajo sencillo puede estar en menos de una semana, un sitio completo entre 3 y 6 semanas. Si es urgente, díselo por WhatsApp y vemos.'
+        'Los tiempos de entrega dependen del trabajo:<br><br>• <strong>Logo básico:</strong> 3 a 7 días<br>• <strong>Identidad de marca completa:</strong> 1 a 2 semanas<br>• <strong>Landing page:</strong> 1 a 3 semanas<br>• <strong>Sitio web completo:</strong> 3 a 6 semanas<br>• <strong>Soporte técnico:</strong> mismo día o al siguiente<br>• <strong>Videos y flyers:</strong> 2 a 5 días<br><br>¿Tienes alguna fecha límite? Si es urgente avísale por WhatsApp.',
+        'Para soporte técnico normalmente atiende el mismo día o al día siguiente. Para diseño, piezas sencillas como logos o banners tardan entre 3 y 7 días. Un sitio web completo puede tomar entre 3 y 6 semanas. ¿Tienes prisa con algo?'
       ]},
 
     { id:'experiencia',
-      keys:['experiencia','años','trayectoria','curriculum','cv','sena','adso','estudios','estudia','formacion','formación','quien es','quién es','quien eres','quién eres','sobre el','sobre él','acerca de','perfil'],
+      keys:['experiencia','años','trayectoria','curriculum','cv','sena','adso','estudios','estudia','formacion','formación','quien es','quién es','sobre el','sobre él','sobre leonardo','acerca de','perfil','habilidades','habilidad','skills','tecnologias','tecnologías','herramientas'],
       replies: [
-        'Leonardo es estudiante de <strong>Análisis y Desarrollo de Software (SENA)</strong>. Trabaja como freelance de diseño gráfico desde 2021 y en soporte técnico remoto desde 2022. Combina visión creativa con conocimientos técnicos sólidos en programación, diseño y sistemas.'
+        'Leonardo es un perfil híbrido que combina diseño y tecnología. Actualmente estudia <strong>Análisis y Desarrollo de Software en el SENA</strong>. Lleva desde <strong>2021 haciendo diseño gráfico freelance</strong>, desde <strong>2022 en soporte técnico remoto</strong> y desde <strong>2023 en desarrollo web</strong>. Maneja Adobe Creative Suite, Figma, React, Tailwind, Linux, Docker y más.',
+        'Su formación incluye SENA (ADSO), cursos de diseño gráfico con Adobe y Figma, y certificaciones en administración Linux y redes. Con más de 5 proyectos entregados y disponibilidad 24/7, es técnico y creativo al mismo tiempo. ¿Necesitas algo específico?',
+        'Básicamente Leonardo es diseñador gráfico, desarrollador web y técnico en sistemas todo en uno. Estudia en el SENA, trabaja freelance desde 2021 y atiende tanto presencialmente en Sibaté como de forma remota. Sus herramientas principales son Illustrator, Photoshop, Figma, React, JavaScript, Linux y Docker.'
+      ]},
+
+    { id:'proyectos',
+      keys:['portafolio','portfolio','proyecto','proyectos','trabajo','trabajos','ejemplo','ejemplos','muestra','muestras','demos','ver trabajo','referencias','ha hecho','que ha hecho','iconografia','iconografía','branding','dashboard','analytics','infraestructura','cloud','landing','resident evil','plataforma ia','plataforma con ia','auditoria','auditoría','seguridad','ecommerce'],
+      replies: [
+        'En el portafolio hay 8 proyectos reales:<br><br>• <strong>Iconografía & Branding</strong> — íconos vectoriales y diseño de identidad (Illustrator, Photoshop).<br>• <strong>Dashboard Analytics</strong> — panel de control con React, TypeScript y GraphQL.<br>• <strong>Infraestructura Cloud</strong> — migración a nube con Linux, Docker y Nginx.<br>• <strong>Landing Resident Evil</strong> — landing cinematográfica con Figma y After Effects.<br>• <strong>Plataforma con IA</strong> — app web con OpenAI API, React y Tailwind.<br>• <strong>Soporte & Reparación</strong> — hardware y mantenimiento.<br>• <strong>Auditoría de Seguridad</strong> — pentesting y OWASP.<br>• <strong>Portafolio Web Personal</strong> — este mismo sitio en Figma + HTML/CSS.<br><br>Puedes verlos en la página <a href="portafolio.html">Portafolio →</a>',
+        'Sus proyectos cubren las tres áreas: diseño (branding, landing Resident Evil, portafolio web), desarrollo (dashboard con React, plataforma con IA) y sistemas (infraestructura cloud, auditoría de seguridad, soporte técnico). Visita la sección Portafolio para ver imágenes y detalles de cada uno.'
       ]},
 
     { id:'contacto',
-      keys:['contacto','contactar','hablar','escribir','llamar','telefono','teléfono','celular','whatsapp','wsp','wa','correo','email','mail','escribirle'],
+      keys:['contacto','contactar','hablar','escribir','llamar','telefono','teléfono','celular','whatsapp','wsp','wa','correo','email','mail','escribirle','numero','número','comunicar'],
       replies: [
-        'Estos son sus canales de contacto:<br><br>• <strong>WhatsApp:</strong> <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a><br>• <strong>Email:</strong> <a href="mailto:lumar.321456@gmail.com">lumar.321456@gmail.com</a><br>• <strong>Formulario:</strong> baja a la sección de Contacto en esta página.<br><br>El más rápido es WhatsApp.'
+        'Puedes contactar a Leonardo por:<br><br>• <strong>WhatsApp:</strong> <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a> (el más rápido)<br>• <strong>Email:</strong> <a href="mailto:lumar.321456@gmail.com">lumar.321456@gmail.com</a><br>• <strong>Formulario de contacto:</strong> en la página <a href="contacto.html">Contacto</a><br><br>¿Prefieres que te pase el link de WhatsApp directo?',
+        'Lo más rápido es escribirle al WhatsApp <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a>. También recibe correos en lumar.321456@gmail.com y tiene un formulario de contacto en la página. ¿Necesitas algo urgente?'
       ]},
 
     { id:'ubicacion',
-      keys:['donde','dónde','ubicacion','ubicación','direccion','dirección','ciudad','pais','país','vive','queda','colombia','sibate','sibaté','bogota','bogotá','cundinamarca','presencial','remoto'],
+      keys:['donde','dónde','ubicacion','ubicación','direccion','dirección','ciudad','pais','país','vive','queda','colombia','sibate','sibaté','bogota','bogotá','cundinamarca','presencial','remoto','a domicilio','domicilio'],
       replies: [
-        'Leonardo está en <strong>Sibaté, Cundinamarca (Colombia)</strong>. Atiende presencialmente en la zona y trabaja de forma <strong>remota</strong> con clientes en cualquier parte del mundo.'
-      ]},
-
-    { id:'portafolio',
-      keys:['portafolio','portfolio','proyecto','proyectos','trabajo','trabajos','ejemplo','ejemplos','muestra','muestras','demos','ver','mostrar','referencias'],
-      replies: [
-        'Sus proyectos están en la sección <strong>Portafolio</strong> de esta misma página. Hay 8 trabajos de diseño, desarrollo web e infraestructura. Haz clic en cualquier tarjeta para ver el detalle completo, las tecnologías usadas y la imagen.'
+        'Leonardo está en <strong>Sibaté, Cundinamarca, Colombia</strong>. Para soporte técnico atiende presencialmente en esa zona y también va a domicilio (tiene un recargo de $25.000–$35.000 COP por el desplazamiento). Para diseño y desarrollo web trabaja 100% remoto con clientes de cualquier parte del mundo.',
+        'Está basado en Sibaté, Cundinamarca. El soporte técnico presencial es en esa zona, pero para diseño gráfico y desarrollo web atiende clientes remotamente desde cualquier lugar. ¿Estás cerca o necesitas servicio remoto?'
       ]},
 
     { id:'agendar', topic:'agendar',
-      keys:['agendar','reunion','reunión','cita','llamada','meet','zoom','google meet','reservar','programar reunion','programar reunión'],
+      keys:['agendar','reunion','reunión','cita','llamada','meet','zoom','google meet','reservar','programar reunion','programar reunión','videollamada','video llamada'],
       replies: [
-        'Para agendar una reunión, lo más rápido es escribirle por WhatsApp y coordinar el horario directamente:<br><br><a href="https://wa.me/573132049102?text=Hola%20Leonardo%2C%20quiero%20agendar%20una%20reuni%C3%B3n" target="_blank">Agendar por WhatsApp →</a>'
+        'Para agendar una reunión lo más fácil es escribirle por WhatsApp y coordinar día y hora directamente:<br><br><a href="https://wa.me/573132049102?text=Hola%20Leonardo%2C%20quiero%20agendar%20una%20reuni%C3%B3n" target="_blank">Agendar reunión por WhatsApp →</a>',
+        'Claro, puedes coordinar una llamada o videollamada escribiéndole al WhatsApp. Él tiene disponibilidad para atender y discutir tu proyecto. <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102 →</a>'
       ]},
 
     { id:'pago',
-      keys:['pago','pagos','formas de pago','metodos de pago','métodos de pago','transferencia','nequi','daviplata','bancolombia','tarjeta','efectivo','paypal','anticipo'],
+      keys:['pago','pagos','formas de pago','metodos de pago','métodos de pago','transferencia','nequi','daviplata','bancolombia','tarjeta','efectivo','paypal','anticipo','como pago','cómo pago','contra entrega'],
       replies: [
-        'Acepta varias formas de pago: <strong>transferencia bancaria, Nequi, Daviplata y efectivo</strong>. Para proyectos grandes normalmente se trabaja con un <strong>50% de anticipo</strong> y el 50% restante a la entrega. Para confirmar con tu caso específico, escríbele por WhatsApp.'
+        'Acepta <strong>transferencia bancaria, Nequi, Daviplata y efectivo</strong>. En proyectos más grandes generalmente se maneja con un <strong>50% de anticipo al inicio</strong> y el otro 50% al entregar. Para proyectos pequeños también se puede pago completo al final. ¿Tienes alguna preferencia?'
       ]},
 
     { id:'garantia',
-      keys:['garantia','garantía','soporte post','despues de entregar','después de entregar','correcciones','cambios','revisiones','ajustes','retoques'],
+      keys:['garantia','garantía','soporte post','despues de entregar','después de entregar','correcciones','cambios','revisiones','ajustes','retoques','incluye','qué incluye','que incluye'],
       replies: [
-        'Sí, todos los proyectos incluyen <strong>2 a 3 rondas de ajustes sin costo</strong> dentro del alcance acordado. Para sitios web hay además <strong>soporte por 30 días</strong> después de la entrega para corregir cualquier detalle.'
+        'Todos los proyectos incluyen <strong>2 a 3 rondas de ajustes sin costo adicional</strong> dentro del alcance acordado. Para páginas web hay <strong>soporte de 30 días</strong> después de la entrega para corregir cualquier detalle. Los logos incluyen 2 revisiones. ¿Tienes alguna duda sobre lo que incluye un servicio específico?',
+        'Sí, Leonardo trabaja con rondas de revisión incluidas. Para diseño son 2–3 ajustes, para web hay 30 días de soporte post-entrega. Si algo no quedó como querías, se corrige sin costo extra dentro del alcance del proyecto.'
       ]},
 
     { id:'idioma',
-      keys:['ingles','inglés','english','espanol','español','spanish','idioma','idiomas','bilingue','bilingüe'],
+      keys:['ingles','inglés','english','espanol','español','spanish','idioma','idiomas','bilingue','bilingüe','en ingles','en inglés'],
       replies: [
-        'Leonardo trabaja principalmente en <strong>español</strong>, pero puede entregar contenido y comunicarse en <strong>inglés</strong> sin problema. ¿En qué idioma necesitas tu proyecto?'
+        'Leonardo trabaja principalmente en <strong>español</strong>, pero puede entregar proyectos y comunicarse en <strong>inglés</strong> perfectamente. ¿Tu proyecto necesita contenido en inglés?'
+      ]},
+
+    { id:'estadisticas',
+      keys:['estadisticas','estadísticas','datos','numeros','números','cuantos proyectos','cuántos proyectos','clientes','satisfaccion','satisfacción','compromiso','24/7','disponibilidad'],
+      replies: [
+        'Algunos datos del portafolio: <strong>5+ proyectos realizados</strong>, <strong>8+ tecnologías</strong> dominadas, <strong>100% de compromiso</strong> con cada cliente y <strong>disponibilidad 24/7</strong>. Es un profesional que toma en serio cada proyecto. ¿Quieres saber algo más?'
+      ]},
+
+    { id:'tecnologias',
+      keys:['tecnologias','tecnologías','herramientas','stack','react','tailwind','typescript','figma','illustrator','photoshop','linux','docker','nginx','git','javascript','node','css','html'],
+      replies: [
+        'Leonardo maneja un stack bastante amplio. En <strong>diseño</strong>: Illustrator, Photoshop, Figma, After Effects, Canva. En <strong>desarrollo</strong>: React, TypeScript, JavaScript, HTML/CSS, Tailwind, Node.js, GraphQL. En <strong>sistemas</strong>: Linux, Docker, Nginx, Git, administración de redes y seguridad. ¿Te interesa alguna tecnología en específico?'
       ]},
 
     { id:'derivar_humano',
-      keys:['hablar con leonardo','hablar con un humano','persona real','que me responda','quiero hablar','llamar','asesor real','no eres real','eres bot','eres robot','quiero a leonardo'],
+      keys:['hablar con leonardo','hablar con humano','persona real','que me responda','quiero hablar','asesor real','no eres real','eres bot','eres robot','quiero a leonardo','hablar directo'],
       replies: [
-        '¡Claro! Te conecto con Leonardo directamente. Toca el botón:<br><br><a href="https://wa.me/573132049102" target="_blank">Abrir WhatsApp ahora →</a>'
+        '¡Claro! Te conecto directo con Leonardo ahora mismo:<br><br><a href="https://wa.me/573132049102" target="_blank">Abrir WhatsApp →</a>',
+        'Sin problema, te paso directo con él. El WhatsApp es la vía más rápida:<br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102 →</a>'
       ]},
 
     { id:'agradecer',
-      keys:['gracias','muchas gracias','mil gracias','genial','perfecto','excelente','bueno','vale','ok','okay','dale','listo','chevere','chévere','bacano','super','súper'],
+      keys:['gracias','muchas gracias','mil gracias','genial','perfecto','excelente','buenisimo','buenísimo','chevere','chévere','bacano','super','súper','vale','ok','okay','dale','listo','entendido','claro'],
       replies: [
-        '¡Con gusto! Si te queda otra duda estoy aquí. Cuando quieras avanzar, escríbele a Leonardo por WhatsApp.',
-        '¡Para servirte! Cualquier otra cosa que necesites, dímelo nomás.'
+        '¡Con mucho gusto! Si tienes otra duda o quieres cotizar algo, estoy por aquí. Y cuando estés listo, Leonardo te espera por WhatsApp. 😊',
+        '¡Para eso estoy! Si se te ocurre algo más, pregunta sin pena. Y si ya tienes todo claro, el próximo paso es escribirle directamente a Leonardo.',
+        '¡Genial! Espero haberte ayudado. Cuando decidas avanzar con tu proyecto, contáctate con Leonardo por WhatsApp, él te atenderá rápido.'
       ]},
 
     { id:'despedida',
-      keys:['adios','adiós','chao','bye','nos vemos','hasta luego','hasta pronto','me voy'],
+      keys:['adios','adiós','chao','chau','bye','nos vemos','hasta luego','hasta pronto','me voy','cuidate','cuídate'],
       replies: [
-        '¡Hasta pronto! Que tengas un excelente día. Vuelve cuando quieras.',
-        '¡Chao! Cuídate mucho. Acá estoy para cuando me necesites.'
+        '¡Hasta pronto! Que te vaya muy bien. Cuando necesites vuelve sin pena. 👋',
+        '¡Chao! Fue un gusto orientarte. Si después tienes preguntas, aquí estaré.'
+      ]},
+
+    { id:'saludo_como_estas',
+      keys:['como estas','cómo estás','como te va','cómo te va','todo bien','que hay','qué hay','como andas','cómo andas'],
+      replies: [
+        '¡Todo bien por acá, gracias por preguntar! Listo para ayudarte con lo que necesites del portafolio de Leonardo. ¿Qué te trae por aquí?',
+        '¡Muy bien! Aquí atendiendo. ¿En qué te puedo ayudar hoy?'
+      ]},
+
+    { id:'filosofia',
+      keys:['filosofia','filosofía','vision','visión','mision','misión','diferencia','diferente','unico','único','especializa','por qué','porque tu','por que tu','que te diferencia','qué te diferencia','propuesta','valor','propuesta de valor'],
+      replies: [
+        'Leonardo tiene un enfoque diferente al de la mayoría: no solo hace que las cosas se vean bien, sino que construye sistemas que <strong>funcionan impecablemente y escalan con tu negocio</strong>. Es un perfil híbrido que fusiona el ojo crítico del diseño con la lógica del desarrollo de software.',
+        'Su lema es claro: <strong>diseño con propósito, desarrollo con precisión</strong>. No improvisa — cada proyecto tiene una estrategia detrás. Eso es lo que lo diferencia de un freelancer común.',
+        'Lo que hace a Leonardo especial es que domina tres mundos: diseño gráfico, programación web y sistemas/infraestructura. Eso significa que puede tomar tu idea desde el boceto hasta el servidor, sin terceros.'
+      ]},
+
+    { id:'personalidad',
+      keys:['como es','cómo es','personalidad','trato','atiende','atencion','atención','amable','confiable','serio','profesional','puntual','compromiso','trabaja','estilo'],
+      replies: [
+        'Leonardo es muy comprometido: tiene una tasa de satisfacción del <strong>100% de compromiso</strong> con cada proyecto y atiende con <strong>disponibilidad 24/7</strong>. Es puntual, directo y siempre mantiene al cliente informado del avance.',
+        'Es un profesional con un trato cercano y honesto. No acepta proyectos que no pueda cumplir bien, y cuando trabaja contigo, lo hace como si fuera su propio negocio. Eso lo dicen sus clientes.',
+        'Su forma de trabajar es: primero entiende bien qué necesitas, luego propone una solución clara, y ejecuta con precisión. Incluye rondas de revisión para que el resultado sea exactamente lo que esperabas.'
+      ]},
+
+    { id:'stack_tecnico',
+      keys:['stack','tecnologia completa','tecnología completa','html css','node.js','node js','git','github','typescript','react hooks','tailwind css','graphql','api','rest','openai','inteligencia artificial','ia web','docker compose'],
+      replies: [
+        'El stack completo de Leonardo incluye: <strong>Frontend</strong>: React, TypeScript, Tailwind CSS, HTML5/CSS3, JavaScript. <strong>Backend</strong>: Node.js, APIs REST, GraphQL, integraciones con OpenAI. <strong>Sistemas</strong>: Linux, Docker, Nginx, Git, configuración de redes y hosting. <strong>Diseño</strong>: Figma, Illustrator, Photoshop, After Effects, Canva.',
+        'Maneja tanto el lado visual como el técnico: desde diseñar un wireframe en Figma hasta desplegarlo en un servidor Linux con Docker. Eso hace que los proyectos queden integrados y optimizados desde el inicio.'
+      ]},
+
+    { id:'disponible',
+      keys:['disponible','disponibilidad','acepta proyectos','nuevos proyectos','tiene cupo','tiene espacio','esta ocupado','está ocupado','cupos','agenda llena','trabaja ahora'],
+      replies: [
+        '¡Sí, Leonardo está disponible para nuevos proyectos! Su estado actual en el portafolio es <strong>"disponible para nuevos proyectos"</strong>. Lo mejor es contactarlo por WhatsApp para revisar los tiempos y disponibilidad: <a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102 →</a>',
+        'Tiene disponibilidad 24/7 y actualmente acepta nuevos clientes. Para no perderte un cupo, escríbele directamente por WhatsApp y cuéntale tu proyecto. <a href="https://wa.me/573132049102" target="_blank">Contactar ahora →</a>'
+      ]},
+
+    { id:'combo_paquete',
+      keys:['combo','paquete','pack','bundle','todo en uno','completo','integral','logo y web','web y diseño','diseño y web','completo emprendimiento','emprendimiento completo','todo junto'],
+      replies: [
+        '¡Claro que sí! Leonardo arma combos personalizados. Por ejemplo: logo + banner para redes + tarjeta de presentación es una combinación muy popular para emprendimientos. También hace web + diseño completo. Para un paquete a medida, escríbele por WhatsApp y le dices qué necesitas: <a href="https://wa.me/573132049102" target="_blank">Cotizar combo →</a>',
+        'Puede armar paquetes según lo que necesites. Si quieres, por ejemplo, logo + web + gestión de redes, se puede negociar un precio especial. Contáctalo y cuéntale: <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>'
       ]}
   ];
 
@@ -698,6 +807,62 @@
   const chatForm   = document.getElementById('chat-form');
   const chatInput  = document.getElementById('chat-input');
 
+  // ---- Personaje animado en el botón FAB ----
+  if (chatFab) {
+    chatFab.innerHTML = `
+      <svg class="fab-char" viewBox="0 0 44 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Antena -->
+        <line x1="22" y1="1" x2="22" y2="7" stroke="#00e5ff" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="22" cy="1" r="2" fill="#00e5ff"/>
+        <!-- Cabeza -->
+        <rect x="9" y="7" width="26" height="19" rx="6" fill="#0a0a0f" stroke="#00e5ff" stroke-width="1.5"/>
+        <!-- Visera interna -->
+        <rect x="12" y="10" width="20" height="10" rx="3" fill="#0d1a2e"/>
+        <!-- Ojo izquierdo -->
+        <circle cx="17" cy="15" r="3.2" fill="#00e5ff" opacity="0.95"/>
+        <circle cx="17" cy="15" r="1.4" fill="#0a0a0f"/>
+        <circle cx="18" cy="14" r="0.7" fill="white" opacity="0.9"/>
+        <!-- Ojo derecho -->
+        <circle cx="27" cy="15" r="3.2" fill="#d500f9" opacity="0.95"/>
+        <circle cx="27" cy="15" r="1.4" fill="#0a0a0f"/>
+        <circle cx="28" cy="14" r="0.7" fill="white" opacity="0.9"/>
+        <!-- Boca/sensor -->
+        <rect x="16" y="21.5" width="12" height="2.5" rx="1.2" fill="#00e5ff" opacity="0.5"/>
+        <rect x="18" y="21.5" width="3" height="2.5" rx="1" fill="#00e5ff" opacity="0.9"/>
+        <rect x="23" y="21.5" width="3" height="2.5" rx="1" fill="#00e5ff" opacity="0.9"/>
+        <!-- Cuerpo -->
+        <rect x="13" y="28" width="18" height="14" rx="4" fill="#0a0a0f" stroke="#00e5ff" stroke-width="1.3"/>
+        <!-- Detalle pecho -->
+        <circle cx="22" cy="32.5" r="2.5" fill="none" stroke="#00e5ff" stroke-width="1.2"/>
+        <circle cx="22" cy="32.5" r="1" fill="#00e5ff" opacity="0.8"/>
+        <rect x="16" y="37" width="4" height="2" rx="1" fill="#d500f9" opacity="0.7"/>
+        <rect x="24" y="37" width="4" height="2" rx="1" fill="#00e5ff" opacity="0.7"/>
+        <!-- Brazo izquierdo -->
+        <rect x="6" y="29" width="6" height="10" rx="3" fill="#0a0a0f" stroke="#00e5ff" stroke-width="1.2"/>
+        <!-- Brazo derecho -->
+        <rect x="32" y="29" width="6" height="10" rx="3" fill="#0a0a0f" stroke="#d500f9" stroke-width="1.2"/>
+      </svg>
+      <span class="chat-fab-label">Chat</span>`;
+
+    // CSS de animación del personaje inyectado dinámicamente
+    const fabStyle = document.createElement('style');
+    fabStyle.textContent = `
+      .fab-char { width: 34px; height: 38px; filter: drop-shadow(0 0 6px rgba(0,229,255,0.7)); }
+      .chat-fab { flex-direction: column; gap: 2px; }
+      @keyframes fabFloat {
+        0%,100% { transform: translateY(0) scale(1); }
+        50%      { transform: translateY(-4px) scale(1.04); }
+      }
+      @keyframes eyeBlink {
+        0%,92%,100% { transform: scaleY(1); }
+        95%         { transform: scaleY(0.1); }
+      }
+      .chat-fab:not(.hidden) { animation: fabFloat 3s ease-in-out infinite; }
+      .chat-fab:hover .fab-char { filter: drop-shadow(0 0 12px rgba(0,229,255,0.95)) drop-shadow(0 0 8px rgba(213,0,249,0.6)); }
+    `;
+    document.head.appendChild(fabStyle);
+  }
+
   const QUICK = [
     { label: 'Servicios',  text: '¿Qué servicios ofreces?' },
     { label: 'Precios',    text: '¿Cuánto cuesta?' },
@@ -747,40 +912,60 @@
   }
   // ===== Cerebro IA online (Pollinations.ai, sin API key) =====
   const AI_SYSTEM_PROMPT = [
-    'Eres "LM AI", el asistente exclusivo del portafolio de Leonardo Márquez.',
-    'REGLA ABSOLUTA E INQUEBRANTABLE: Solo puedes responder preguntas sobre el portafolio de Leonardo Márquez.',
-    'Los únicos temas permitidos son: servicios de soporte técnico, servicios de diseño gráfico, desarrollo web, precios, tiempos de entrega, proyectos del portafolio, información sobre Leonardo, ubicación, formas de contacto, formas de pago y garantías.',
-    'Si el usuario pregunta CUALQUIER otra cosa (recetas, ciencia, historia, deportes, tecnología general, matemáticas, chistes, noticias, consejos personales, o cualquier tema ajeno al portafolio), debes responder EXACTAMENTE esto: "Solo puedo ayudarte con temas del portafolio de Leonardo Márquez. Puedes preguntarme sobre servicios, precios, tiempos, proyectos o contacto."',
-    'NO improvises. NO respondas preguntas fuera del portafolio bajo ninguna circunstancia.',
-    'Leonardo es Técnico en Sistemas y Diseñador Gráfico de Sibaté, Cundinamarca, Colombia.',
-    'PRECIOS EN PESOS COLOMBIANOS (COP) Y SU EQUIVALENTE EN DÓLARES (USD):',
-    '--- SOPORTE TÉCNICO ---',
-    'Diagnóstico y revisión técnica: $35.000-$45.000 COP (USD $9-$12).',
-    'Formateo + instalación de Windows y drivers: $80.000-$100.000 COP (USD $21-$26).',
-    'Mantenimiento preventivo (optimización del sistema): $60.000-$75.000 COP (USD $15-$19).',
-    'Limpieza física interna (con cambio de pasta térmica): $70.000-$85.000 COP (USD $18-$22).',
-    'Mantenimiento integral (limpieza física + formateo): $120.000-$140.000 COP (USD $31-$36).',
-    'Instalación de repuestos (disco, RAM, pantalla, etc.) — mano de obra: $45.000-$60.000 COP (USD $12-$15).',
-    'Eliminación de virus y malware: $55.000-$70.000 COP (USD $14-$18).',
-    'Instalación y configuración de red WiFi / repetidor: $55.000-$70.000 COP (USD $14-$18).',
-    'Instalación de software especializado: $45.000-$60.000 COP (USD $12-$15).',
-    'Servicio a domicilio (recargo adicional): $25.000-$35.000 COP (USD $6-$9).',
-    '--- DISEÑO GRÁFICO Y MULTIMEDIA ---',
-    'Diseño de logo básico (vector, 2 revisiones): $60.000 COP (USD $15).',
-    'Logo + manual de identidad básico: $100.000 COP (USD $27).',
-    'Banner para redes sociales (Facebook, Instagram, LinkedIn): $35.000 COP (USD $9).',
-    'Banner para impresión (pendón, solo diseño): $60.000 COP (USD $15).',
-    'Flyer o volante digital o impreso: $35.000 COP (USD $9).',
-    'Tarjeta de presentación (frente y reverso): $30.000 COP (USD $8).',
-    'Edición de video corto (reel, hasta 1 min): $180.000 COP (USD $50).',
-    'Edición de video para YouTube (por pieza entregada): $253.000 COP (USD $70).',
-    'Retoque de foto Photoshop (fondo, luz, limpieza): $25.000 COP (USD $6).',
-    'Portada para Facebook / YouTube / Twitter: $45.000 COP (USD $12).',
-    'Presentación (PPT o Canva, hasta 10 diapositivas): $80.000 COP (USD $21).',
-    'Gestión de redes sociales (community manager, 3 publicaciones/semana, mensual): $180.000 COP (USD $50).',
+    'Eres "LM AI", el asistente virtual exclusivo del portafolio de Leonardo Márquez.',
+    'REGLA ABSOLUTA: Solo respondes preguntas relacionadas con el portafolio de Leonardo Márquez.',
+    'Si el usuario pregunta algo que no tenga que ver con el portafolio (recetas, ciencia, deportes, historia, matemáticas, política, entretenimiento, etc.), responde: "Solo puedo ayudarte con temas del portafolio de Leonardo Márquez: servicios, precios, proyectos, contacto o información sobre él."',
+    'Habla como una persona real: usa un tono cálido, natural y conversacional. Sé directo y útil. Puedes usar expresiones como "claro que sí", "sin problema", "eso lo maneja Leonardo muy bien", etc.',
+    'Nunca uses listas con asteriscos. Si necesitas listar cosas, usa guiones o puntos (•). Respuestas máximo 5 frases salvo que se pida lista de precios.',
+    '--- SOBRE LEONARDO MÁRQUEZ ---',
+    'Es un perfil híbrido que fusiona el ojo crítico del diseño con la lógica implacable del desarrollo de software.',
+    'Su filosofía: diseño con propósito, desarrollo con precisión. No solo hace que las cosas se vean bien — construye sistemas que funcionan impecablemente y escalan con el negocio del cliente.',
+    'Lo que lo diferencia: domina tres mundos (diseño, desarrollo web y sistemas/infraestructura), lo que significa que puede tomar una idea desde el boceto hasta el servidor sin depender de terceros.',
+    'Forma de trabajar: primero entiende a fondo la necesidad del cliente, luego propone una solución clara, y ejecuta con precisión incluyendo rondas de revisión para que el resultado sea exactamente lo esperado.',
+    'Disponibilidad actual: abierto para nuevos proyectos. Estado: "Disponible para nuevos proyectos" según su portafolio.',
+    'Personalidad: comprometido, puntual, honesto y cercano. Atiende como si el proyecto fuera propio.',
+    'Tagline del portafolio: "Innovación en Análisis Para el Futuro — Soluciones digitales de alto impacto que transforman tu visión en una experiencia inolvidable."',
+    'Es un freelance que trabaja como diseñador gráfico desde 2021, soporte técnico remoto desde 2022, desarrollo web desde 2023.',
+    'Estudia Análisis y Desarrollo de Software (ADSO) en el SENA (en curso). Cursos de Adobe Creative Suite, UI/UX, Figma. Certificaciones en Linux, redes y seguridad (en desarrollo).',
+    'Estadísticas: 5+ proyectos entregados, 8+ tecnologías dominadas, 100% compromiso con cada cliente, disponibilidad 24/7.',
+    'Stack completo: Frontend: React, TypeScript, Tailwind CSS, HTML5/CSS3, JavaScript. Backend: Node.js, APIs REST, GraphQL, OpenAI API. Sistemas: Linux, Docker, Nginx, Git, redes. Diseño: Figma, Illustrator, Photoshop, After Effects, Canva.',
+    'Ubicación: Sibaté, Cundinamarca, Colombia. Soporte técnico presencial en la zona, diseño y desarrollo 100% remoto al mundo.',
     'Contacto: WhatsApp +57 313 204 9102 — Email lumar.321456@gmail.com.',
-    'Responde SIEMPRE en español, de forma clara, amigable y breve (máximo 4 frases).',
-    'No uses Markdown ni asteriscos; usa texto plano.'
+    'Formas de pago: transferencia bancaria, Nequi, Daviplata, efectivo. Proyectos grandes: 50% anticipo, 50% al entregar.',
+    'Garantía: 2-3 rondas de ajustes sin costo. Webs: 30 días de soporte post-entrega. Logos: 2 revisiones incluidas.',
+    'Idiomas: trabaja principalmente en español, también puede comunicarse y entregar en inglés.',
+    'Combos disponibles: arma paquetes personalizados (ej. logo + web + redes sociales) con precio especial.',
+    '--- PROYECTOS DEL PORTAFOLIO (8 en total) ---',
+    '1. Iconografía & Branding (Diseño) — colección de íconos vectoriales y símbolos de marca con Illustrator y Photoshop.',
+    '2. Dashboard Analytics (Desarrollo) — panel de control con gráficos interactivos, TypeScript, React y GraphQL.',
+    '3. Infraestructura Cloud (Sistemas) — migración a nube, APIs distribuidas, Linux, Docker y Nginx.',
+    '4. Landing Resident Evil (Diseño) — landing cinematográfica con slider interactivo, Figma y After Effects.',
+    '5. Plataforma con IA (Desarrollo) — app web con OpenAI API, React y Tailwind para análisis de datos.',
+    '6. Soporte & Reparación (Sistemas) — mantenimiento, diagnóstico y reparación de hardware.',
+    '7. Auditoría de Seguridad (Sistemas) — pentesting, OWASP y políticas de acceso corporativas.',
+    '8. Portafolio Web Personal (Diseño) — este mismo sitio, diseñado en Figma y maquetado en HTML/CSS.',
+    '--- TIEMPOS DE ENTREGA ---',
+    'Logo: 3-7 días. Identidad de marca: 1-2 semanas. Landing page: 1-3 semanas. Sitio web completo: 3-6 semanas.',
+    'Soporte técnico: mismo día o siguiente. Videos y flyers: 2-5 días.',
+    '--- PRECIOS EN PESOS COLOMBIANOS (COP) ---',
+    'SOPORTE TÉCNICO:',
+    'Diagnóstico: $35.000-$45.000 COP. Formateo + Windows (incluye drivers y respaldo): $80.000-$100.000 COP.',
+    'Mantenimiento preventivo: $60.000-$75.000 COP. Limpieza física interna (pasta térmica): $70.000-$85.000 COP.',
+    'Mantenimiento integral (físico + software, el más solicitado): $120.000-$140.000 COP.',
+    'Instalación repuestos (RAM, SSD, pantalla, teclado): $45.000-$60.000 COP.',
+    'Eliminación virus/malware: $55.000-$70.000 COP. WiFi/red/router: $55.000-$70.000 COP.',
+    'Software especializado (Office, antivirus, etc.): $45.000-$60.000 COP. Domicilio (recargo): $25.000-$35.000 COP.',
+    'DISEÑO GRÁFICO Y MULTIMEDIA:',
+    'Logo básico vector (2 revisiones, popular en emprendimientos): $60.000 COP.',
+    'Logo + manual de identidad (tipografía, colores, usos): $100.000 COP.',
+    'Banner redes sociales (Facebook, Instagram, LinkedIn): $35.000 COP.',
+    'Banner para impresión/pendón (solo diseño): $60.000 COP.',
+    'Flyer o volante digital o impreso: $35.000 COP. Tarjeta de presentación (frente y reverso): $30.000 COP.',
+    'Retoque de foto Photoshop (fondo, luz, limpieza): $25.000 COP por foto.',
+    'Portada Facebook/YouTube/Twitter: $45.000 COP. Presentación PPT/Canva (hasta 10 diapos): $80.000 COP.',
+    'Video reel/corto hasta 1 min (cortes, música, textos): $180.000 COP.',
+    'Video para YouTube por pieza: $253.000 COP.',
+    'Gestión de redes sociales / community manager (3 publicaciones/semana): $180.000 COP al mes.'
   ].join(' ');
 
   function buildAIPrompt(userText) {
@@ -832,17 +1017,41 @@
 
   // IDs de intents considerados "del portafolio"
   const PORTFOLIO_INTENTS = new Set([
-    'saludo','servicios','diseno','web','soporte','precio','tiempo',
-    'experiencia','contacto','ubicacion','portafolio','agendar','pago',
-    'garantia','idioma','derivar_humano','agradecer','despedida'
+    'saludo','saludo_como_estas','servicios','diseno','logo','video','gestion_redes',
+    'web','soporte','formateo','mantenimiento','virus_wifi','precio','tiempo',
+    'experiencia','proyectos','contacto','ubicacion','agendar','pago',
+    'garantia','idioma','estadisticas','tecnologias','filosofia','personalidad',
+    'stack_tecnico','disponible','combo_paquete','derivar_humano','agradecer','despedida'
   ]);
 
+  // Palabras clave de respaldo para detectar temas del portafolio
+  const PORTFOLIO_KEYWORDS = [
+    'leonardo','portafolio','portfolio','servicio','servicios','diseño','disenar','disenio','diseno',
+    'logo','branding','marca','banner','flyer','tarjeta','video','reel','fotografia','fotografía',
+    'presentacion','presentación','redes sociales','community manager','identidad',
+    'web','pagina','página','sitio','landing','ecommerce','react','javascript','html','css',
+    'soporte','tecnico','técnico','mantenimiento','formateo','virus','malware','wifi','router','red',
+    'computador','laptop','portatil','pc','windows','linux','ram','ssd','disco','repuesto',
+    'precio','precios','costo','cuesta','cuanto','cuánto','vale','cotizar','tarifa','presupuesto',
+    'tiempo','entrega','demora','dias','días','semanas','urgente',
+    'contacto','whatsapp','email','correo','telefono','teléfono','llamar','escribir',
+    'sena','adso','figma','photoshop','illustrator','docker','nginx','typescript','graphql',
+    'pago','nequi','daviplata','transferencia','anticipo','garantia','garantía','revision','revisión',
+    'proyecto','proyectos','trabajo','experiencia','trayectoria','sobre el','sobre él','quien es',
+    'sibate','sibaté','cundinamarca','colombia','presencial','remoto','domicilio'
+  ];
+
   function isPortfolioMessage(text) {
+    const lower = text.toLowerCase();
+    // Coincidencia con intent conocido
     const { intent, score } = detectIntent(text);
-    // Si coincide con algún intent del portafolio con puntuación suficiente
-    if (intent && PORTFOLIO_INTENTS.has(intent.id) && score >= 0.5) return true;
-    // Saludo corto (hola, hi, etc.) siempre es válido
-    if (/^\s*(hola|hello|hi|buenas|hey|saludos)\s*$/i.test(text.trim())) return true;
+    if (intent && PORTFOLIO_INTENTS.has(intent.id) && score >= 0.4) return true;
+    // Saludo o expresión corta — siempre válido
+    if (/^\s*(hola|hello|hi|buenas|hey|saludos|gracias|ok|bien|dale|listo|chao|bye)\s*[!¡.?]?\s*$/i.test(lower)) return true;
+    // Contiene al menos una palabra clave del portafolio
+    if (PORTFOLIO_KEYWORDS.some(kw => lower.includes(kw))) return true;
+    // Pregunta genérica de servicio o precio (¿cuánto cuesta?, ¿qué incluye?, etc.)
+    if (/cu[aá]nto|cómo funciona|qué incluye|que incluye|en qué consiste|en que consiste|me puede(s|n)|puede(s|n) ayudar|necesito (un|una|ayuda|información|info)|tengo (un|una)/i.test(lower)) return true;
     return false;
   }
 
