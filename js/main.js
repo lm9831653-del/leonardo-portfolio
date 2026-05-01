@@ -639,10 +639,17 @@
       ]},
 
     { id:'precio', topic:'precio',
-      keys:['precio','precios','costo','costos','cuesta','cuestan','cobra','cobras','cuanto','cuánto','vale','valor','tarifa','tarifas','presupuesto','cotizar','cotizacion','cotización','cuanto sale','cuánto sale','plata','dinero','pesos','barato','caro','económico','economico','mas barato','más barato'],
+      keys:['precio','precios','costo','costos','cuesta','cuestan','cobra','cobras','cuanto','cuánto','vale','valor','tarifa','tarifas','presupuesto','cotizar','cotizacion','cotización','cuanto sale','cuánto sale','plata','dinero','pesos','barato','caro','económico','economico','mas barato','más barato','dolar','dolares','dólar','dólares','usd','en dolares','en dólares','precio dolar','precio dolares','cuanto en dolares','cuánto en dólares','cuanto es en dolares','precio usd','en usd','valor en dolares','en divisas'],
       replies: [
-        'Acá te doy todos los precios:<br><br><strong>Soporte Técnico (COP):</strong><br>• Diagnóstico: $35.000–$45.000<br>• Formateo + Windows: $80.000–$100.000<br>• Mantenimiento preventivo: $60.000–$75.000<br>• Limpieza física interna: $70.000–$85.000<br>• Mantenimiento integral ⭐: $120.000–$140.000<br>• Instalación de repuestos: $45.000–$60.000<br>• Virus/malware: $55.000–$70.000<br>• WiFi/red: $55.000–$70.000<br>• Software especializado: $45.000–$60.000<br>• Domicilio: $25.000–$35.000 (recargo)<br><br><strong>Diseño & Multimedia (COP):</strong><br>• Logo básico: $60.000<br>• Logo + identidad: $100.000<br>• Banner redes: $35.000<br>• Banner impresión: $60.000<br>• Flyer/volante: $35.000<br>• Tarjeta presentación: $30.000<br>• Retoque foto: $25.000/foto<br>• Portada FB/YT/Twitter: $45.000<br>• Presentación PPT (10 diapos): $80.000<br>• Video reel (1 min): $180.000<br>• Video YouTube: $253.000/pieza<br>• Gestión redes sociales: $180.000/mes<br><br>¿Quieres cotizar algo en específico? <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>',
-        'Los precios van desde $25.000 COP para un retoque de foto hasta $253.000 COP para edición de video YouTube. El servicio más solicitado en soporte es el mantenimiento integral ($120.000–$140.000) y en diseño el logo básico ($60.000). ¿Qué servicio te interesa cotizar?'
+        'Acá te doy todos los precios en <strong>COP y USD</strong>:<br><br><strong>Soporte Técnico:</strong><br>• Diagnóstico: $35.000–$45.000 COP (≈ USD $9–$12)<br>• Formateo + Windows: $80.000–$100.000 COP (≈ USD $21–$26)<br>• Mantenimiento preventivo: $60.000–$75.000 COP (≈ USD $15–$19)<br>• Limpieza física interna: $70.000–$85.000 COP (≈ USD $18–$22)<br>• Mantenimiento integral ⭐: $120.000–$140.000 COP (≈ USD $31–$36)<br>• Instalación repuestos: $45.000–$60.000 COP (≈ USD $12–$15)<br>• Virus/malware: $55.000–$70.000 COP (≈ USD $14–$18)<br>• WiFi/red: $55.000–$70.000 COP (≈ USD $14–$18)<br>• Software especializado: $45.000–$60.000 COP (≈ USD $12–$15)<br>• Domicilio (recargo): $25.000–$35.000 COP (≈ USD $6–$9)<br><br><strong>Diseño & Multimedia:</strong><br>• Logo básico: $60.000 COP (≈ USD $15)<br>• Logo + identidad: $100.000 COP (≈ USD $27)<br>• Banner redes: $35.000 COP (≈ USD $9)<br>• Banner impresión: $60.000 COP (≈ USD $15)<br>• Flyer/volante: $35.000 COP (≈ USD $9)<br>• Tarjeta presentación: $30.000 COP (≈ USD $8)<br>• Retoque foto: $25.000 COP/foto (≈ USD $6)<br>• Portada FB/YT/Twitter: $45.000 COP (≈ USD $12)<br>• Presentación PPT (10 diapos): $80.000 COP (≈ USD $21)<br>• Video reel (1 min): $180.000 COP (≈ USD $50)<br>• Video YouTube: $253.000 COP/pieza (≈ USD $70)<br>• Gestión redes sociales: $180.000 COP/mes (≈ USD $50)<br><br>¿Quieres cotizar algo en específico? <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>',
+        'Los precios van desde USD $6 (retoque de foto) hasta USD $70 (video YouTube). En pesos colombianos (COP), el más solicitado en soporte es el mantenimiento integral ($120.000–$140.000 COP / USD $31–$36) y en diseño el logo básico ($60.000 COP / USD $15). ¿Cuál te interesa?'
+      ]},
+
+    { id:'precio_usd', topic:'precio',
+      keys:['dolar','dolares','dólar','dólares','usd','en dolares','en dólares','precio dolar','precio dolares','cuanto en dolares','cuánto en dólares','precio usd','en usd','valor en dolares','cuanto usd','cuánto usd','divisa','divisas','moneda extranjera','precio internacional','extranjero'],
+      replies: [
+        'Claro, acá los precios en <strong>dólares (USD)</strong>:<br><br><strong>Soporte Técnico:</strong><br>• Diagnóstico: USD $9–$12<br>• Formateo + Windows: USD $21–$26<br>• Mantenimiento preventivo: USD $15–$19<br>• Limpieza física interna: USD $18–$22<br>• Mantenimiento integral ⭐: USD $31–$36<br>• Virus/malware: USD $14–$18<br>• WiFi/red: USD $14–$18<br><br><strong>Diseño & Multimedia:</strong><br>• Logo básico: USD $15<br>• Logo + identidad de marca: USD $27<br>• Banner redes sociales: USD $9<br>• Flyer/volante: USD $9<br>• Tarjeta de presentación: USD $8<br>• Retoque foto: USD $6/foto<br>• Presentación PPT: USD $21<br>• Video reel (1 min): USD $50<br>• Video YouTube: USD $70/pieza<br>• Gestión de redes: USD $50/mes<br><br><em>(Conversión aproximada. Pago en COP por Nequi, Daviplata o transferencia.)</em> <a href="https://wa.me/573132049102" target="_blank">Cotizar →</a>',
+        'En dólares los precios son muy accesibles: el logo básico sale en USD $15, un banner en USD $9, un video reel en USD $50 y el mantenimiento integral de computador en USD $31–$36. El pago final se hace en pesos colombianos (COP). ¿Cuál servicio te interesa?'
       ]},
 
     { id:'tiempo', topic:'tiempo',
@@ -1033,25 +1040,26 @@
     '--- TIEMPOS DE ENTREGA ---',
     'Logo: 3-7 días. Identidad de marca: 1-2 semanas. Landing page: 1-3 semanas. Sitio web completo: 3-6 semanas.',
     'Soporte técnico: mismo día o siguiente. Videos y flyers: 2-5 días.',
-    '--- PRECIOS EN PESOS COLOMBIANOS (COP) ---',
+    '--- PRECIOS EN PESOS COLOMBIANOS (COP) Y DÓLARES (USD) ---',
+    'Conversión de referencia: 1 USD ≈ 4.000 COP. Los pagos se realizan en COP por Nequi, Daviplata o transferencia bancaria.',
+    'Si el usuario pregunta en dólares, responde SIEMPRE con el precio en USD. Si pregunta en pesos, responde en COP. Si pregunta el precio a secas, da ambos.',
     'SOPORTE TÉCNICO:',
-    'Diagnóstico: $35.000-$45.000 COP. Formateo + Windows (incluye drivers y respaldo): $80.000-$100.000 COP.',
-    'Mantenimiento preventivo: $60.000-$75.000 COP. Limpieza física interna (pasta térmica): $70.000-$85.000 COP.',
-    'Mantenimiento integral (físico + software, el más solicitado): $120.000-$140.000 COP.',
-    'Instalación repuestos (RAM, SSD, pantalla, teclado): $45.000-$60.000 COP.',
-    'Eliminación virus/malware: $55.000-$70.000 COP. WiFi/red/router: $55.000-$70.000 COP.',
-    'Software especializado (Office, antivirus, etc.): $45.000-$60.000 COP. Domicilio (recargo): $25.000-$35.000 COP.',
+    'Diagnóstico: $35.000-$45.000 COP (USD $9-$12). Formateo + Windows (incluye drivers y respaldo): $80.000-$100.000 COP (USD $21-$26).',
+    'Mantenimiento preventivo: $60.000-$75.000 COP (USD $15-$19). Limpieza física interna (pasta térmica): $70.000-$85.000 COP (USD $18-$22).',
+    'Mantenimiento integral (físico + software, el más solicitado): $120.000-$140.000 COP (USD $31-$36).',
+    'Instalación repuestos (RAM, SSD, pantalla, teclado): $45.000-$60.000 COP (USD $12-$15).',
+    'Eliminación virus/malware: $55.000-$70.000 COP (USD $14-$18). WiFi/red/router: $55.000-$70.000 COP (USD $14-$18).',
+    'Software especializado (Office, antivirus, etc.): $45.000-$60.000 COP (USD $12-$15). Domicilio (recargo): $25.000-$35.000 COP (USD $6-$9).',
     'DISEÑO GRÁFICO Y MULTIMEDIA:',
-    'Logo básico vector (2 revisiones, popular en emprendimientos): $60.000 COP.',
-    'Logo + manual de identidad (tipografía, colores, usos): $100.000 COP.',
-    'Banner redes sociales (Facebook, Instagram, LinkedIn): $35.000 COP.',
-    'Banner para impresión/pendón (solo diseño): $60.000 COP.',
-    'Flyer o volante digital o impreso: $35.000 COP. Tarjeta de presentación (frente y reverso): $30.000 COP.',
-    'Retoque de foto Photoshop (fondo, luz, limpieza): $25.000 COP por foto.',
-    'Portada Facebook/YouTube/Twitter: $45.000 COP. Presentación PPT/Canva (hasta 10 diapos): $80.000 COP.',
-    'Video reel/corto hasta 1 min (cortes, música, textos): $180.000 COP.',
-    'Video para YouTube por pieza: $253.000 COP.',
-    'Gestión de redes sociales / community manager (3 publicaciones/semana): $180.000 COP al mes.'
+    'Logo básico vector (2 revisiones): $60.000 COP (USD $15).',
+    'Logo + manual de identidad (tipografía, colores, usos): $100.000 COP (USD $27).',
+    'Banner redes sociales: $35.000 COP (USD $9). Banner para impresión/pendón: $60.000 COP (USD $15).',
+    'Flyer o volante digital o impreso: $35.000 COP (USD $9). Tarjeta de presentación (frente y reverso): $30.000 COP (USD $8).',
+    'Retoque de foto Photoshop: $25.000 COP por foto (USD $6).',
+    'Portada Facebook/YouTube/Twitter: $45.000 COP (USD $12). Presentación PPT/Canva (hasta 10 diapos): $80.000 COP (USD $21).',
+    'Video reel/corto hasta 1 min: $180.000 COP (USD $50).',
+    'Video para YouTube por pieza: $253.000 COP (USD $70).',
+    'Gestión de redes sociales / community manager (3 publicaciones/semana): $180.000 COP al mes (USD $50/mes).'
   ].join(' ');
 
   function buildAIPrompt(userText) {
