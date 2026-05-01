@@ -779,23 +779,32 @@
       if (map[ctx.lastTopic]) return map[ctx.lastTopic];
     }
 
-    if (intent && score >= 0.6) {
+    // Umbral bajo: si hay CUALQUIER coincidencia razonable, responder
+    if (intent && score >= 0.35) {
       if (intent.topic) ctx.lastTopic = intent.topic;
       return pick(intent.replies);
     }
 
-    // Fallback inteligente: sugerencias específicas según las palabras detectadas
-    const tokens = tokenize(text);
-    const suggestions = [];
-    if (tokens.some(t => fuzzyMatch(t,'cotizar') > 0 || fuzzyMatch(t,'precio') > 0)) suggestions.push('Precios');
-    if (tokens.some(t => fuzzyMatch(t,'web') > 0 || fuzzyMatch(t,'pagina') > 0))     suggestions.push('Desarrollo Web');
-    if (tokens.some(t => fuzzyMatch(t,'logo') > 0 || fuzzyMatch(t,'diseno') > 0))    suggestions.push('Diseño Gráfico');
-
-    if (suggestions.length) {
-      return `No estoy 100% seguro de tu pregunta. ¿Te refieres a <strong>${suggestions.join('</strong> o <strong>')}</strong>? También puedes escribirle directo a Leonardo:<br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102 →</a>`;
+    // Coincidencia parcial: usar el intent de mayor puntaje aunque sea bajo
+    const { intent: bestIntent, score: bestScore } = detectIntent(text);
+    if (bestIntent && bestScore > 0.15) {
+      if (bestIntent.topic) ctx.lastTopic = bestIntent.topic;
+      return pick(bestIntent.replies);
     }
 
-    return 'Solo puedo ayudarte con temas del portafolio de Leonardo. Puedo responderte sobre: <strong>servicios</strong>, <strong>precios</strong>, <strong>tiempos</strong>, <strong>portafolio</strong>, <strong>contacto</strong> o <strong>ubicación</strong>.<br><br>¿Tienes alguna duda sobre alguno de estos temas? O si prefieres hablar directamente: <a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>';
+    // Fallback inteligente: sugerencias por palabras clave
+    const tokens = tokenize(text);
+    const suggestions = [];
+    if (tokens.some(t => fuzzyMatch(t,'cotizar') > 0 || fuzzyMatch(t,'precio') > 0 || fuzzyMatch(t,'costo') > 0)) suggestions.push('Precios');
+    if (tokens.some(t => fuzzyMatch(t,'web') > 0 || fuzzyMatch(t,'pagina') > 0 || fuzzyMatch(t,'sitio') > 0))    suggestions.push('Desarrollo Web');
+    if (tokens.some(t => fuzzyMatch(t,'logo') > 0 || fuzzyMatch(t,'diseno') > 0 || fuzzyMatch(t,'marca') > 0))   suggestions.push('Diseño Gráfico');
+    if (tokens.some(t => fuzzyMatch(t,'soporte') > 0 || fuzzyMatch(t,'tecnico') > 0 || fuzzyMatch(t,'pc') > 0))  suggestions.push('Soporte Técnico');
+
+    if (suggestions.length) {
+      return `Cuéntame un poco más sobre lo que necesitas. ¿Te interesa algo de <strong>${suggestions.join('</strong> o <strong>')}</strong>? También puedes escribirle directo a Leonardo:<br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102 →</a>`;
+    }
+
+    return 'Puedo ayudarte con información sobre los <strong>servicios</strong>, <strong>precios</strong>, <strong>proyectos</strong>, <strong>tiempos de entrega</strong> o <strong>contacto</strong> de Leonardo. ¿Qué quieres saber?';
   }
 
   // ---- DOM del chat ----
@@ -1026,32 +1035,47 @@
 
   // Palabras clave de respaldo para detectar temas del portafolio
   const PORTFOLIO_KEYWORDS = [
-    'leonardo','portafolio','portfolio','servicio','servicios','diseño','disenar','disenio','diseno',
-    'logo','branding','marca','banner','flyer','tarjeta','video','reel','fotografia','fotografía',
-    'presentacion','presentación','redes sociales','community manager','identidad',
-    'web','pagina','página','sitio','landing','ecommerce','react','javascript','html','css',
-    'soporte','tecnico','técnico','mantenimiento','formateo','virus','malware','wifi','router','red',
-    'computador','laptop','portatil','pc','windows','linux','ram','ssd','disco','repuesto',
-    'precio','precios','costo','cuesta','cuanto','cuánto','vale','cotizar','tarifa','presupuesto',
-    'tiempo','entrega','demora','dias','días','semanas','urgente',
-    'contacto','whatsapp','email','correo','telefono','teléfono','llamar','escribir',
-    'sena','adso','figma','photoshop','illustrator','docker','nginx','typescript','graphql',
-    'pago','nequi','daviplata','transferencia','anticipo','garantia','garantía','revision','revisión',
-    'proyecto','proyectos','trabajo','experiencia','trayectoria','sobre el','sobre él','quien es',
-    'sibate','sibaté','cundinamarca','colombia','presencial','remoto','domicilio'
+    'leonardo','portafolio','portfolio','servicio','servicios',
+    'diseño','disenar','disenio','diseno','diseñas','diseñar',
+    'logo','logos','logotipo','branding','marca','banner','flyer','afiche','poster','volante',
+    'tarjeta','portada','video','reel','fotografia','fotografía','retoque','presentacion','presentación',
+    'redes sociales','community manager','identidad','identidad visual','imagen corporativa',
+    'web','pagina','página','sitio','landing','ecommerce','react','javascript','html','css','app','aplicacion',
+    'soporte','tecnico','técnico','mantenimiento','formateo','formatear','virus','malware','wifi','router','red','redes',
+    'computador','computadora','laptop','portatil','portátil','pc','windows','linux','ram','ssd','disco','repuesto','pantalla','teclado',
+    'lento','lenta','infectado','arreglar','reparar','reparacion','diagnóstico','diagnostico',
+    'precio','precios','costo','costos','cuesta','cuestan','cuanto','cuánto','vale','cotizar','cotizacion','tarifa','presupuesto','plata','pesos','cop','usd',
+    'tiempo','tiempos','entrega','demora','plazo','urgente','rapido','rápido','dias','semanas',
+    'contacto','whatsapp','wsp','email','correo','telefono','teléfono','llamar','escribir','numero','número',
+    'sena','adso','figma','photoshop','illustrator','after effects','docker','nginx','typescript','graphql','tailwind',
+    'pago','pagos','nequi','daviplata','bancolombia','transferencia','efectivo','anticipo',
+    'garantia','garantía','revision','revisión','ajustes','cambios','correcciones','incluye',
+    'proyecto','proyectos','trabajo','trabajos','ejemplo','muestra','referencias',
+    'experiencia','trayectoria','estudios','formacion','formación','sena','curriculum','perfil',
+    'herramienta','herramientas','stack','tecnologia','tecnología','habilidad','habilidades',
+    'sobre el','sobre él','sobre leonardo','quien es','quién es','acerca de',
+    'sibate','sibaté','cundinamarca','colombia','presencial','remoto','domicilio','donde','dónde',
+    'disponible','disponibilidad','nuevo proyecto','combo','paquete','pack',
+    'filosofia','filosofía','diferencia','diferente','propuesta','estilo','como trabaja','cómo trabaja',
+    'idioma','ingles','inglés','spanish','english'
   ];
 
   function isPortfolioMessage(text) {
-    const lower = text.toLowerCase();
-    // Coincidencia con intent conocido
+    const lower = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const lowerOrig = text.toLowerCase();
+    // Coincidencia con intent conocido (umbral bajo)
     const { intent, score } = detectIntent(text);
-    if (intent && PORTFOLIO_INTENTS.has(intent.id) && score >= 0.4) return true;
-    // Saludo o expresión corta — siempre válido
-    if (/^\s*(hola|hello|hi|buenas|hey|saludos|gracias|ok|bien|dale|listo|chao|bye)\s*[!¡.?]?\s*$/i.test(lower)) return true;
-    // Contiene al menos una palabra clave del portafolio
-    if (PORTFOLIO_KEYWORDS.some(kw => lower.includes(kw))) return true;
-    // Pregunta genérica de servicio o precio (¿cuánto cuesta?, ¿qué incluye?, etc.)
-    if (/cu[aá]nto|cómo funciona|qué incluye|que incluye|en qué consiste|en que consiste|me puede(s|n)|puede(s|n) ayudar|necesito (un|una|ayuda|información|info)|tengo (un|una)/i.test(lower)) return true;
+    if (intent && PORTFOLIO_INTENTS.has(intent.id) && score >= 0.3) return true;
+    // Saludo, despedida o expresión corta — siempre válido
+    if (/^\s*(hola|hello|hi|buenas|hey|saludos|gracias|ok|bien|dale|listo|chao|bye|adios|ciao|claro|genial|perfecto|entendido)\s*[!¡.?]?\s*$/i.test(lower)) return true;
+    // Contiene al menos una palabra/frase clave del portafolio (con/sin tildes)
+    const lowerNorm = lower;
+    if (PORTFOLIO_KEYWORDS.some(kw => {
+      const kwNorm = kw.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      return lowerNorm.includes(kwNorm) || lowerOrig.includes(kw);
+    })) return true;
+    // Preguntas genéricas que probablemente son del portafolio
+    if (/cu[aá]nto|c[oó]mo funciona|qu[eé] incluye|en qu[eé] consiste|me puede[sn]|puede[sn] ayudar|necesito (un|una|ayuda|informaci[oó]n|info)|tengo (un|una|problema)|que hace[sn]|qu[eé] hace[sn]|a qu[eé] te dedica|cu[aá]les son|como (trabaj|atien|cobr)|c[oó]mo (trabaj|atien|cobr)/i.test(lower)) return true;
     return false;
   }
 
@@ -1063,7 +1087,7 @@
     chatInput.value = '';
     addTyping();
 
-    // Filtro de tema: si la pregunta no es del portafolio, responder de inmediato sin llamar a la IA online
+    // Filtro de tema: bloquear preguntas fuera del portafolio
     if (!isPortfolioMessage(text)) {
       setTimeout(() => {
         removeTyping();
@@ -1072,14 +1096,27 @@
       return;
     }
 
-    // Intenta IA online; si falla, usa el motor local
+    // Revisar si el KB local tiene una respuesta con suficiente confianza
+    const { intent, score } = detectIntent(text);
+    const kbHasAnswer = intent && PORTFOLIO_INTENTS.has(intent.id) && score >= 0.45;
+
+    if (kbHasAnswer) {
+      // Respuesta directa desde el KB local — rápida y completa
+      setTimeout(() => {
+        removeTyping();
+        addMsg(generateReply(text), 'bot');
+      }, 280);
+      return;
+    }
+
+    // Para preguntas con poca coincidencia en el KB, intentar la IA online
+    // Si la IA falla, usar el KB local de todos modos
     fetchSmartReply(text)
       .then(reply => {
         removeTyping();
         addMsg(aiToHtml(reply), 'bot');
       })
       .catch(() => {
-        // pequeño delay para que se vea natural
         setTimeout(() => {
           removeTyping();
           addMsg(generateReply(text), 'bot');
