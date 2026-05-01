@@ -1092,6 +1092,12 @@
       });
       // Any remaining lone "$" → "pesos"
       clean = clean.replace(/\$/g, 'pesos ');
+      // ---- Quitar términos técnicos que suenan feo al hablar ----
+      clean = clean.replace(/\bhtml\b/gi, '');
+      clean = clean.replace(/\bcss\b/gi, '');
+      clean = clean.replace(/\bpdf\b/gi, '');
+      clean = clean.replace(/→/g, '');
+      clean = clean.replace(/\s{2,}/g, ' ').trim();
       // ---- fin conversión ----
       // Cap length to avoid super long readings
       if (clean.length > 360) clean = clean.slice(0, 360) + '…';
