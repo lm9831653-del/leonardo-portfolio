@@ -35,6 +35,82 @@
   const isTouch      = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
 
   /* --------------------------------------------------------
+     0b. CORRECCIONES DE ANIMACIONES PARA MÓVIL
+         Reduce/detiene animaciones costosas en pantallas táctiles
+         para evitar jitter, vibración y alto consumo de batería.
+  --------------------------------------------------------- */
+  if (isTouch || window.innerWidth < 900) {
+    const mobileStyle = document.createElement('style');
+    mobileStyle.id = 'lm-mobile-perf';
+    mobileStyle.textContent = `
+      /* --- Desactivar partículas de fondo (10 elementos animados) --- */
+      .site-bg-particles { display: none !important; }
+
+      /* --- Detener la línea de escaneo (scan) --- */
+      .site-bg-scan { display: none !important; }
+
+      /* --- Orbs: sin blur ni movimiento (muy costoso en GPU móvil) --- */
+      .site-bg-orb {
+        filter: none !important;
+        animation: none !important;
+        opacity: 0.08 !important;
+        transform: none !important;
+      }
+
+      /* --- Grid de fondo: sin movimiento continuo --- */
+      .site-bg-grid { animation: none !important; }
+
+      /* --- Íconos flotantes del hero: mucho más suaves --- */
+      .float-icon {
+        animation-duration: 8s !important;
+        animation-timing-function: ease-in-out !important;
+      }
+      @keyframes floatIcon {
+        0%,100% { transform: translateY(0px); }
+        50%      { transform: translateY(-6px); }
+      }
+
+      /* --- Marquee: velocidad normal (no acelerar) --- */
+      .marquee-track { animation-duration: 55s !important; }
+
+      /* --- FAB personaje: flotado suave y lento --- */
+      @keyframes fabFloat {
+        0%,100% { transform: translateY(0px); }
+        50%      { transform: translateY(-5px); }
+      }
+      .chat-fab:not(.hidden) {
+        animation: fabFloat 4.5s ease-in-out infinite !important;
+      }
+
+      /* --- Puntos de typing del chat: menos vibrantes --- */
+      @keyframes typing {
+        0%,60%,100% { opacity: .3; transform: translateY(0); }
+        30%         { opacity: 1;  transform: translateY(-3px); }
+      }
+      .typing span { animation-duration: 1.6s !important; }
+
+      /* --- Pulsación del estado (dot verde) --- */
+      @keyframes pulse {
+        0%,100% { opacity: 1; }
+        50%     { opacity: .35; }
+      }
+      .status-dot, .chat-status .dot {
+        animation-duration: 2.5s !important;
+      }
+
+      /* --- Reveal: sin translate para evitar repaint costoso --- */
+      @media (max-width: 900px) {
+        .reveal { transform: none !important; opacity: 0; }
+        .reveal.in-view { opacity: 1; transition: opacity 0.7s ease !important; }
+      }
+
+      /* --- Scroll progress bar: sin transición rápida --- */
+      .scroll-progress { transition: none !important; }
+    `;
+    document.head.appendChild(mobileStyle);
+  }
+
+  /* --------------------------------------------------------
      1. Custom Cursor (solo escritorio con mouse)
   --------------------------------------------------------- */
   const dot  = document.getElementById('cursor-dot');
@@ -203,7 +279,8 @@
      9. Blob morph animation (SVG path)
   --------------------------------------------------------- */
   const blob = document.getElementById('blob-path');
-  if (blob && !reduceMotion) {
+  // Blob morph desactivado en móvil (evita repaint/reflow en SVG)
+  if (blob && !reduceMotion && !isTouch && window.innerWidth >= 900) {
     const paths = [
       'M380.5,322.5Q334,395,248.5,396Q163,397,117.5,323.5Q72,250,111,171Q150,92,239.5,88Q329,84,378,167Q427,250,380.5,322.5Z',
       'M409.5,316.5Q366,383,277,411.5Q188,440,119,345Q50,250,116,151Q182,52,279.5,69.5Q377,87,415,168.5Q453,250,409.5,316.5Z',
@@ -853,20 +930,20 @@
       </svg>
       <span class="chat-fab-label">Chat</span>`;
 
-    // CSS de animación del personaje inyectado dinámicamente
+    // CSS de animación del personaje — velocidad adaptada a móvil/escritorio
+    const isMobileFab = isTouch || window.innerWidth < 900;
+    const fabDuration = isMobileFab ? '4.5s' : '3s';
+    const fabMoveY    = isMobileFab ? '-5px' : '-4px';
+    const fabScale    = isMobileFab ? '1'    : '1.04';
     const fabStyle = document.createElement('style');
     fabStyle.textContent = `
       .fab-char { width: 34px; height: 38px; filter: drop-shadow(0 0 6px rgba(0,229,255,0.7)); }
       .chat-fab { flex-direction: column; gap: 2px; }
       @keyframes fabFloat {
         0%,100% { transform: translateY(0) scale(1); }
-        50%      { transform: translateY(-4px) scale(1.04); }
+        50%      { transform: translateY(${fabMoveY}) scale(${fabScale}); }
       }
-      @keyframes eyeBlink {
-        0%,92%,100% { transform: scaleY(1); }
-        95%         { transform: scaleY(0.1); }
-      }
-      .chat-fab:not(.hidden) { animation: fabFloat 3s ease-in-out infinite; }
+      .chat-fab:not(.hidden) { animation: fabFloat ${fabDuration} ease-in-out infinite; }
       .chat-fab:hover .fab-char { filter: drop-shadow(0 0 12px rgba(0,229,255,0.95)) drop-shadow(0 0 8px rgba(213,0,249,0.6)); }
     `;
     document.head.appendChild(fabStyle);
