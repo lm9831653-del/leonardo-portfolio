@@ -879,6 +879,25 @@
     chatWin.classList.remove('open');
     chatWin.setAttribute('aria-hidden', 'true');
     chatFab.classList.remove('hidden');
+
+    // Detener voz activa
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+    // Reiniciar historial y contexto
+    ctx.history   = [];
+    ctx.lastTopic = null;
+    try { localStorage.removeItem(HISTORY_KEY); } catch (e) {}
+
+    // Limpiar mensajes del DOM para que al abrir aparezca el saludo inicial
+    const chatBody = document.getElementById('chat-body');
+    if (chatBody) chatBody.innerHTML = '';
+
+    // Limpiar chips de sugerencias
+    const chatQuick = document.getElementById('chat-quick');
+    if (chatQuick) chatQuick.innerHTML = '';
+
+    // Permitir que se muestre el saludo otra vez
+    chatGreeted = false;
   }
 
   if (chatFab)   chatFab.addEventListener('click', openChat);
@@ -1053,6 +1072,27 @@
         .replace(/\s+/g, ' ')
         .trim();
       if (!clean) return;
+      // ---- Convertir precios a texto hablado en español ----
+      // "USD $9–$12" → "equivalentes a 9–12 dólares"
+      clean = clean.replace(/\(?USD\s*\$\s*([\d.,–\-]+)\)?/gi, function(_, v) {
+        return 'equivalentes a ' + v.replace('.', '') + ' dólares';
+      });
+      // "$120.000 – $140.000 COP" → "120 mil a 140 mil pesos colombianos"
+      clean = clean.replace(/\$([\d]+)\.([\d]{3})\s*[–\-]\s*\$([\d]+)\.([\d]{3})\s*COP/g, function(_, a1, a2, b1, b2) {
+        var from = parseInt(a1, 10), to = parseInt(b1, 10);
+        return from + ' mil a ' + to + ' mil pesos colombianos';
+      });
+      // "$35.000 COP" → "35 mil pesos colombianos"
+      clean = clean.replace(/\$([\d]+)\.([\d]{3})\s*COP/g, function(_, a, b) {
+        return parseInt(a, 10) + ' mil pesos colombianos';
+      });
+      // "$180.000" → "180 mil pesos"
+      clean = clean.replace(/\$([\d]+)\.([\d]{3})/g, function(_, a) {
+        return parseInt(a, 10) + ' mil pesos';
+      });
+      // Any remaining lone "$" → "pesos"
+      clean = clean.replace(/\$/g, 'pesos ');
+      // ---- fin conversión ----
       // Cap length to avoid super long readings
       if (clean.length > 360) clean = clean.slice(0, 360) + '…';
       var u = new SpeechSynthesisUtterance(clean);
