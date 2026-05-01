@@ -520,8 +520,8 @@
     { id:'precio', topic:'precio',
       keys:['precio','precios','costo','costos','cuesta','cuestan','cobra','cobras','cuanto','cuánto','vale','valor','valor','tarifa','tarifas','presupuesto','cotizar','cotizacion','cotización','cuanto sale','cuánto sale','plata','dinero','pesos','pago','barato','caro','económico','economico'],
       replies: [
-        'Estos son los precios reales de Leonardo:<br><br><strong>Técnico en Sistemas:</strong><br>• Diagnóstico: <strong>$20.000–$30.000 COP</strong><br>• Formateo + Windows: <strong>$60.000–$80.000 COP</strong><br>• Mantenimiento integral: <strong>$80.000–$100.000 COP</strong> ⭐<br>• Limpieza física: <strong>$60.000–$70.000 COP</strong><br>• Eliminación de virus: <strong>$40.000–$60.000 COP</strong><br>• Domicilio: <strong>$30.000–$40.000 COP</strong><br><br><strong>Diseño Gráfico:</strong><br>• Logo básico: <strong>$150.000–$350.000 COP</strong> ⭐<br>• Logo + manual de marca: <strong>$400.000–$800.000 COP</strong><br>• Banner redes sociales: <strong>$30.000–$80.000 COP</strong><br>• Flyer/volante: <strong>$40.000–$80.000 COP</strong><br>• Edición video (por min): <strong>$30.000–$80.000 COP</strong><br>• Gestión redes (mensual): <strong>$200.000–$500.000 COP</strong><br><br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
-        '¿Cuánto cuesta? Aquí un resumen rápido:<br><br>• Soporte técnico: desde <strong>$20.000 COP</strong><br>• Mantenimiento integral: <strong>$80.000–$100.000 COP</strong><br>• Logo básico: <strong>$150.000–$350.000 COP</strong><br>• Logo + manual: <strong>$400.000–$800.000 COP</strong><br>• Edición de video: desde <strong>$30.000 COP/min</strong><br>• Gestión de redes: desde <strong>$200.000 COP/mes</strong><br><br>¿Cuál servicio te interesa? Te doy el precio exacto.'
+        'Precios en <strong>pesos colombianos (COP)</strong> con equivalente en USD:<br><br><strong>Soporte Técnico:</strong><br>• Diagnóstico: $35.000–$45.000 COP (USD $9–$12)<br>• Formateo + Windows: $80.000–$100.000 COP (USD $21–$26)<br>• Mantenimiento preventivo: $60.000–$75.000 COP (USD $15–$19)<br>• Limpieza física interna: $70.000–$85.000 COP (USD $18–$22)<br>• Mantenimiento integral: $120.000–$140.000 COP (USD $31–$36)<br>• Instalación de repuestos: $45.000–$60.000 COP (USD $12–$15)<br>• Eliminación de virus: $55.000–$70.000 COP (USD $14–$18)<br>• WiFi / red: $55.000–$70.000 COP (USD $14–$18)<br>• Software especializado: $45.000–$60.000 COP (USD $12–$15)<br>• Domicilio: $25.000–$35.000 COP (USD $6–$9)<br><br><strong>Diseño Gráfico:</strong><br>• Logo básico: $60.000 COP (USD $15)<br>• Logo + manual de identidad: $100.000 COP (USD $27)<br>• Banner redes sociales: $35.000 COP (USD $9)<br>• Banner para impresión: $60.000 COP (USD $15)<br>• Flyer / volante: $35.000 COP (USD $9)<br>• Tarjeta de presentación: $30.000 COP (USD $8)<br>• Video corto (reel, 1 min): $180.000 COP (USD $50)<br>• Video YouTube (por pieza): $253.000 COP (USD $70)<br>• Retoque de foto: $25.000 COP (USD $6)<br>• Portada redes: $45.000 COP (USD $12)<br>• Presentación (hasta 10 diap.): $80.000 COP (USD $21)<br>• Gestión redes sociales (mensual): $180.000 COP (USD $50)<br><br>¿Quieres cotizar algo específico?<br><a href="https://wa.me/573132049102" target="_blank">Cotizar ahora →</a>',
+        'Cada proyecto tiene un precio distinto según lo que necesites. Para darte un valor exacto en pocos minutos, lo mejor es escribirle por WhatsApp con los detalles:<br><br><a href="https://wa.me/573132049102" target="_blank">+57 313 204 9102</a>'
       ]},
 
     { id:'tiempo', topic:'tiempo',
@@ -663,9 +663,9 @@
     const followsPrice = /\b(cuanto|cuánto|precio|costo|vale|cuesta)\b/i.test(text);
     if (followsPrice && ctx.lastTopic && (!intent || score < 0.7)) {
       const map = {
-        diseno:  'Para <strong>diseño gráfico</strong>: logo básico <strong>$150.000–$350.000 COP</strong>, logo + manual de marca <strong>$400.000–$800.000 COP</strong>, banner redes <strong>$30.000–$80.000 COP</strong>, flyer <strong>$40.000–$80.000 COP</strong>, gestión mensual de redes <strong>$200.000–$500.000 COP</strong>. Para cotización exacta:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
+        diseno:  'Para <strong>diseño gráfico</strong> los precios son en pesos colombianos (COP): logo básico $60.000 (USD $15), banner redes $35.000 (USD $9), flyer $35.000 (USD $9), video reel $180.000 (USD $50), gestión de redes $180.000/mes (USD $50). Para cotizar tu proyecto:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
         web:     'Para <strong>desarrollo web</strong>, una landing page comienza en $400.000 COP y un sitio completo en $800.000 COP. Para tu caso específico:<br><a href="https://wa.me/573132049102" target="_blank">Cotizar por WhatsApp →</a>',
-        soporte: 'En <strong>soporte técnico</strong>: diagnóstico <strong>$20.000–$30.000 COP</strong>, formateo Windows <strong>$60.000–$80.000 COP</strong>, mantenimiento integral <strong>$80.000–$100.000 COP</strong>, domicilio <strong>$30.000–$40.000 COP</strong>. Más detalle:<br><a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>'
+        soporte: 'En <strong>soporte técnico</strong> los precios son en pesos colombianos (COP): diagnóstico $35.000–$45.000 (USD $9–$12), formateo+Windows $80.000–$100.000 (USD $21–$26), mantenimiento preventivo $60.000–$75.000 (USD $15–$19), limpieza física $70.000–$85.000 (USD $18–$22). Más detalle:<br><a href="https://wa.me/573132049102" target="_blank">WhatsApp →</a>'
       };
       if (map[ctx.lastTopic]) return map[ctx.lastTopic];
     }
@@ -749,34 +749,34 @@
   const AI_SYSTEM_PROMPT = [
     'Eres "LM AI", el asistente personal del portafolio de Leonardo Márquez.',
     'Leonardo es Técnico en Sistemas y Diseñador Gráfico de Sibaté, Colombia.',
-    'TARIFAS EXACTAS — TÉCNICO EN SISTEMAS:',
-    'Diagnóstico y revisión: $20.000–$30.000 COP (USD $5–$8).',
-    'Formateo e instalación de Windows: $60.000–$80.000 COP (USD $15–$21), incluye drivers, programas básicos y respaldo.',
-    'Mantenimiento preventivo por hora: $25.000–$35.000 COP (USD $6–$9).',
-    'Limpieza física interna portátil/PC: $60.000–$70.000 COP (USD $15–$18), incluye cambio de pasta térmica.',
-    'Mantenimiento integral (más solicitado): $80.000–$100.000 COP (USD $21–$26), paquete completo software + físico.',
-    'Instalación de repuestos mano de obra: $30.000–$50.000 COP (USD $8–$13).',
-    'Servicio a domicilio: $30.000–$40.000 COP (USD $8–$10).',
-    'Instalación de red WiFi/repetidores: $40.000–$80.000 COP (USD $10–$21).',
-    'Eliminación de virus y malware: $40.000–$60.000 COP (USD $10–$15).',
-    'Instalación de software especializado: $30.000–$50.000 COP (USD $8–$13).',
-    'TARIFAS EXACTAS — CREATIVOS Y DISEÑO:',
-    'Edición de video simple: $30.000–$80.000 COP/minuto (USD $8–$21), ideal para reels.',
-    'Edición de video por hora: $40.000–$100.000 COP (USD $10–$26).',
-    'Diseño de logo básico (popular): $150.000–$350.000 COP (USD $38–$90), logo en vectores.',
-    'Logo + manual de identidad: $400.000–$800.000 COP (USD $103–$205).',
-    'Banner para redes sociales: $30.000–$80.000 COP c/u (USD $8–$21).',
-    'Banner para impresión/pendón: $60.000–$150.000 COP (USD $15–$38).',
-    'Edición con Photoshop: $15.000–$40.000 COP/foto (USD $4–$10).',
-    'Flyer/volante: $40.000–$80.000 COP (USD $10–$21).',
-    'Tarjeta de presentación: $40.000–$80.000 COP (USD $10–$21).',
-    'Portada YouTube/Facebook: $50.000–$120.000 COP (USD $13–$31).',
-    'Presentaciones PowerPoint/Canva: $20.000–$60.000 COP por diapositiva o lote (USD $5–$15).',
-    'Edición de fotografía: $8.000–$25.000 COP/foto (USD $2–$6).',
-    'Gestión de redes sociales (mensual): $200.000–$500.000 COP/mes (USD $51–$128), 2-4 publicaciones por semana.',
+    'PRECIOS EN PESOS COLOMBIANOS (COP) Y SU EQUIVALENTE EN DÓLARES (USD):',
+    '--- SOPORTE TÉCNICO ---',
+    'Diagnóstico y revisión técnica: $35.000-$45.000 COP (USD $9-$12).',
+    'Formateo + instalación de Windows y drivers: $80.000-$100.000 COP (USD $21-$26).',
+    'Mantenimiento preventivo (optimización del sistema): $60.000-$75.000 COP (USD $15-$19).',
+    'Limpieza física interna (con cambio de pasta térmica): $70.000-$85.000 COP (USD $18-$22).',
+    'Mantenimiento integral (limpieza física + formateo): $120.000-$140.000 COP (USD $31-$36).',
+    'Instalación de repuestos (disco, RAM, pantalla, etc.) — mano de obra: $45.000-$60.000 COP (USD $12-$15).',
+    'Eliminación de virus y malware: $55.000-$70.000 COP (USD $14-$18).',
+    'Instalación y configuración de red WiFi / repetidor: $55.000-$70.000 COP (USD $14-$18).',
+    'Instalación de software especializado: $45.000-$60.000 COP (USD $12-$15).',
+    'Servicio a domicilio (recargo adicional): $25.000-$35.000 COP (USD $6-$9).',
+    '--- DISEÑO GRÁFICO Y MULTIMEDIA ---',
+    'Diseño de logo básico (vector, 2 revisiones): $60.000 COP (USD $15).',
+    'Logo + manual de identidad básico: $100.000 COP (USD $27).',
+    'Banner para redes sociales (Facebook, Instagram, LinkedIn): $35.000 COP (USD $9).',
+    'Banner para impresión (pendón, solo diseño): $60.000 COP (USD $15).',
+    'Flyer o volante digital o impreso: $35.000 COP (USD $9).',
+    'Tarjeta de presentación (frente y reverso): $30.000 COP (USD $8).',
+    'Edición de video corto (reel, hasta 1 min): $180.000 COP (USD $50).',
+    'Edición de video para YouTube (por pieza entregada): $253.000 COP (USD $70).',
+    'Retoque de foto Photoshop (fondo, luz, limpieza): $25.000 COP (USD $6).',
+    'Portada para Facebook / YouTube / Twitter: $45.000 COP (USD $12).',
+    'Presentación (PPT o Canva, hasta 10 diapositivas): $80.000 COP (USD $21).',
+    'Gestión de redes sociales (community manager, 3 publicaciones/semana, mensual): $180.000 COP (USD $50).',
+    'Todos los precios son en pesos colombianos (COP). El equivalente en dólares es aproximado según la tasa de cambio.',
     'Contacto: WhatsApp +57 313 204 9102 — Email lumar.321456@gmail.com.',
-    'Si te preguntan por precios, responde con las tarifas exactas de arriba según el servicio consultado.',
-    'Para cotizaciones personalizadas o combos, recomienda WhatsApp.',
+    'Si te preguntan por servicios, precios o agendar, recomienda contactar por WhatsApp o llenar el formulario en /contacto.html.',
     'PERO también puedes conversar libremente de CUALQUIER tema: cultura, ciencia, historia, tecnología,',
     'consejos, recetas, programación, matemáticas, deportes, salud, viajes, estudios, ayuda con tareas, etc.',
     'Responde SIEMPRE en español, de forma clara, amigable y breve (máximo 4 frases).',
@@ -927,28 +927,62 @@
       var srv = params.get('servicio');
       if (!srv) return;
 
-      var msgEl = form.querySelector('#message');
-      if (msgEl && !msgEl.value) {
-        msgEl.value = 'Hola Leonardo, me interesa el servicio: "' + srv + '". ¿Podrías darme más información y agendar?';
+      // Price lookup map — keyed by lowercase fragments of the service name
+      var PRICE_MAP = [
+        { re: /diagn.stico/,             tipo: 'Soporte Técnico',    cop: '$35.000 – $45.000 COP', usd: 'USD $9–$12' },
+        { re: /formateo|windows/,         tipo: 'Soporte Técnico',    cop: '$80.000 – $100.000 COP', usd: 'USD $21–$26' },
+        { re: /mantenimiento integral/,   tipo: 'Soporte Técnico',    cop: '$120.000 – $140.000 COP', usd: 'USD $31–$36' },
+        { re: /mantenimiento preventivo/, tipo: 'Soporte Técnico',    cop: '$60.000 – $75.000 COP', usd: 'USD $15–$19' },
+        { re: /limpieza f.sica|pasta/,   tipo: 'Soporte Técnico',    cop: '$70.000 – $85.000 COP', usd: 'USD $18–$22' },
+        { re: /repuesto/,                 tipo: 'Soporte Técnico',    cop: '$45.000 – $60.000 COP', usd: 'USD $12–$15' },
+        { re: /virus|malware/,            tipo: 'Soporte Técnico',    cop: '$55.000 – $70.000 COP', usd: 'USD $14–$18' },
+        { re: /wifi|repetidor|red/,       tipo: 'Soporte Técnico',    cop: '$55.000 – $70.000 COP', usd: 'USD $14–$18' },
+        { re: /software especializado/,   tipo: 'Soporte Técnico',    cop: '$45.000 – $60.000 COP', usd: 'USD $12–$15' },
+        { re: /domicilio/,                tipo: 'Soporte Técnico',    cop: '$25.000 – $35.000 COP', usd: 'USD $6–$9' },
+        { re: /logo.*manual|manual.*identidad/, tipo: 'Diseño Gráfico', cop: '$100.000 COP', usd: 'USD $27' },
+        { re: /logo/,                     tipo: 'Diseño Gráfico',     cop: '$60.000 COP', usd: 'USD $15' },
+        { re: /banner.*impresi.n|pend.n/, tipo: 'Diseño Gráfico',     cop: '$60.000 COP', usd: 'USD $15' },
+        { re: /banner/,                   tipo: 'Diseño Gráfico',     cop: '$35.000 COP', usd: 'USD $9' },
+        { re: /flyer|volante/,            tipo: 'Diseño Gráfico',     cop: '$35.000 COP', usd: 'USD $9' },
+        { re: /tarjeta/,                  tipo: 'Diseño Gráfico',     cop: '$30.000 COP', usd: 'USD $8' },
+        { re: /youtube.*pieza|pieza/,     tipo: 'Diseño Gráfico',     cop: '$253.000 COP', usd: 'USD $70' },
+        { re: /video.*corto|reel/,        tipo: 'Diseño Gráfico',     cop: '$180.000 COP', usd: 'USD $50' },
+        { re: /video/,                    tipo: 'Diseño Gráfico',     cop: '$180.000 COP', usd: 'USD $50' },
+        { re: /photoshop|retoque|foto/,   tipo: 'Diseño Gráfico',     cop: '$25.000 COP', usd: 'USD $6' },
+        { re: /portada/,                  tipo: 'Diseño Gráfico',     cop: '$45.000 COP', usd: 'USD $12' },
+        { re: /presentaci.n|ppt|canva/,   tipo: 'Diseño Gráfico',     cop: '$80.000 COP', usd: 'USD $21' },
+        { re: /gesti.n.*redes|community/, tipo: 'Diseño Gráfico',     cop: '$180.000 COP/mes', usd: 'USD $50' }
+      ];
+
+      var t = srv.toLowerCase();
+      var priceInfo = null;
+      for (var pi = 0; pi < PRICE_MAP.length; pi++) {
+        if (PRICE_MAP[pi].re.test(t)) { priceInfo = PRICE_MAP[pi]; break; }
       }
 
-      // Try to map the requested service to one of the select options
+      var msgEl = form.querySelector('#message');
+      if (msgEl && !msgEl.value) {
+        var priceStr = priceInfo
+          ? '\nPrecio: ' + priceInfo.cop + ' (' + priceInfo.usd + ')\nTipo: ' + priceInfo.tipo
+          : '';
+        msgEl.value = 'Hola Leonardo, me interesa el servicio: "' + srv + '".' + priceStr + '\n¿Podrías darme más información y agendar?';
+      }
+
+      // Try to match the requested service to one of the select options
       var sel = form.querySelector('#service');
       if (sel) {
-        var t = srv.toLowerCase();
-        var pick = '';
-        if (/(logo|banner|flyer|tarjeta|portada|fotograf|video|presentaci|photoshop|gesti.n de redes)/.test(t)) {
-          pick = 'design';
-        } else if (/(web|sitio|html|p.gina)/.test(t)) {
-          pick = 'web';
-        } else if (/(diagn.stico|formateo|mantenimiento|limpieza|repuesto|domicilio|wifi|virus|software|red)/.test(t)) {
-          pick = 'support';
-        } else if (/(consultor)/.test(t)) {
-          pick = 'consulting';
-        } else {
-          pick = 'other';
+        var bestOpt = null, bestScore = 0;
+        var srvWords = t.split(/[\s\-\+\/,()]+/).filter(function(w){ return w.length > 3; });
+        Array.prototype.forEach.call(sel.options, function(opt) {
+          if (!opt.value) return;
+          var ov = opt.value.toLowerCase();
+          var score = 0;
+          srvWords.forEach(function(w){ if (ov.indexOf(w) !== -1) score++; });
+          if (score > bestScore) { bestScore = score; bestOpt = opt; }
+        });
+        if (bestOpt && bestScore > 0) {
+          sel.value = bestOpt.value;
         }
-        sel.value = pick;
       }
 
       // Scroll to the form smoothly
@@ -1125,4 +1159,3 @@
     document.addEventListener('DOMContentLoaded', brandFormSubmit);
   } else { brandFormSubmit(); }
 })();
-
