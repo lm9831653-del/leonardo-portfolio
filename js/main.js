@@ -35,30 +35,34 @@
   const isTouch      = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
 
   /* --------------------------------------------------------
-     0b. CORRECCIONES DE ANIMACIONES PARA MÓVIL
-         Reduce/detiene animaciones costosas en pantallas táctiles
-         para evitar jitter, vibración y alto consumo de batería.
+     0b. AJUSTES DE ANIMACIÓN PARA MÓVIL
+         Mantiene el movimiento del fondo y reduce su intensidad
+         para equilibrar fluidez y consumo en pantallas táctiles.
   --------------------------------------------------------- */
-  if (isTouch || window.innerWidth < 900) {
+  if (!reduceMotion && (isTouch || window.innerWidth < 900)) {
     const mobileStyle = document.createElement('style');
     mobileStyle.id = 'lm-mobile-perf';
     mobileStyle.textContent = `
-      /* --- Desactivar partículas de fondo (10 elementos animados) --- */
-      .site-bg-particles { display: none !important; }
+      /* --- Mantener las partículas visibles, con un ciclo más pausado --- */
+      .site-bg-particles { display: block !important; }
+      .site-bg-particles span { animation-duration: 32s !important; }
 
-      /* --- Detener la línea de escaneo (scan) --- */
-      .site-bg-scan { display: none !important; }
-
-      /* --- Orbs: sin blur ni movimiento (muy costoso en GPU móvil) --- */
-      .site-bg-orb {
-        filter: none !important;
-        animation: none !important;
-        opacity: 0.08 !important;
-        transform: none !important;
+      /* --- Mantener la línea de escaneo, más sutil y lenta --- */
+      .site-bg-scan {
+        display: block !important;
+        animation-duration: 18s !important;
+        opacity: 0.3 !important;
       }
 
-      /* --- Grid de fondo: sin movimiento continuo --- */
-      .site-bg-grid { animation: none !important; }
+      /* --- Orbs: conservar su movimiento con menos desenfoque --- */
+      .site-bg-orb {
+        filter: blur(44px) !important;
+        animation-duration: 48s !important;
+        opacity: 0.14 !important;
+      }
+
+      /* --- Mantener el movimiento del grid a menor velocidad --- */
+      .site-bg-grid { animation: bg-grid-pan 52s linear infinite !important; }
 
       /* --- Íconos flotantes del hero: mucho más suaves --- */
       .float-icon {
