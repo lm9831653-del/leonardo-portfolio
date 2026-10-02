@@ -231,8 +231,8 @@
     .chat-form button:hover{transform:scale(1.05)}
     .chat-form button svg{width:18px;height:18px}
     @media (max-width:480px){
-      .chat-fab{bottom:16px;right:16px;width:56px;height:56px}
-      .chat-window{bottom:16px;right:16px;left:16px;width:auto;height:75vh}
+      .chat-fab{bottom:max(1rem,env(safe-area-inset-bottom));right:max(1rem,env(safe-area-inset-right));width:clamp(3.25rem,14vw,3.5rem);height:clamp(3.25rem,14vw,3.5rem)}
+      .chat-window{bottom:max(1rem,env(safe-area-inset-bottom));right:max(1rem,env(safe-area-inset-right));left:max(1rem,env(safe-area-inset-left));width:auto;height:min(75vh,42rem);height:min(75dvh,42rem);max-height:calc(100vh - 2rem);max-height:calc(100dvh - 2rem)}
     }
   </style>
 
