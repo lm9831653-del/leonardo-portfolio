@@ -1418,3 +1418,332 @@ img { max-width: 100%; height: auto; display: block; }
   .pricing-tab { padding: 10px 14px; font-size: 10px; letter-spacing: .8px; }
   .pricing-grid { gap: 14px; }
 }
+
+/* =========================================================
+   FLUID RESPONSIVE REFINEMENTS
+   Keep the original visual style and motion at every size.
+   ========================================================= */
+:root {
+  --page-gutter: clamp(.75rem, 4vw, 1.5rem);
+  --section-space: clamp(3.25rem, 7vw, 6rem);
+  --card-space: clamp(1rem, 2.8vw, 2rem);
+}
+
+html {
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+.container,
+.nav-inner {
+  width: 100%;
+  padding-inline: var(--page-gutter);
+}
+
+.container {
+  max-width: 77.5rem;
+}
+
+.nav-inner {
+  max-width: 77.5rem;
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.hero-inner,
+.about-grid,
+.services-grid,
+.stats-grid,
+.timeline-grid,
+.projects-grid,
+.skills-grid,
+.contact-grid,
+.contact-mini,
+.form-row {
+  min-width: 0;
+}
+
+.services-grid,
+.projects-grid,
+.skills-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1000px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.hero-title {
+  font-size: clamp(2.25rem, 7vw, 5.5rem);
+  overflow-wrap: anywhere;
+}
+
+.hero-desc,
+.about-desc,
+.contact-lead {
+  font-size: clamp(.9375rem, 1.5vw, 1.125rem);
+}
+
+.hero-badge {
+  font-size: clamp(.625rem, 1vw, .75rem);
+  letter-spacing: clamp(.1em, .8vw, .2em);
+}
+
+.service-card,
+.skill-cat,
+.contact-form {
+  padding: var(--card-space);
+}
+
+.service-card h3,
+.whatsapp-card h4 {
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+}
+
+.timeline-head h3 {
+  font-size: clamp(1.25rem, 2.3vw, 1.625rem);
+}
+
+.timeline-card,
+.project-body,
+.mini-card {
+  min-width: 0;
+}
+
+.project-body h3,
+.timeline-card h4,
+.pillar h4 {
+  overflow-wrap: anywhere;
+}
+
+.project-tag,
+.badge,
+.filter,
+.pricing-tab {
+  max-width: 100%;
+}
+
+.modal {
+  padding: clamp(.75rem, 3vw, 1.25rem);
+}
+
+.modal-content {
+  width: min(100%, 55rem);
+  max-height: min(90vh, 56rem);
+  max-height: min(90dvh, 56rem);
+}
+
+.modal-body {
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.modal-body h3 {
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  overflow-wrap: anywhere;
+}
+
+.map {
+  height: clamp(15rem, 38vw, 23.75rem);
+}
+
+.footer {
+  padding-block: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+@media (max-width: 900px) {
+  .nav .btn-cta {
+    display: none;
+  }
+
+  .hero {
+    padding-block: clamp(6rem, 14vh, 8rem) clamp(3rem, 8vh, 4rem);
+  }
+
+  .float-icon {
+    display: flex;
+    width: clamp(2.5rem, 8vw, 3rem);
+    height: clamp(2.5rem, 8vw, 3rem);
+    border-radius: clamp(.75rem, 3vw, 1rem);
+  }
+
+  .float-icon svg {
+    width: clamp(1.125rem, 4vw, 1.5rem);
+    height: clamp(1.125rem, 4vw, 1.5rem);
+  }
+
+  .float-tl { top: -.5rem; left: -.5rem; }
+  .float-tr { top: 18%; right: -.5rem; }
+  .float-bl { bottom: 16%; left: -.5rem; }
+  .float-br { bottom: -.5rem; right: -.5rem; }
+
+  .contact-grid {
+    gap: clamp(1.5rem, 5vw, 2.25rem);
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --page-gutter: clamp(.75rem, 4vw, 1rem);
+    --section-space: clamp(3rem, 12vw, 4rem);
+  }
+
+  .hero {
+    padding-block: clamp(5.5rem, 18vw, 6.5rem) clamp(2.5rem, 10vw, 3rem);
+  }
+
+  .hero-inner {
+    gap: clamp(1.5rem, 8vw, 2rem);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 11vw, 3.75rem);
+  }
+
+  .hero-desc {
+    margin-block: 1.125rem 1.5rem;
+  }
+
+  .hero-actions .btn {
+    padding-inline: clamp(.875rem, 4vw, 1.25rem);
+    white-space: normal;
+  }
+
+  .about-grid {
+    gap: clamp(1.5rem, 8vw, 2.5rem);
+  }
+
+  .services-grid,
+  .projects-grid,
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-grid {
+    gap: 1.5rem;
+  }
+
+  .contact-mini {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(.5rem, 3vw, 1rem);
+  }
+
+  .mini-card {
+    padding: clamp(.75rem, 4vw, 1.125rem);
+  }
+
+  .mini-card p {
+    overflow-wrap: anywhere;
+  }
+
+  .filters {
+    margin-bottom: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .filter {
+    padding-inline: clamp(.75rem, 4vw, 1rem);
+    white-space: normal;
+  }
+
+  .modal-content {
+    max-height: 94vh;
+    max-height: 94dvh;
+  }
+
+  .chat-window {
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .projects-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Keep decorative motion, but make it gentler on compact devices. */
+@media (max-width: 720px) {
+  .site-bg-orb {
+    animation-play-state: running;
+    animation-duration: 42s;
+    filter: blur(clamp(2.75rem, 12vw, 3.5rem));
+  }
+
+  .site-bg-grid {
+    background-size: clamp(2.75rem, 12vw, 3.5rem);
+    animation: bg-grid-pan 52s linear infinite;
+  }
+
+  .site-bg .site-bg-particles span:nth-child(n+6) {
+    display: block;
+  }
+
+  .site-bg-particles span {
+    animation-duration: 28s;
+  }
+
+  .site-bg-scan {
+    animation-duration: 18s;
+  }
+
+  .marquee-track {
+    animation-duration: 58s;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-bg-orb {
+    animation-play-state: running;
+    animation-duration: 48s;
+    opacity: .18;
+  }
+
+  .site-bg .site-bg-particles span:nth-child(n+4) {
+    display: block;
+  }
+
+  .chat-fab {
+    width: clamp(3.25rem, 14vw, 3.5rem);
+    height: clamp(3.25rem, 14vw, 3.5rem);
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .contact-mini {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-bg-orb,
+  .site-bg-grid,
+  .site-bg-particles span,
+  .site-bg-scan {
+    animation: none;
+  }
+}
