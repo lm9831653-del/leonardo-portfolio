@@ -1,245 +1,2271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portafolio de Leonardo Márquez — Análisis y Desarrollo Software, Diseño Gráfico, Soporte Técnico." />
-  <title>Leonardo Márquez — Inicio</title>
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-  <link rel="shortcut icon" href="images/favicon.svg">
+  <meta name="description"
+    content="ByteForge — Desarrollo de software, desarrollo web moderno, bases de datos, diseño digital y soporte técnico." />
+  <meta name="theme-color" content="#07030e" />
+  <title>
+    ByteForge
+  </title>
 
+  <!-- Fuentes tipográficas -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/LOGO.png" />
+
+  <!-- Estilos CSS externos -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- Animated cyber background (mobile-optimized) -->
-  <div class="site-bg" aria-hidden="true">
-    <div class="site-bg-grid"></div>
-    <div class="site-bg-orb orb-1"></div>
-    <div class="site-bg-orb orb-2"></div>
-    <div class="site-bg-orb orb-3"></div>
-    <div class="site-bg-particles">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <div class="site-bg-scan"></div>
-  </div>
-
-  <!-- Custom Cursor -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
-
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress" id="scroll-progress"></div>
-
-  <!-- Navigation -->
-  <header class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">LM</a>
-
-      <nav class="nav-links" id="nav-links">
-        <a href="index.html" class="active">INICIO</a>
-        <a href="sobre-mi.html">SOBRE MÍ</a>
-        <a href="servicios.html">SERVICIOS</a>
-        <a href="portafolio.html">PORTAFOLIO</a>
-        <a href="contacto.html">CONTACTO</a>
-      </nav>
-
-      <a href="contacto.html" class="btn btn-cta">COTIZA AHORA</a>
-
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menú">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-
-<section id="inicio" class="hero">
-      <div class="hero-grid"></div>
-
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <div class="hero-badge">CREATIVE DEVELOPER &amp; TECHNICIAN</div>
-
-          <h1 class="hero-title">
-            <span class="line-1">Innovación en</span>
-            <span class="line-2 rotating-word" id="rotating-word">Análisis</span>
-            <span class="line-3">Para el Futuro</span>
-          </h1>
-
-          <p class="hero-desc">
-            Soluciones digitales de alto impacto que transforman tu visión en una experiencia inolvidable. Diseño, código y estrategia en perfecta sintonía.
-          </p>
-
-          <div class="hero-actions">
-            <a href="contacto.html" class="btn btn-primary">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-              Cotiza Ahora
+<body class="bg-void text-ink font-body">
+  <div class="relative min-h-screen font-body text-ink">
+    <div class="ambient" aria-hidden="true"></div>
+    <canvas id="nebula-canvas" aria-hidden="true"></canvas>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <a href="#home"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-neon focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
+      Skip to content
+    </a>
+    <header class="fixed inset-x-0 top-0 z-50 transition-all duration-500 bg-transparent py-5">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 lg:px-8">
+        <a href="#inicio" class="group flex items-center gap-2" aria-label="ByteForge — inicio">
+          <img src="images/LOGO.png" alt="ByteForge Logo"
+            class="h-10 w-10 rounded-lg object-contain transition-transform duration-300 group-hover:rotate-12" />
+          <img src="images/nombre.png" alt="ByteForge" class="h-5 object-contain" />
+        </a>
+        <ul class="hidden items-center gap-9 lg:flex">
+          <li>
+            <a href="#inicio"
+              class="group relative text-sm font-medium tracking-wide text-muted transition-colors hover:text-ink">
+              Inicio
+              <span
+                class="absolute -bottom-1.5 left-0 h-px w-0 bg-gradient-to-r from-neon to-cyan transition-all duration-300 group-hover:w-full">
+              </span>
             </a>
-            <a href="portafolio.html" class="btn btn-ghost">Ver Proyectos</a>
-          </div>
+          </li>
+          <li>
+            <a href="#sobre-mi"
+              class="group relative text-sm font-medium tracking-wide text-muted transition-colors hover:text-ink">
+              Sobre mí
+              <span
+                class="absolute -bottom-1.5 left-0 h-px w-0 bg-gradient-to-r from-neon to-cyan transition-all duration-300 group-hover:w-full">
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#habilidades"
+              class="group relative text-sm font-medium tracking-wide text-muted transition-colors hover:text-ink">
+              Habilidades
+              <span
+                class="absolute -bottom-1.5 left-0 h-px w-0 bg-gradient-to-r from-neon to-cyan transition-all duration-300 group-hover:w-full">
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#proyectos"
+              class="group relative text-sm font-medium tracking-wide text-muted transition-colors hover:text-ink">
+              Proyectos
+              <span
+                class="absolute -bottom-1.5 left-0 h-px w-0 bg-gradient-to-r from-neon to-cyan transition-all duration-300 group-hover:w-full">
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#experiencia"
+              class="group relative text-sm font-medium tracking-wide text-muted transition-colors hover:text-ink">
+              Experiencia
+              <span
+                class="absolute -bottom-1.5 left-0 h-px w-0 bg-gradient-to-r from-neon to-cyan transition-all duration-300 group-hover:w-full">
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#contacto"
+              class="group relative text-sm font-medium tracking-wide text-muted transition-colors hover:text-ink">
+              Contacto
+              <span
+                class="absolute -bottom-1.5 left-0 h-px w-0 bg-gradient-to-r from-neon to-cyan transition-all duration-300 group-hover:w-full">
+              </span>
+            </a>
+          </li>
+        </ul>
+        <div class="hidden lg:block">
+          <a href="#contacto"
+            class="btn-sheen inline-flex items-center gap-2 rounded-full border border-neon/70 bg-neon/10 px-6 py-2.5 text-sm font-semibold tracking-wide text-neon-soft transition-all duration-300 hover:bg-neon hover:text-white hover:shadow-neon">
+            Contáctame
+          </a>
+        </div>
+        <button class="grid h-10 w-10 place-items-center rounded-lg border border-line text-ink lg:hidden"
+          aria-expanded="false" aria-label="Abrir menú de navegación">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-menu h-5 w-5" aria-hidden="true">
+            <path d="M4 5h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 19h16"></path>
+          </svg>
+        </button>
+      </nav>
+      <div
+        class="overflow-hidden border-b border-line bg-void/95 backdrop-blur-xl transition-all duration-500 lg:hidden max-h-0 opacity-0">
+        <ul class="space-y-1 px-6 py-5">
+          <li>
+            <a href="#inicio"
+              class="block rounded-lg px-3 py-2.5 text-base text-muted transition-colors hover:bg-white/5 hover:text-ink">
+              Inicio
+            </a>
+          </li>
+          <li>
+            <a href="#sobre-mi"
+              class="block rounded-lg px-3 py-2.5 text-base text-muted transition-colors hover:bg-white/5 hover:text-ink">
+              Sobre mí
+            </a>
+          </li>
+          <li>
+            <a href="#habilidades"
+              class="block rounded-lg px-3 py-2.5 text-base text-muted transition-colors hover:bg-white/5 hover:text-ink">
+              Habilidades
+            </a>
+          </li>
+          <li>
+            <a href="#proyectos"
+              class="block rounded-lg px-3 py-2.5 text-base text-muted transition-colors hover:bg-white/5 hover:text-ink">
+              Proyectos
+            </a>
+          </li>
+          <li>
+            <a href="#experiencia"
+              class="block rounded-lg px-3 py-2.5 text-base text-muted transition-colors hover:bg-white/5 hover:text-ink">
+              Experiencia
+            </a>
+          </li>
+          <li>
+            <a href="#contacto"
+              class="block rounded-lg px-3 py-2.5 text-base text-muted transition-colors hover:bg-white/5 hover:text-ink">
+              Contacto
+            </a>
+          </li>
+          <li class="pt-3">
+            <a href="#contacto"
+              class="block rounded-full border border-neon/70 bg-neon/15 px-6 py-3 text-center text-sm font-semibold text-neon-soft">
+              Contáctame
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <!-- ===================== HERO SECTION ===================== -->
+      <section id="inicio" class="hero-section">
 
-          <div class="hero-status">
-            <span class="status-dot"></span>
-            Disponible para nuevos proyectos
+        <!-- Barra superior con 3 frases -->
+        <div class="hero-top-bar">
+          <div class="hero-top-phrase">
+            <span class="hero-top-italic">IDEAS QUE SE CONVIERTEN</span>
+            <span class="hero-top-italic">EN REALIDAD</span>
+          </div>
+          <div class="hero-top-phrase">
+            <span class="hero-top-italic">CÓDIGO QUE GENERA</span>
+            <span class="hero-top-italic">OPORTUNIDADES</span>
+          </div>
+          <div class="hero-top-phrase">
+            <span class="hero-top-italic">SOLUCIONES PARA</span>
+            <span class="hero-top-italic">UN MEJOR MAÑANA</span>
           </div>
         </div>
 
-        <div class="hero-visual">
-          <!-- Floating icons -->
-          <div class="float-icon float-tl" data-parallax="0.6">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <!-- Imagen del héroe con badges flotantes -->
+        <div class="hero-image-wrapper">
+          <div class="hero-image-glow" aria-hidden="true"></div>
+          <img src="images/hero-portrait.png"
+            alt="Retrato con iluminación neón rosa y cian que representa la marca personal ByteForge" class="hero-image"
+            loading="eager" />
+          <!-- Badge: Desarrollo web (izquierda) -->
+          <div class="hero-badge hero-badge-left">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="#3ee0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m18 16 4-4-4-4"></path>
+              <path d="m6 8-4 4 4 4"></path>
+              <path d="m14.5 4-5 16"></path>
+            </svg>
+            <span>Desarrollo web</span>
           </div>
-          <div class="float-icon float-tr" data-parallax="-0.4">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <!-- Badge: Diseño digital (derecha) -->
+          <div class="hero-badge hero-badge-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="#ff6fb0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path
+                d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z">
+              </path>
+            </svg>
+            <span>Diseño digital</span>
           </div>
-          <div class="float-icon float-bl" data-parallax="0.5">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <div class="float-icon float-br" data-parallax="-0.6">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2zM9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-          </div>
+        </div>
 
-          <!-- Blob behind avatar -->
-          <svg class="hero-blob" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <radialGradient id="blob-grad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.7"/>
-                <stop offset="50%" stop-color="#d500f9" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <path id="blob-path" fill="url(#blob-grad)" d="M380.5,322.5Q334,395,248.5,396Q163,397,117.5,323.5Q72,250,111,171Q150,92,239.5,88Q329,84,378,167Q427,250,380.5,322.5Z"/>
-          </svg>
+        <!-- Contenido principal del héroe -->
+        <div class="hero-content">
+          <!-- Hola, soy -->
+          <p class="hero-greeting">
+            <span class="hero-cross" aria-hidden="true"></span>
+            <span>HOLA, SOY</span>
+          </p>
 
-          <!-- Avatar card -->
-          <div class="avatar-card" data-parallax="0.3">
-            <img src="images/leonardo-profile.jpg" alt="Leonardo Márquez" />
-            <div class="avatar-overlay"></div>
-            <div class="avatar-tag">
-              <div>
-                <div class="avatar-name">Leonardo Márquez</div>
-                <div class="avatar-role">SIBATE_CO // ADSO</div>
+          <!-- Nombre grande + badge circular -->
+          <div class="hero-name-row">
+            <h1 class="hero-name">
+              LEONARDO<br />
+              M<span class="hero-accent">Á</span>RQUEZ
+            </h1>
+            <!-- Badge circular rotatorio -->
+            <div class="hero-circular-badge" aria-hidden="true">
+              <svg viewBox="0 0 200 200" class="hero-circular-text">
+                <defs>
+                  <path id="circlePath" d="M100,100 m-75,0 a75,75 0 1,1 150,0 a75,75 0 1,1 -150,0" />
+                </defs>
+                <text>
+                  <textPath href="#circlePath" startOffset="0%">BYTEFORGE · DESARROLLA · CREA · INNOVA · CONECTA ·
+                  </textPath>
+                </text>
+              </svg>
+              <div class="hero-circular-icon">
+                <img src="images/LOGO.png" alt="ByteForge Logo" class="hero-circular-logo" />
               </div>
-              <span class="status-dot"></span>
+            </div>
+          </div>
+
+          <!-- Subtítulo -->
+          <p class="hero-subtitle">
+            DESARROLLADOR DE SOFTWARE JUNIOR
+            <span class="hero-dot"> · </span>
+            <span class="hero-brand">BYTEFORGE</span>
+          </p>
+
+          <!-- Descripción -->
+          <p class="hero-description">
+            Soy desarrollador de software junior y freelancer, enfocado en desarrollo web,
+            software y diseño digital. Creo interfaces con HTML, CSS, JavaScript y Tailwind,
+            y trabajo con Python, Java, PHP, SQL y bases de datos. He desarrollado
+            proyectos web y de escritorio, participando en el análisis de requisitos,
+            las pruebas y la corrección de errores. También tengo experiencia en operación
+            y programación CNC, soporte técnico y mantenimiento de computadores.
+            Busco colaborar en proyectos freelance y seguir creciendo profesionalmente.
+          </p>
+
+          <!-- Botones CTA -->
+          <div class="hero-cta-row">
+            <a href="#proyectos" class="hero-btn-image" aria-label="Ver proyectos">
+              <img src="images/ver proyectos.png" alt="Ver proyectos" class="hero-cta-img" />
+            </a>
+            <a href="https://wa.me/573132049102?text=Hola%20Leonardo%2C%20vi%20tu%20portafolio%20como%20desarrollador%20de%20software%20y%20me%20gustar%C3%ADa%20conversar%20contigo%20sobre%20una%20oportunidad%20o%20proyecto."
+              target="_blank" rel="noopener noreferrer" class="hero-btn-image" aria-label="Contáctame por WhatsApp">
+              <img src="images/contactame.png" alt="Contáctame" class="hero-cta-img" />
+            </a>
+          </div>
+
+          <!-- Barra de ubicación y disponibilidad -->
+          <div class="hero-info-bar">
+            <div class="hero-location">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="#ff2e88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                </path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Sibaté, Cundinamarca, Colombia</span>
+            </div>
+            <div class="hero-available">
+              <span class="hero-available-dot"></span>
+              Disponible
+            </div>
+          </div>
+
+          <!-- Logo ByteForge al fondo -->
+          <div class="hero-bottom-logo">
+            <img src="images/LOGO.png" alt="ByteForge Logo" style="height: 36px; width: 36px; object-fit: contain;" />
+            <img src="images/nombre.png" alt="ByteForge" style="height: 20px; object-fit: contain;" />
+          </div>
+        </div>
+      </section>
+      <section class="relative border-y border-line bg-abyss/60 py-14" aria-label="Tecnologías y datos del perfil">
+        <div class="reveal mx-auto max-w-7xl px-5 lg:px-8" style="transition-delay: 0ms">
+          <div class="marquee-3d-wrapper">
+            <div class="marquee-3d-stage">
+              <div class="marquee-3d-track">
+                <!-- Set 1 -->
+                <span class="tech-badge-3d glow-py">
+                  <svg viewBox="0 0 24 24" fill="none" class="text-amber-400">
+                    <path
+                      d="M12 2C8.7 2 8.9 3.4 8.9 3.4v1.4h3.1v.5H6.8S4 5.1 4 8.7c0 3.7 2.5 3.5 2.5 3.5h1.5v-2.1s-.1-2.5 2.4-2.5h4.2s2.3 0 2.3-2.3V4.4S17.3 2 12 2z"
+                      fill="#38bdf8" />
+                    <path
+                      d="M12 22c3.3 0 3.1-1.4 3.1-1.4v-1.4H12v-.5h5.2s2.8.2 2.8-3.4c0-3.7-2.5-3.5-2.5-3.5h-1.5v2.1s.1 2.5-2.4 2.5H9.4s-2.3 0-2.3 2.3v1S6.7 22 12 22z"
+                      fill="#facc15" />
+                    <circle cx="10" cy="4" r=".6" fill="#030712" />
+                    <circle cx="14" cy="20" r=".6" fill="#030712" />
+                  </svg>
+                  <span>Python</span>
+                </span>
+                <span class="tech-badge-3d glow-java">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-rose-400">
+                    <path
+                      d="M9.1 18.2s-.7.1-1.1.2c-.4.1-.7.2-.7.2s.5.3 1.2.4c1 .1 2.2.2 3.6.1 1.3-.1 2.5-.3 3-.6 0 0-.4-.2-.9-.3-.5-.1-1-.1-1.4-.1-1.4 0-2.8.1-3.7.1zm-.8-2.1s-.8.2-1.2.3c-.4.1-.7.2-.7.2s.6.3 1.4.4c1.1.1 2.5.2 4 .1 1.5-.1 2.8-.4 3.4-.7 0 0-.5-.2-1-.3-.5-.1-1.1-.1-1.6-.1-1.5 0-3.2.1-4.3.1zm1.7-4c-.7 1.2-1.3 2.5-1.5 3.1 0 0 .5-.1 1.2-.2 1-.2 2.3-.3 3.7-.3 1.3 0 2.4.2 2.7.4.2-.6.2-1.3-.1-1.9-.5-1-1.6-1.8-2.6-2.3-.8.6-2.3 1.2-3.4 1.2zm6.6 4.7c-1.3.6-3.4.8-5.3.8-1.5 0-3-.2-4.1-.5l-.3.2c1.3.5 3 1 4.7.9 2 0 4.1-.4 5.3-.9l-.3-.5zm-3.8-13.6c.4.8.8 1.7.8 2.5 0 1.2-.6 2.3-1.4 3.2 1.4-.8 2.4-2.1 2.4-3.6 0-.8-.3-1.5-.7-2.1h-1.1zm-1.8 1.2c.4.8.8 1.6.8 2.4 0 1.4-.8 2.6-1.8 3.5 1.5-.8 2.7-2.2 2.7-3.8 0-.8-.3-1.5-.7-2.1h-1zM4 20.3c3.2.8 7.3.9 10.6.4 2.8-.4 5.4-1.4 5.4-1.4s-.6.5-1.8.9c-2 .6-4.6.9-7.2.9-2.9 0-5.5-.4-7-1.2 0 0 0 .1 0 .4z" />
+                  </svg>
+                  <span>Java</span>
+                </span>
+                <span class="tech-badge-3d glow-php">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-indigo-400">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4.7 13.3H5.9l1-6.6h2.2c1.4 0 2.3.7 2.1 2-.2 1.5-1.4 2.4-2.8 2.4h-.7l-.4 2.2zm1.7-4.2h.5c.7 0 1.1-.3 1.2-.9.1-.5-.2-.9-.8-.9h-.5l-.4 1.8zm4.4 4.2l1-6.6h1.4l-.4 2.4h1.7c1.4 0 2.3.7 2.1 2-.2 1.5-1.4 2.4-2.8 2.4h-2l-.6 2.2h-1.4l1-2.4zm2.1-1.8h.5c.7 0 1.1-.3 1.2-.9.1-.5-.2-.9-.8-.9h-.5l-.4 1.8zm-2.4 1.8l.7-4.4h1.4l-.7 4.4h-1.4z" />
+                  </svg>
+                  <span>PHP</span>
+                </span>
+                <span class="tech-badge-3d glow-sql">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="text-emerald-400">
+                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                  </svg>
+                  <span>SQL</span>
+                </span>
+                <span class="tech-badge-3d glow-mysql">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-blue-400">
+                    <path
+                      d="M16.5 6c-1.8 0-3.3 1.2-3.8 2.8-.7-.5-1.6-.8-2.6-.8-2.3 0-4.2 1.8-4.3 4.1C4.6 12.3 4 13.5 4 15c0 2.2 1.8 4 4 4h9c2.8 0 5-2.2 5-5 0-2.6-2-4.7-4.5-4.9-.3-1.8-1.9-3.1-3.8-3.1h-.2zm0 2c1 0 1.9.7 2 1.7l.1.8.8.1c1.7.2 3.1 1.7 3.1 3.4 0 1.9-1.6 3.5-3.5 3.5H8c-1.4 0-2.5-1.1-2.5-2.5 0-1.1.7-2 1.7-2.4l.7-.3.1-.8c.2-1.4 1.4-2.5 2.9-2.5.7 0 1.4.3 1.9.8l.6.6.6-.6c.7-.6 1.6-.9 2.5-.9z" />
+                  </svg>
+                  <span>MySQL</span>
+                </span>
+                <span class="tech-badge-3d glow-sqlite">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-sky-400">
+                    <path
+                      d="M20.5 7.5L12.5 3a1.5 1.5 0 0 0-1.5 0L3.5 7.5A1.5 1.5 0 0 0 2.7 8.8v6.4a1.5 1.5 0 0 0 .8 1.3l8 4.5a1.5 1.5 0 0 0 1.5 0l8-4.5a1.5 1.5 0 0 0 .8-1.3V8.8a1.5 1.5 0 0 0-.8-1.3zm-8.5-2.6l6.8 3.8-2.8 1.6-6.8-3.8 2.8-1.6zm-7.3 4.6l6.8 3.8v7.6l-6.8-3.8V9.5zm8.3 11.4v-7.6l6.8-3.8v7.6l-6.8 3.8z" />
+                  </svg>
+                  <span>SQLite</span>
+                </span>
+                <span class="tech-badge-3d glow-oracle">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-red-500">
+                    <path
+                      d="M16.3 4.5H7.7C3.5 4.5 0 7.9 0 12s3.5 7.5 7.7 7.5h8.6c4.2 0 7.7-3.4 7.7-7.5s-3.5-7.5-7.7-7.5zm-.3 11.6H8c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1H16c2.3 0 4.1 1.8 4.1 4.1s-1.8 4.1-4.1 4.1z" />
+                  </svg>
+                  <span>Oracle</span>
+                </span>
+                <span class="tech-badge-3d glow-git">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-400">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12.02c0 4.42 2.87 8.18 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.35-3.37-1.35-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.56 9.56 0 0 1 12 6.84c.85 0 1.7.12 2.5.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.86v2.75c0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12.02C22 6.48 17.52 2 12 2z" />
+                  </svg>
+                  <span>Git &amp; GitHub</span>
+                </span>
+                <span class="tech-badge-3d glow-html">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-500">
+                    <path
+                      d="M12 2L3 5v14l9 3 9-3V5l-9-3zm6.5 6.8h-7.6l.2 2.3h7.2l-.7 7.2-5.6 1.6-5.6-1.6-.4-4.5h2.4l.2 2.3 3.4 1 3.4-1 .3-3.8H5.8L5.2 6.5h13.5l-.2 2.3z" />
+                  </svg>
+                  <span>HTML5</span>
+                </span>
+                <span class="tech-badge-3d glow-css">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-blue-500">
+                    <path
+                      d="M12 2L3 5v14l9 3 9-3V5l-9-3zm6.4 4.5l-.3 3.4H7.8l.2 2.3h9.8l-.8 7.8-4.8 1.4-4.8-1.4-.3-3.6h2.4l.2 1.8 2.5.7 2.5-.7.3-3.5H5.4l-.5-5.6h13.8l-.3-2.3z" />
+                  </svg>
+                  <span>CSS3</span>
+                </span>
+                <span class="tech-badge-3d glow-js">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-yellow-400">
+                    <path
+                      d="M3 3h18v18H3V3zm15.4 13.8c-.4-.6-.9-1-1.6-1.3-.7-.3-1.4-.4-2-.4-.8 0-1.4.2-1.8.5-.4.3-.6.8-.6 1.4 0 .5.2.9.5 1.2.4.3.9.5 1.7.7.9.2 1.7.5 2.4.8.7.3 1.2.7 1.6 1.2.4.5.6 1.2.6 2 0 1.1-.4 2-1.3 2.7-.9.7-2 1-3.5 1-1.2 0-2.2-.2-3.1-.7s-1.5-1.2-1.9-2.1l2.2-1.3c.3.6.7 1.1 1.2 1.4.5.3 1 .5 1.7.5.7 0 1.3-.2 1.7-.5.4-.3.6-.8.6-1.3 0-.5-.2-.9-.5-1.2-.3-.3-.9-.6-1.7-.7-.9-.2-1.7-.5-2.4-.8-.7-.3-1.2-.7-1.6-1.2-.4-.5-.6-1.2-.6-2 0-1 .4-1.9 1.2-2.6.8-.7 1.9-1 3.2-1 1.1 0 2 .2 2.8.6.8.4 1.4 1 1.8 1.8l-2.1 1.3zm-6.5-4.7v7.5c0 .9-.2 1.5-.7 1.9-.5.4-1.2.6-2.1.6-.8 0-1.5-.2-2-.5-.5-.4-.9-.9-1.1-1.6l2.1-1.2c.2.4.3.7.6.9.2.2.5.3.9.3.4 0 .7-.1.9-.3.2-.2.3-.6.3-1.1V12.1h2z" />
+                  </svg>
+                  <span>JavaScript</span>
+                </span>
+                <span class="tech-badge-3d glow-tailwind">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-cyan-400">
+                    <path
+                      d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
+                  </svg>
+                  <span>Tailwind CSS</span>
+                </span>
+                <span class="tech-badge-3d glow-vscode">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-sky-400">
+                    <path
+                      d="M17.5 2.1l-8 7.3-4.7-3.6-2.8 1.4v9.6l2.8 1.4 4.7-3.6 8 7.3 4.5-2.2V4.3l-4.5-2.2zm-13.5 8l3 2.3-3 2.3v-4.6zm13.5 8.7l-6.3-5.8 6.3-5.8v11.6z" />
+                  </svg>
+                  <span>VS Code</span>
+                </span>
+                <span class="tech-badge-3d glow-vercel">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                    <path d="M12 2L2 20h20L12 2z" />
+                  </svg>
+                  <span>Vercel</span>
+                </span>
+                <span class="tech-badge-3d glow-ps">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-cyan-400">
+                    <path
+                      d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm4.5 4.5H11c2 0 3.3.9 3.3 2.5 0 1.8-1.5 2.6-3.2 2.6H10v3.4H8.5V7.5zm1.5 3.8h.9c1 0 1.9-.3 1.9-1.3 0-.9-.7-1.3-1.8-1.3H10v2.6zm6 5.2c1.2 0 2.1-.6 2.4-1.3l-1.2-.6c-.2.4-.6.7-1.2.7-.8 0-1.2-.4-1.2-1 0-.6.4-.8 1.4-1.1 1.5-.4 2.1-.9 2.1-2 0-1.3-1-2-2.3-2-1.3 0-2.1.6-2.4 1.4l1.2.6c.2-.4.6-.7 1.2-.7.6 0 1.1.3 1.1.8 0 .5-.3.7-1.3 1-1.5.4-2.2.9-2.2 2.1 0 1.3 1 2.1 2.4 2.1z" />
+                  </svg>
+                  <span>Photoshop</span>
+                </span>
+                <span class="tech-badge-3d glow-canva">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-teal-400">
+                    <path
+                      d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1.6 14.8c-2.3 0-3.9-1.6-3.9-3.8 0-2.3 1.7-4 4-4 1.3 0 2.4.6 2.9 1.5l-1.4 1c-.3-.6-.8-.9-1.5-.9-1.3 0-2.2 1.1-2.2 2.4 0 1.4.9 2.3 2.2 2.3.8 0 1.4-.4 1.8-1.1l1.4.9c-.8 1.1-1.9 1.7-3.3 1.7z" />
+                  </svg>
+                  <span>Canva</span>
+                </span>
+                <span class="tech-badge-3d glow-drawio">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-400">
+                    <path
+                      d="M4 4h6v5H4V4zm10 0h6v5h-6V4zm-5 11h6v5H9v-5zM6 9v3h12V9h2v4a1 1 0 0 1-1 1h-6v2h-2v-2H5a1 1 0 0 1-1-1V9h2z" />
+                  </svg>
+                  <span>Draw.io</span>
+                </span>
+                <span class="tech-badge-3d glow-staruml">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="text-purple-400">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <span>StarUML</span>
+                </span>
+
+                <!-- Set 2 (Duplicate for continuous loop) -->
+                <span class="tech-badge-3d glow-py">
+                  <svg viewBox="0 0 24 24" fill="none" class="text-amber-400">
+                    <path
+                      d="M12 2C8.7 2 8.9 3.4 8.9 3.4v1.4h3.1v.5H6.8S4 5.1 4 8.7c0 3.7 2.5 3.5 2.5 3.5h1.5v-2.1s-.1-2.5 2.4-2.5h4.2s2.3 0 2.3-2.3V4.4S17.3 2 12 2z"
+                      fill="#38bdf8" />
+                    <path
+                      d="M12 22c3.3 0 3.1-1.4 3.1-1.4v-1.4H12v-.5h5.2s2.8.2 2.8-3.4c0-3.7-2.5-3.5-2.5-3.5h-1.5v2.1s.1 2.5-2.4 2.5H9.4s-2.3 0-2.3 2.3v1S6.7 22 12 22z"
+                      fill="#facc15" />
+                    <circle cx="10" cy="4" r=".6" fill="#030712" />
+                    <circle cx="14" cy="20" r=".6" fill="#030712" />
+                  </svg>
+                  <span>Python</span>
+                </span>
+                <span class="tech-badge-3d glow-java">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-rose-400">
+                    <path
+                      d="M9.1 18.2s-.7.1-1.1.2c-.4.1-.7.2-.7.2s.5.3 1.2.4c1 .1 2.2.2 3.6.1 1.3-.1 2.5-.3 3-.6 0 0-.4-.2-.9-.3-.5-.1-1-.1-1.4-.1-1.4 0-2.8.1-3.7.1zm-.8-2.1s-.8.2-1.2.3c-.4.1-.7.2-.7.2s.6.3 1.4.4c1.1.1 2.5.2 4 .1 1.5-.1 2.8-.4 3.4-.7 0 0-.5-.2-1-.3-.5-.1-1.1-.1-1.6-.1-1.5 0-3.2.1-4.3.1zm1.7-4c-.7 1.2-1.3 2.5-1.5 3.1 0 0 .5-.1 1.2-.2 1-.2 2.3-.3 3.7-.3 1.3 0 2.4.2 2.7.4.2-.6.2-1.3-.1-1.9-.5-1-1.6-1.8-2.6-2.3-.8.6-2.3 1.2-3.4 1.2zm6.6 4.7c-1.3.6-3.4.8-5.3.8-1.5 0-3-.2-4.1-.5l-.3.2c1.3.5 3 1 4.7.9 2 0 4.1-.4 5.3-.9l-.3-.5zm-3.8-13.6c.4.8.8 1.7.8 2.5 0 1.2-.6 2.3-1.4 3.2 1.4-.8 2.4-2.1 2.4-3.6 0-.8-.3-1.5-.7-2.1h-1.1zm-1.8 1.2c.4.8.8 1.6.8 2.4 0 1.4-.8 2.6-1.8 3.5 1.5-.8 2.7-2.2 2.7-3.8 0-.8-.3-1.5-.7-2.1h-1zM4 20.3c3.2.8 7.3.9 10.6.4 2.8-.4 5.4-1.4 5.4-1.4s-.6.5-1.8.9c-2 .6-4.6.9-7.2.9-2.9 0-5.5-.4-7-1.2 0 0 0 .1 0 .4z" />
+                  </svg>
+                  <span>Java</span>
+                </span>
+                <span class="tech-badge-3d glow-php">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-indigo-400">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4.7 13.3H5.9l1-6.6h2.2c1.4 0 2.3.7 2.1 2-.2 1.5-1.4 2.4-2.8 2.4h-.7l-.4 2.2zm1.7-4.2h.5c.7 0 1.1-.3 1.2-.9.1-.5-.2-.9-.8-.9h-.5l-.4 1.8zm4.4 4.2l1-6.6h1.4l-.4 2.4h1.7c1.4 0 2.3.7 2.1 2-.2 1.5-1.4 2.4-2.8 2.4h-2l-.6 2.2h-1.4l1-2.4zm2.1-1.8h.5c.7 0 1.1-.3 1.2-.9.1-.5-.2-.9-.8-.9h-.5l-.4 1.8zm-2.4 1.8l.7-4.4h1.4l-.7 4.4h-1.4z" />
+                  </svg>
+                  <span>PHP</span>
+                </span>
+                <span class="tech-badge-3d glow-sql">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="text-emerald-400">
+                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                  </svg>
+                  <span>SQL</span>
+                </span>
+                <span class="tech-badge-3d glow-mysql">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-blue-400">
+                    <path
+                      d="M16.5 6c-1.8 0-3.3 1.2-3.8 2.8-.7-.5-1.6-.8-2.6-.8-2.3 0-4.2 1.8-4.3 4.1C4.6 12.3 4 13.5 4 15c0 2.2 1.8 4 4 4h9c2.8 0 5-2.2 5-5 0-2.6-2-4.7-4.5-4.9-.3-1.8-1.9-3.1-3.8-3.1h-.2zm0 2c1 0 1.9.7 2 1.7l.1.8.8.1c1.7.2 3.1 1.7 3.1 3.4 0 1.9-1.6 3.5-3.5 3.5H8c-1.4 0-2.5-1.1-2.5-2.5 0-1.1.7-2 1.7-2.4l.7-.3.1-.8c.2-1.4 1.4-2.5 2.9-2.5.7 0 1.4.3 1.9.8l.6.6.6-.6c.7-.6 1.6-.9 2.5-.9z" />
+                  </svg>
+                  <span>MySQL</span>
+                </span>
+                <span class="tech-badge-3d glow-sqlite">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-sky-400">
+                    <path
+                      d="M20.5 7.5L12.5 3a1.5 1.5 0 0 0-1.5 0L3.5 7.5A1.5 1.5 0 0 0 2.7 8.8v6.4a1.5 1.5 0 0 0 .8 1.3l8 4.5a1.5 1.5 0 0 0 1.5 0l8-4.5a1.5 1.5 0 0 0 .8-1.3V8.8a1.5 1.5 0 0 0-.8-1.3zm-8.5-2.6l6.8 3.8-2.8 1.6-6.8-3.8 2.8-1.6zm-7.3 4.6l6.8 3.8v7.6l-6.8-3.8V9.5zm8.3 11.4v-7.6l6.8-3.8v7.6l-6.8 3.8z" />
+                  </svg>
+                  <span>SQLite</span>
+                </span>
+                <span class="tech-badge-3d glow-oracle">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-red-500">
+                    <path
+                      d="M16.3 4.5H7.7C3.5 4.5 0 7.9 0 12s3.5 7.5 7.7 7.5h8.6c4.2 0 7.7-3.4 7.7-7.5s-3.5-7.5-7.7-7.5zm-.3 11.6H8c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1H16c2.3 0 4.1 1.8 4.1 4.1s-1.8 4.1-4.1 4.1z" />
+                  </svg>
+                  <span>Oracle</span>
+                </span>
+                <span class="tech-badge-3d glow-git">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-400">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12.02c0 4.42 2.87 8.18 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.35-3.37-1.35-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.56 9.56 0 0 1 12 6.84c.85 0 1.7.12 2.5.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.86v2.75c0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12.02C22 6.48 17.52 2 12 2z" />
+                  </svg>
+                  <span>Git &amp; GitHub</span>
+                </span>
+                <span class="tech-badge-3d glow-html">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-500">
+                    <path
+                      d="M12 2L3 5v14l9 3 9-3V5l-9-3zm6.5 6.8h-7.6l.2 2.3h7.2l-.7 7.2-5.6 1.6-5.6-1.6-.4-4.5h2.4l.2 2.3 3.4 1 3.4-1 .3-3.8H5.8L5.2 6.5h13.5l-.2 2.3z" />
+                  </svg>
+                  <span>HTML5</span>
+                </span>
+                <span class="tech-badge-3d glow-css">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-blue-500">
+                    <path
+                      d="M12 2L3 5v14l9 3 9-3V5l-9-3zm6.4 4.5l-.3 3.4H7.8l.2 2.3h9.8l-.8 7.8-4.8 1.4-4.8-1.4-.3-3.6h2.4l.2 1.8 2.5.7 2.5-.7.3-3.5H5.4l-.5-5.6h13.8l-.3-2.3z" />
+                  </svg>
+                  <span>CSS3</span>
+                </span>
+                <span class="tech-badge-3d glow-js">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-yellow-400">
+                    <path
+                      d="M3 3h18v18H3V3zm15.4 13.8c-.4-.6-.9-1-1.6-1.3-.7-.3-1.4-.4-2-.4-.8 0-1.4.2-1.8.5-.4.3-.6.8-.6 1.4 0 .5.2.9.5 1.2.4.3.9.5 1.7.7.9.2 1.7.5 2.4.8.7.3 1.2.7 1.6 1.2.4.5.6 1.2.6 2 0 1.1-.4 2-1.3 2.7-.9.7-2 1-3.5 1-1.2 0-2.2-.2-3.1-.7s-1.5-1.2-1.9-2.1l2.2-1.3c.3.6.7 1.1 1.2 1.4.5.3 1 .5 1.7.5.7 0 1.3-.2 1.7-.5.4-.3.6-.8.6-1.3 0-.5-.2-.9-.5-1.2-.3-.3-.9-.6-1.7-.7-.9-.2-1.7-.5-2.4-.8-.7-.3-1.2-.7-1.6-1.2-.4-.5-.6-1.2-.6-2 0-1 .4-1.9 1.2-2.6.8-.7 1.9-1 3.2-1 1.1 0 2 .2 2.8.6.8.4 1.4 1 1.8 1.8l-2.1 1.3zm-6.5-4.7v7.5c0 .9-.2 1.5-.7 1.9-.5.4-1.2.6-2.1.6-.8 0-1.5-.2-2-.5-.5-.4-.9-.9-1.1-1.6l2.1-1.2c.2.4.3.7.6.9.2.2.5.3.9.3.4 0 .7-.1.9-.3.2-.2.3-.6.3-1.1V12.1h2z" />
+                  </svg>
+                  <span>JavaScript</span>
+                </span>
+                <span class="tech-badge-3d glow-tailwind">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-cyan-400">
+                    <path
+                      d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
+                  </svg>
+                  <span>Tailwind CSS</span>
+                </span>
+                <span class="tech-badge-3d glow-vscode">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-sky-400">
+                    <path
+                      d="M17.5 2.1l-8 7.3-4.7-3.6-2.8 1.4v9.6l2.8 1.4 4.7-3.6 8 7.3 4.5-2.2V4.3l-4.5-2.2zm-13.5 8l3 2.3-3 2.3v-4.6zm13.5 8.7l-6.3-5.8 6.3-5.8v11.6z" />
+                  </svg>
+                  <span>VS Code</span>
+                </span>
+                <span class="tech-badge-3d glow-vercel">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                    <path d="M12 2L2 20h20L12 2z" />
+                  </svg>
+                  <span>Vercel</span>
+                </span>
+                <span class="tech-badge-3d glow-ps">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-cyan-400">
+                    <path
+                      d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm4.5 4.5H11c2 0 3.3.9 3.3 2.5 0 1.8-1.5 2.6-3.2 2.6H10v3.4H8.5V7.5zm1.5 3.8h.9c1 0 1.9-.3 1.9-1.3 0-.9-.7-1.3-1.8-1.3H10v2.6zm6 5.2c1.2 0 2.1-.6 2.4-1.3l-1.2-.6c-.2.4-.6.7-1.2.7-.8 0-1.2-.4-1.2-1 0-.6.4-.8 1.4-1.1 1.5-.4 2.1-.9 2.1-2 0-1.3-1-2-2.3-2-1.3 0-2.1.6-2.4 1.4l1.2.6c.2-.4.6-.7 1.2-.7.6 0 1.1.3 1.1.8 0 .5-.3.7-1.3 1-1.5.4-2.2.9-2.2 2.1 0 1.3 1 2.1 2.4 2.1z" />
+                  </svg>
+                  <span>Photoshop</span>
+                </span>
+                <span class="tech-badge-3d glow-canva">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-teal-400">
+                    <path
+                      d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1.6 14.8c-2.3 0-3.9-1.6-3.9-3.8 0-2.3 1.7-4 4-4 1.3 0 2.4.6 2.9 1.5l-1.4 1c-.3-.6-.8-.9-1.5-.9-1.3 0-2.2 1.1-2.2 2.4 0 1.4.9 2.3 2.2 2.3.8 0 1.4-.4 1.8-1.1l1.4.9c-.8 1.1-1.9 1.7-3.3 1.7z" />
+                  </svg>
+                  <span>Canva</span>
+                </span>
+                <span class="tech-badge-3d glow-drawio">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-400">
+                    <path
+                      d="M4 4h6v5H4V4zm10 0h6v5h-6V4zm-5 11h6v5H9v-5zM6 9v3h12V9h2v4a1 1 0 0 1-1 1h-6v2h-2v-2H5a1 1 0 0 1-1-1V9h2z" />
+                  </svg>
+                  <span>Draw.io</span>
+                </span>
+                <span class="tech-badge-3d glow-staruml">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="text-purple-400">
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <span>StarUML</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+      <section id="sobre-mi" class="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+        <div class="grid items-center gap-16 lg:grid-cols-2">
+          <div>
+            <div class="reveal" style="transition-delay: 0ms">
+              <p class="mb-4 flex items-center gap-3 font-display text-xs uppercase tracking-[0.45em] text-neon-soft">
+                <span class="h-px w-10 bg-neon"> </span>
+                Sobre mí
+              </p>
+              <h2 class="font-display text-3xl font-semibold leading-tight tracking-wide text-ink sm:text-5xl">
+                CÓMO
+                <span class="text-cyan cyan-glow"> TRABAJO </span>
+              </h2>
+              <p class="mt-5 max-w-md text-lg text-muted" style="text-align: justify; hyphens: auto;">
+                Soy desarrollador web junior y freelancer. Comprendo las
+                necesidades de cada cliente, mantengo una comunicación clara y
+                trabajo según los requisitos acordados para cada proyecto.
+              </p>
+            </div>
+            <div class="mt-12 space-y-9">
+              <div class="reveal group flex gap-6" style="transition-delay: 0ms">
+                <span
+                  class="font-display text-2xl font-bold text-neon/50 transition-all duration-300 group-hover:text-neon group-hover:text-glow">
+                  01
+                </span>
+                <div class="border-l border-line pl-6 transition-colors duration-300 group-hover:border-neon/60">
+                  <h3 class="text-lg font-semibold text-ink">
+                    Aprendizaje continuo
+                  </h3>
+                  <p class="mt-2 max-w-md text-muted" style="text-align: justify; hyphens: auto;">
+                    Fortalezco mis conocimientos de desarrollo web mediante
+                    la práctica y la creación de proyectos. Así aplico lo que
+                    aprendo y sigo mejorando mis habilidades.
+                  </p>
+                </div>
+              </div>
+              <div class="reveal group flex gap-6" style="transition-delay: 120ms">
+                <span
+                  class="font-display text-2xl font-bold text-neon/50 transition-all duration-300 group-hover:text-neon group-hover:text-glow">
+                  02
+                </span>
+                <div class="border-l border-line pl-6 transition-colors duration-300 group-hover:border-neon/60">
+                  <h3 class="text-lg font-semibold text-ink">
+                    Atención al detalle
+                  </h3>
+                  <p class="mt-2 max-w-md text-muted" style="text-align: justify; hyphens: auto;">
+                    Reviso el diseño y el funcionamiento de las páginas,
+                    pruebo los cambios y corrijo los errores que encuentro
+                    antes de entregar el trabajo.
+                  </p>
+                </div>
+              </div>
+              <div class="reveal group flex gap-6" style="transition-delay: 240ms">
+                <span
+                  class="font-display text-2xl font-bold text-neon/50 transition-all duration-300 group-hover:text-neon group-hover:text-glow">
+                  03
+                </span>
+                <div class="border-l border-line pl-6 transition-colors duration-300 group-hover:border-neon/60">
+                  <h3 class="text-lg font-semibold text-ink">
+                    Adaptabilidad
+                  </h3>
+                  <p class="mt-2 max-w-md text-muted" style="text-align: justify; hyphens: auto;">
+                    Trabajo de forma remota desde Colombia y organizo mis
+                    tiempos de acuerdo con los requisitos y el alcance de
+                    cada proyecto.
+                  </p>
+                </div>
+              </div>
+              <div class="reveal group flex gap-6" style="transition-delay: 360ms">
+                <span
+                  class="font-display text-2xl font-bold text-neon/50 transition-all duration-300 group-hover:text-neon group-hover:text-glow">
+                  04
+                </span>
+                <div class="border-l border-line pl-6 transition-colors duration-300 group-hover:border-neon/60">
+                  <h3 class="text-lg font-semibold text-ink">
+                    IA con transparencia
+                  </h3>
+                  <p class="mt-2 max-w-md text-muted" style="text-align: justify; hyphens: auto;">
+                    Uso la inteligencia artificial como apoyo para aprender y
+                    desarrollar mis proyectos. Reviso el resultado y asumo la
+                    responsabilidad del trabajo que entrego.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal relative mx-auto w-full max-w-md" style="transition-delay: 200ms">
+            <div class="glass corner relative rounded-3xl p-10 text-center">
+              <div
+                class="absolute inset-0 -z-10 rounded-3xl bg-[radial-gradient(circle_at_50%_40%,rgba(139,92,246,0.18),transparent_65%)]"
+                aria-hidden="true"></div>
 
-      <div class="hero-scroll">
-        <span>SCROLL</span>
-        <div class="scroll-line"></div>
-      </div>
-    </section>
+              <div class="pointer-events-none absolute left-1/2 top-[148px] -z-0 h-0 w-0" aria-hidden="true">
+                <span class="absolute h-2 w-2 rounded-full"
+                  style="background: rgb(255, 46, 136); box-shadow: rgb(255, 46, 136) 0px 0px 12px; --orbit-r: 118px; animation: 10s linear 0s infinite normal none running orbit;"></span>
+                <span class="absolute h-2 w-2 rounded-full"
+                  style="background: rgb(62, 224, 255); box-shadow: rgb(62, 224, 255) 0px 0px 12px; --orbit-r: 140px; animation: 15s linear 0s infinite normal none running orbit;"></span>
+                <span class="absolute h-2 w-2 rounded-full"
+                  style="background: rgb(255, 46, 136); box-shadow: rgb(255, 46, 136) 0px 0px 12px; --orbit-r: 162px; animation: 20s linear 0s infinite normal none running orbit;"></span>
+              </div>
 
-<!-- MARQUEE -->
-    <section class="marquee">
-      <div class="marquee-track">
-        <span>HTML5</span><span>CSS3</span><span>JAVASCRIPT</span><span>REACT</span><span>TAILWIND</span><span>TYPESCRIPT</span><span>FIGMA</span><span>ILLUSTRATOR</span><span>PHOTOSHOP</span><span>NODE.JS</span><span>LINUX</span><span>DOCKER</span><span>NGINX</span><span>GIT</span>
-        <span>HTML5</span><span>CSS3</span><span>JAVASCRIPT</span><span>REACT</span><span>TAILWIND</span><span>TYPESCRIPT</span><span>FIGMA</span><span>ILLUSTRATOR</span><span>PHOTOSHOP</span><span>NODE.JS</span><span>LINUX</span><span>DOCKER</span><span>NGINX</span><span>GIT</span>
-      </div>
-    </section>
-  </main>
+              <div class="relative mx-auto h-52 w-52">
+                <svg viewBox="0 0 200 200" class="h-full w-full -rotate-90">
+                  <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="10">
+                  </circle>
+                  <circle cx="100" cy="100" r="86" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+                    stroke-linecap="round" stroke-dasharray="389.05483422055994 540.3539364174444"
+                    class="animate-glow-breathe"></circle>
+                  <defs>
+                    <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#ff2e88"></stop>
+                      <stop offset="100%" stop-color="#3ee0ff"></stop>
+                    </linearGradient>
+                  </defs>
+                </svg>
 
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                  <p class="font-display text-3xl font-bold tracking-[0.1em] text-ink">
+                    WEB
+                  </p>
+                  <p class="mt-1 text-[11px] uppercase tracking-[0.25em] text-dim">
+                    FREELANCER JUNIOR
+                  </p>
+                </div>
+              </div>
 
+              <div class="mt-8 grid grid-cols-2 gap-3 text-left">
+                <div class="rounded-xl border border-line bg-white/5 p-3.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-map-pin mb-2 h-4 w-4 text-neon-soft" aria-hidden="true">
+                    <path
+                      d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
+                    </path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <p class="text-sm font-semibold text-ink">Cundinamarca</p>
+                  <p class="text-[11px] text-dim">Colombia</p>
+                </div>
 
-<!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <p>Diseñado &amp; desarrollado con pasión © 2026 — Leonardo Márquez</p>
-    </div>
-  </footer>
+                <div class="rounded-xl border border-line bg-white/5 p-3.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-rocket mb-2 h-4 w-4 text-neon-soft" aria-hidden="true">
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09">
+                    </path>
+                    <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z">
+                    </path>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path>
+                  </svg>
+                  <p class="text-sm font-semibold text-ink">Modalidad remota</p>
+                  <p class="text-[11px] text-dim">Disponible para proyectos</p>
+                </div>
 
-<!-- TOAST -->
-  <div class="toast" id="toast">
-    <div class="toast-title">¡Mensaje enviado con éxito!</div>
-    <div class="toast-desc">Me pondré en contacto contigo muy pronto.</div>
-  </div>
+                <div class="rounded-xl border border-line bg-white/5 p-3.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-languages mb-2 h-4 w-4 text-neon-soft" aria-hidden="true">
+                    <path d="m5 8 6 6"></path>
+                    <path d="m4 14 6-6 2-3"></path>
+                    <path d="M2 5h12"></path>
+                    <path d="M7 2h1"></path>
+                    <path d="m22 22-5-10-5 10"></path>
+                    <path d="M14 18h6"></path>
+                  </svg>
+                  <p class="text-sm font-semibold text-ink">Español</p>
+                  <p class="text-[11px] text-dim">Inglés básico</p>
+                </div>
 
-<!-- AI CHAT WIDGET -->
-  <button class="chat-fab" id="chat-fab" aria-label="Abrir asistente">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-    </svg>
-    <span class="chat-fab-label">Soporte</span>
-  </button>
+                <div class="rounded-xl border border-line bg-white/5 p-3.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-timer mb-2 h-4 w-4 text-neon-soft" aria-hidden="true">
+                    <line x1="10" x2="14" y1="2" y2="2"></line>
+                    <line x1="12" x2="15" y1="14" y2="11"></line>
+                    <circle cx="12" cy="14" r="8"></circle>
+                  </svg>
+                  <p class="text-sm font-semibold text-ink">Disponibilidad</p>
+                  <p class="text-[11px] text-dim">A convenir según el proyecto</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <aside class="chat-window" id="chat-window" aria-hidden="true">
-    <header class="chat-header">
-      <div class="chat-header-left">
-        <div class="chat-avatar">LM</div>
-        <div>
-          <div class="chat-title">Soporte</div>
-          <div class="chat-status"><span class="dot"></span> En línea</div>
+      <!-- ===================== HABILIDADES TÉCNICAS ===================== -->
+      <section id="habilidades" class="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+        <div class="reveal max-w-2xl" style="transition-delay: 0ms">
+          <p class="mb-4 flex items-center gap-3 font-display text-xs uppercase tracking-[0.45em] text-neon-soft">
+            <span class="h-px w-10 bg-neon"></span>
+            Habilidades Técnicas
+          </p>
+          <h2 class="font-display text-3xl font-semibold leading-tight tracking-wide text-ink sm:text-5xl">
+            DOMINIO Y
+            <span class="text-cyan cyan-glow">HERRAMIENTAS</span>
+          </h2>
+          <p class="mt-5 max-w-3xl text-lg leading-relaxed text-muted" style="text-align: justify;">
+            Competencias técnicas clasificadas por áreas especializadas con total transparencia sobre mi nivel actual. Me enfoco en escribir código limpio, comprender la lógica detrás de cada tecnología y continuar fortaleciendo mis capacidades día a día.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- 1. Frontend & Desarrollo Web -->
+          <div class="reveal skill-card group" style="transition-delay: 0ms">
+            <div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon to-violet text-white shadow-neon transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-5 w-5" aria-hidden="true">
+                    <path d="m18 16 4-4-4-4"></path>
+                    <path d="m6 8-4 4 4 4"></path>
+                    <path d="m14.5 4-5 16"></path>
+                  </svg>
+                </span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-neon-soft">Frontend</span>
+                  <h3 class="font-display text-lg font-semibold tracking-wide text-ink">
+                    DESARROLLO WEB
+                  </h3>
+                </div>
+              </div>
+
+              <p class="mt-4 text-muted leading-relaxed text-sm" style="text-align: justify; hyphens: auto">
+                Construcción de interfaces web dinámicas, responsivas y accesibles. Aplicación de buenas prácticas en HTML5 semántico, maquetación CSS moderna y librerías de estilos.
+              </p>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2 border-t border-line/60 pt-4">
+              <span class="skill-pill glow-html">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-500">
+                  <path
+                    d="M12 2L3 5v14l9 3 9-3V5l-9-3zm6.5 6.8h-7.6l.2 2.3h7.2l-.7 7.2-5.6 1.6-5.6-1.6-.4-4.5h2.4l.2 2.3 3.4 1 3.4-1 .3-3.8H5.8L5.2 6.5h13.5l-.2 2.3z" />
+                </svg>
+                <span>HTML5</span>
+              </span>
+              <span class="skill-pill glow-css">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-blue-500">
+                  <path
+                    d="M12 2L3 5v14l9 3 9-3V5l-9-3zm6.4 4.5l-.3 3.4H7.8l.2 2.3h9.8l-.8 7.8-4.8 1.4-4.8-1.4-.3-3.6h2.4l.2 1.8 2.5.7 2.5-.7.3-3.5H5.4l-.5-5.6h13.8l-.3-2.3z" />
+                </svg>
+                <span>CSS3</span>
+              </span>
+              <span class="skill-pill glow-js">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-yellow-400">
+                  <path
+                    d="M3 3h18v18H3V3zm15.4 13.8c-.4-.6-.9-1-1.6-1.3-.7-.3-1.4-.4-2-.4-.8 0-1.4.2-1.8.5-.4.3-.6.8-.6 1.4 0 .5.2.9.5 1.2.4.3.9.5 1.7.7.9.2 1.7.5 2.4.8.7.3 1.2.7 1.6 1.2.4.5.6 1.2.6 2 0 1.1-.4 2-1.3 2.7-.9.7-2 1-3.5 1-1.2 0-2.2-.2-3.1-.7s-1.5-1.2-1.9-2.1l2.2-1.3c.3.6.7 1.1 1.2 1.4.5.3 1 .5 1.7.5.7 0 1.3-.2 1.7-.5.4-.3.6-.8.6-1.3 0-.5-.2-.9-.5-1.2-.3-.3-.9-.6-1.7-.7-.9-.2-1.7-.5-2.4-.8-.7-.3-1.2-.7-1.6-1.2-.4-.5-.6-1.2-.6-2 0-1 .4-1.9 1.2-2.6.8-.7 1.9-1 3.2-1 1.1 0 2 .2 2.8.6.8.4 1.4 1 1.8 1.8l-2.1 1.3zm-6.5-4.7v7.5c0 .9-.2 1.5-.7 1.9-.5.4-1.2.6-2.1.6-.8 0-1.5-.2-2-.5-.5-.4-.9-.9-1.1-1.6l2.1-1.2c.2.4.3.7.6.9.2.2.5.3.9.3.4 0 .7-.1.9-.3.2-.2.3-.6.3-1.1V12.1h2z" />
+                </svg>
+                <span>JavaScript</span>
+              </span>
+              <span class="skill-pill glow-tailwind">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-cyan-400">
+                  <path
+                    d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
+                </svg>
+                <span>Tailwind CSS</span>
+              </span>
+              <span class="skill-pill glow-react">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-cyan">
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" fill="none" stroke="currentColor" stroke-width="1.6"
+                    transform="rotate(60 12 12)" />
+                  <ellipse cx="12" cy="12" rx="9" ry="3.5" fill="none" stroke="currentColor" stroke-width="1.6"
+                    transform="rotate(120 12 12)" />
+                  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                </svg>
+                <span>React (Aprendizaje)</span>
+              </span>
+              <span class="skill-pill glow-responsive">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-emerald-400">
+                  <rect width="18" height="12" x="3" y="4" rx="2" />
+                  <path d="M7 20h10" />
+                  <path d="M12 16v4" />
+                </svg>
+                <span>Diseño Adaptable</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 2. Backend & Programación -->
+          <div class="reveal skill-card group" style="transition-delay: 100ms">
+            <div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-cyan to-violet text-white shadow-cyan transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-5 w-5" aria-hidden="true">
+                    <polyline points="4 17 10 11 4 5"></polyline>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                  </svg>
+                </span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-cyan">Backend & Lógica</span>
+                  <h3 class="font-display text-lg font-semibold tracking-wide text-ink">
+                    PROGRAMACIÓN
+                  </h3>
+                </div>
+              </div>
+
+              <p class="mt-4 text-muted leading-relaxed text-sm" style="text-align: justify; hyphens: auto">
+                Desarrollo de lógica computacional, scripts para procesamiento de información y fundamentos de programación orientada a objetos para resolver problemas con código limpio.
+              </p>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2 border-t border-line/60 pt-4">
+              <span class="skill-pill glow-py">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 2C8.7 2 8.9 3.4 8.9 3.4v1.4h3.1v.5H6.8S4 5.1 4 8.7c0 3.7 2.5 3.5 2.5 3.5h1.5v-2.1s-.1-2.5 2.4-2.5h4.2s2.3 0 2.3-2.3V4.4S17.3 2 12 2z"
+                    fill="#38bdf8" />
+                  <path
+                    d="M12 22c3.3 0 3.1-1.4 3.1-1.4v-1.4H12v-.5h5.2s2.8.2 2.8-3.4c0-3.7-2.5-3.5-2.5-3.5h-1.5v2.1s.1 2.5-2.4 2.5H9.4s-2.3 0-2.3 2.3v1S6.7 22 12 22z"
+                    fill="#facc15" />
+                </svg>
+                <span>Python</span>
+              </span>
+              <span class="skill-pill glow-java">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-rose-400">
+                  <path
+                    d="M9.1 18.2s-.7.1-1.1.2c-.4.1-.7.2-.7.2s.5.3 1.2.4c1 .1 2.2.2 3.6.1 1.3-.1 2.5-.3 3-.6 0 0-.4-.2-.9-.3-.5-.1-1-.1-1.4-.1-1.4 0-2.8.1-3.7.1zm-.8-2.1s-.8.2-1.2.3c-.4.1-.7.2-.7.2s.6.3 1.4.4c1.1.1 2.5.2 4 .1 1.5-.1 2.8-.4 3.4-.7 0 0-.5-.2-1-.3-.5-.1-1.1-.1-1.6-.1-1.5 0-3.2.1-4.3.1zm1.7-4c-.7 1.2-1.3 2.5-1.5 3.1 0 0 .5-.1 1.2-.2 1-.2 2.3-.3 3.7-.3 1.3 0 2.4.2 2.7.4.2-.6.2-1.3-.1-1.9-.5-1-1.6-1.8-2.6-2.3-.8.6-2.3 1.2-3.4 1.2zm6.6 4.7c-1.3.6-3.4.8-5.3.8-1.5 0-3-.2-4.1-.5l-.3.2c1.3.5 3 1 4.7.9 2 0 4.1-.4 5.3-.9l-.3-.5z" />
+                </svg>
+                <span>Java</span>
+              </span>
+              <span class="skill-pill glow-php">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-indigo-400">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4.7 13.3H5.9l1-6.6h2.2c1.4 0 2.3.7 2.1 2-.2 1.5-1.4 2.4-2.8 2.4h-.7l-.4 2.2zm1.7-4.2h.5c.7 0 1.1-.3 1.2-.9.1-.5-.2-.9-.8-.9h-.5l-.4 1.8zm4.4 4.2l1-6.6h1.4l-.4 2.4h1.7c1.4 0 2.3.7 2.1 2-.2 1.5-1.4 2.4-2.8 2.4h-2l-.6 2.2h-1.4l1-2.4zm2.1-1.8h.5c.7 0 1.1-.3 1.2-.9.1-.5-.2-.9-.8-.9h-.5l-.4 1.8zm-2.4 1.8l.7-4.4h1.4l-.7 4.4h-1.4z" />
+                </svg>
+                <span>PHP</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 3. Bases de Datos & SQL -->
+          <div class="reveal skill-card group" style="transition-delay: 150ms">
+            <div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon to-cyan text-white shadow-neon transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-5 w-5" aria-hidden="true">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                    <path d="M3 5v14a9 3 0 0 0 18 0V5"></path>
+                    <path d="M3 12a9 3 0 0 0 18 0"></path>
+                  </svg>
+                </span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-neon-soft">Persistencia</span>
+                  <h3 class="font-display text-lg font-semibold tracking-wide text-ink">
+                    BASES DE DATOS
+                  </h3>
+                </div>
+              </div>
+
+              <p class="mt-4 text-muted leading-relaxed text-sm" style="text-align: justify; hyphens: auto">
+                Modelado relacional, diseño de esquemas, consultas estructuradas SQL y conexión con distintos motores para garantizar persistencia y seguridad de la información.
+              </p>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2 border-t border-line/60 pt-4">
+              <span class="skill-pill glow-sql">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-emerald-400">
+                  <ellipse cx="12" cy="5" rx="9" ry="3" />
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                </svg>
+                <span>SQL</span>
+              </span>
+              <span class="skill-pill glow-mysql">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-blue-400">
+                  <path
+                    d="M16.5 6c-1.8 0-3.3 1.2-3.8 2.8-.7-.5-1.6-.8-2.6-.8-2.3 0-4.2 1.8-4.3 4.1C4.6 12.3 4 13.5 4 15c0 2.2 1.8 4 4 4h9c2.8 0 5-2.2 5-5 0-2.6-2-4.7-4.5-4.9-.3-1.8-1.9-3.1-3.8-3.1h-.2zm0 2c1 0 1.9.7 2 1.7l.1.8.8.1c1.7.2 3.1 1.7 3.1 3.4 0 1.9-1.6 3.5-3.5 3.5H8c-1.4 0-2.5-1.1-2.5-2.5 0-1.1.7-2 1.7-2.4l.7-.3.1-.8c.2-1.4 1.4-2.5 2.9-2.5.7 0 1.4.3 1.9.8l.6.6.6-.6c.7-.6 1.6-.9 2.5-.9z" />
+                </svg>
+                <span>MySQL</span>
+              </span>
+              <span class="skill-pill glow-sqlite">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-sky-400">
+                  <path
+                    d="M20.5 7.5L12.5 3a1.5 1.5 0 0 0-1.5 0L3.5 7.5A1.5 1.5 0 0 0 2.7 8.8v6.4a1.5 1.5 0 0 0 .8 1.3l8 4.5a1.5 1.5 0 0 0 1.5 0l8-4.5a1.5 1.5 0 0 0 .8-1.3V8.8a1.5 1.5 0 0 0-.8-1.3zm-8.5-2.6l6.8 3.8-2.8 1.6-6.8-3.8 2.8-1.6zm-7.3 4.6l6.8 3.8v7.6l-6.8-3.8V9.5zm8.3 11.4v-7.6l6.8-3.8v7.6l-6.8 3.8z" />
+                </svg>
+                <span>SQLite</span>
+              </span>
+              <span class="skill-pill glow-oracle">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-red-500">
+                  <path
+                    d="M16.3 4.5H7.7C3.5 4.5 0 7.9 0 12s3.5 7.5 7.7 7.5h8.6c4.2 0 7.7-3.4 7.7-7.5s-3.5-7.5-7.7-7.5zm-.3 11.6H8c-2.3 0-4.1-1.8-4.1-4.1s1.8-4.1 4.1-4.1H16c2.3 0 4.1 1.8 4.1 4.1s-1.8 4.1-4.1 4.1z" />
+                </svg>
+                <span>Oracle DB</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 4. Herramientas & Workflow -->
+          <div class="reveal skill-card group" style="transition-delay: 200ms">
+            <div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon to-violet text-white shadow-neon transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-5 w-5" aria-hidden="true">
+                    <circle cx="18" cy="18" r="3"></circle>
+                    <circle cx="6" cy="6" r="3"></circle>
+                    <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+                    <line x1="6" y1="9" x2="6" y2="21"></line>
+                  </svg>
+                </span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-neon-soft">Workflow</span>
+                  <h3 class="font-display text-lg font-semibold tracking-wide text-ink">
+                    HERRAMIENTAS & FLUJO
+                  </h3>
+                </div>
+              </div>
+
+              <p class="mt-4 text-muted leading-relaxed text-sm" style="text-align: justify; hyphens: auto">
+                Control de versiones con Git, colaboración en GitHub, configuración de entornos en VS Code, despliegues y diagramación de software con herramientas de modelado.
+              </p>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2 border-t border-line/60 pt-4">
+              <span class="skill-pill glow-git">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-400">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12.02c0 4.42 2.87 8.18 6.84 9.5.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.35-3.37-1.35-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.56 9.56 0 0 1 12 6.84c.85 0 1.7.12 2.5.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.86v2.75c0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12.02C22 6.48 17.52 2 12 2z" />
+                </svg>
+                <span>Git & GitHub</span>
+              </span>
+              <span class="skill-pill glow-vscode">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-sky-400">
+                  <path
+                    d="M17.5 2.1l-8 7.3-4.7-3.6-2.8 1.4v9.6l2.8 1.4 4.7-3.6 8 7.3 4.5-2.2V4.3l-4.5-2.2zm-13.5 8l3 2.3-3 2.3v-4.6zm13.5 8.7l-6.3-5.8 6.3-5.8v11.6z" />
+                </svg>
+                <span>VS Code</span>
+              </span>
+              <span class="skill-pill glow-vercel">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                  <path d="M12 2L2 20h20L12 2z" />
+                </svg>
+                <span>Vercel</span>
+              </span>
+              <span class="skill-pill glow-drawio">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-orange-400">
+                  <path
+                    d="M4 4h6v5H4V4zm10 0h6v5h-6V4zm-5 11h6v5H9v-5zM6 9v3h12V9h2v4a1 1 0 0 1-1 1h-6v2h-2v-2H5a1 1 0 0 1-1-1V9h2z" />
+                </svg>
+                <span>Draw.io</span>
+              </span>
+              <span class="skill-pill glow-staruml">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-purple-400">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <span>StarUML</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 5. Diseño & Edición Digital -->
+          <div class="reveal skill-card group" style="transition-delay: 250ms">
+            <div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-cyan to-violet text-white shadow-cyan transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-5 w-5" aria-hidden="true">
+                    <path
+                      d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z">
+                    </path>
+                    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                  </svg>
+                </span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-cyan">Creatividad</span>
+                  <h3 class="font-display text-lg font-semibold tracking-wide text-ink">
+                    DISEÑO & EDICIÓN
+                  </h3>
+                </div>
+              </div>
+
+              <p class="mt-4 text-muted leading-relaxed text-sm" style="text-align: justify; hyphens: auto">
+                Composiciones visuales, retoque y montaje fotográfico, identidad gráfica para aplicaciones y edición de video con alto sentido estético y detalle visual.
+              </p>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2 border-t border-line/60 pt-4">
+              <span class="skill-pill glow-ps">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-sky-400">
+                  <path
+                    d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm4.5 4.5H11c2 0 3.3.9 3.3 2.5 0 1.8-1.5 2.6-3.2 2.6H10v3.4H8.5V7.5zm1.5 3.8h.9c1 0 1.9-.3 1.9-1.3 0-.9-.7-1.3-1.8-1.3H10v2.6zm6 5.2c1.2 0 2.1-.6 2.4-1.3l-1.2-.6c-.2.4-.6.7-1.2.7-.8 0-1.2-.4-1.2-1 0-.6.4-.8 1.4-1.1 1.5-.4 2.1-.9 2.1-2 0-1.3-1-2-2.3-2-1.3 0-2.1.6-2.4 1.4l1.2.6c.2-.4.6-.7 1.2-.7.6 0 1.1.3 1.1.8 0 .5-.3.7-1.3 1-1.5.4-2.2.9-2.2 2.1 0 1.3 1 2.1 2.4 2.1z" />
+                </svg>
+                <span>Photoshop</span>
+              </span>
+              <span class="skill-pill glow-canva">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="text-teal-400">
+                  <path
+                    d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1.6 14.8c-2.3 0-3.9-1.6-3.9-3.8 0-2.3 1.7-4 4-4 1.3 0 2.4.6 2.9 1.5l-1.4 1c-.3-.6-.8-.9-1.5-.9-1.3 0-2.2 1.1-2.2 2.4 0 1.4.9 2.3 2.2 2.3.8 0 1.4-.4 1.8-1.1l1.4.9c-.8 1.1-1.9 1.7-3.3 1.7z" />
+                </svg>
+                <span>Canva</span>
+              </span>
+              <span class="skill-pill glow-cam">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-amber-400">
+                  <path
+                    d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                  <circle cx="12" cy="13" r="3" />
+                </svg>
+                <span>Edición Fotográfica</span>
+              </span>
+              <span class="skill-pill glow-video">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-rose-400">
+                  <rect width="18" height="18" x="3" y="3" rx="2" />
+                  <path d="m9 8 7 4-7 4V8z" />
+                </svg>
+                <span>Edición de Video</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 6. Soporte Técnico, Hardware & CNC -->
+          <div class="reveal skill-card group" style="transition-delay: 300ms">
+            <div>
+              <div class="flex items-center gap-4">
+                <span
+                  class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-neon to-cyan text-white shadow-neon transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-5 w-5" aria-hidden="true">
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                </span>
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-[0.25em] text-neon-soft">Infraestructura & Precisión</span>
+                  <h3 class="font-display text-lg font-semibold tracking-wide text-ink">
+                    SOPORTE TÉCNICO & CNC
+                  </h3>
+                </div>
+              </div>
+
+              <p class="mt-4 text-muted leading-relaxed text-sm" style="text-align: justify; hyphens: auto">
+                Mantenimiento de computadores, ensamble de hardware, resolución de incidencias en sistemas operativos y experiencia técnica en operación y programación de maquinaria CNC.
+              </p>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2 border-t border-line/60 pt-4">
+              <span class="skill-pill glow-maint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-emerald-400">
+                  <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.1-3.1a6 6 0 0 1-8.3 7.1l-7.9 7.9a2 2 0 0 1-2.8-2.8l7.9-7.9a6 6 0 0 1 7.1-8.3z" />
+                </svg>
+                <span>Soporte Técnico</span>
+              </span>
+              <span class="skill-pill glow-hardware">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-rose-400">
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+                <span>Mantenimiento PC</span>
+              </span>
+              <span class="skill-pill glow-net">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-cyan">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+                <span>Config. Software</span>
+              </span>
+              <span class="skill-pill glow-cnc">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-amber-400">
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="3" />
+                  <line x1="12" y1="3" x2="12" y2="7" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+                <span>Operación CNC</span>
+              </span>
+              <span class="skill-pill glow-gcode">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" class="text-cyan">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                  <line x1="12" y1="2" x2="12" y2="22" />
+                </svg>
+                <span>Código G</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PROYECTOS ===================== -->
+      <section id="proyectos" class="relative border-y border-line bg-abyss/50 py-24 lg:py-32">
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <div class="reveal mx-auto max-w-2xl text-center" style="transition-delay: 0ms">
+            <p class="mb-4 font-display text-xs uppercase tracking-[0.45em] text-cyan">
+              Proyectos
+            </p>
+            <h2 class="font-display text-3xl font-semibold tracking-wide text-ink sm:text-5xl">
+              MUESTRAS DE MI
+              <span class="text-neon text-glow"> TRABAJO </span>
+            </h2>
+            <p class="mt-5 text-lg text-muted">
+              Proyectos personales, ejercicios interactivos y demostraciones conceptuales que respaldan mis habilidades.
+            </p>
+          </div>
+
+          <!-- Selector de Categorías de Proyectos -->
+          <div class="reveal mt-12 flex justify-center" style="transition-delay: 150ms">
+            <div class="glass inline-flex gap-1 rounded-full p-1.5" role="tablist"
+              aria-label="Galería de proyectos">
+              <button role="tab" data-tab="tab-web" aria-selected="true"
+                class="project-tab-btn flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-300 bg-neon text-white shadow-neon cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-code-xml lucide-code-2 h-4 w-4" aria-hidden="true">
+                  <path d="m18 16 4-4-4-4"></path>
+                  <path d="m6 8-4 4 4 4"></path>
+                  <path d="m14.5 4-5 16"></path>
+                </svg>
+                <span> Portafolio Web </span>
+              </button>
+              <button role="tab" data-tab="tab-diseno" aria-selected="false"
+                class="project-tab-btn flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-300 text-muted hover:text-ink cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-brush h-4 w-4" aria-hidden="true">
+                  <path d="m11 10 3 3"></path>
+                  <path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"></path>
+                  <path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"></path>
+                </svg>
+                <span> Diseño Digital </span>
+              </button>
+              <button role="tab" data-tab="tab-bd" aria-selected="false"
+                class="project-tab-btn flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-300 text-muted hover:text-ink cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-database h-4 w-4" aria-hidden="true">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                  <path d="M3 12A9 3 0 0 0 21 12"></path>
+                </svg>
+                <span> Base de Datos </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PANEL 1: Portafolio Web -->
+          <div id="tab-web" class="project-tab-panel block reveal mt-10" style="transition-delay: 250ms">
+            <div class="mb-4 flex justify-center">
+              <span
+                class="inline-flex items-center gap-2 rounded-full border border-cyan/40 bg-cyan/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-cyan">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-sparkles lucide-stars h-3.5 w-3.5" aria-hidden="true">
+                  <path
+                    d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z">
+                  </path>
+                  <path d="M20 2v4"></path>
+                  <path d="M22 4h-4"></path>
+                  <circle cx="4" cy="20" r="2"></circle>
+                </svg>
+                Proyecto Principal · Código en Vivo
+              </span>
+            </div>
+            <div
+              class="overflow-hidden rounded-2xl border border-line bg-abyss shadow-[0_40px_90px_-40px_rgba(255,46,136,0.35)]">
+              <div class="flex items-center gap-2 border-b border-line bg-panel/70 px-5 py-3.5">
+                <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+                <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+                <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+                <span class="ml-4 flex-1 truncate rounded-md bg-white/5 px-3 py-1 text-xs text-dim">
+                  byteforge · muestra de proyecto web interactivo
+                </span>
+              </div>
+              <div class="p-5 sm:p-7">
+                <div class="grid gap-5 lg:grid-cols-[200px_1fr]">
+                  <div class="hidden rounded-xl border border-line bg-panel/60 p-4 lg:block">
+                    <p class="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-dim">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-folder-open h-3.5 w-3.5" aria-hidden="true">
+                        <path
+                          d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2">
+                        </path>
+                      </svg>
+                      Explorador
+                    </p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-cyan">src/</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-neon-soft">App.tsx</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-muted">Hero.tsx</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-muted">Habilidades.tsx</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-muted">Proyectos.tsx</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-muted">index.css</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-cyan">public/</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-muted">hero-portrait.png</p>
+                    <p class="whitespace-pre font-mono text-xs leading-6 text-muted">index.html</p>
+                  </div>
+                  <div class="rounded-xl border border-line bg-void/70 p-5">
+                    <p class="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-dim">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-file-code-corner lucide-file-code-2 h-3.5 w-3.5" aria-hidden="true">
+                        <path
+                          d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35">
+                        </path>
+                        <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+                        <path d="m5 16-3 3 3 3"></path>
+                        <path d="m9 22 3-3-3-3"></path>
+                      </svg>
+                      App.tsx — arquitectura y renderizado
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 0px">
+                      <span class="text-violet">export default function</span>
+                      <span class="text-cyan"> Portafolio</span>
+                      <span class="text-muted">() {</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 16px">
+                      <span class="text-violet">return</span>
+                      <span class="text-muted">(</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 32px">
+                      <span class="text-neon-soft">&lt;main className="min-h-screen bg-void"&gt;</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 48px">
+                      <span class="text-neon-soft">&lt;Hero</span>
+                      <span class="text-muted"> title=</span><span class="text-emerald-400">"Leonardo Márquez"</span>
+                      <span class="text-muted"> role=</span><span class="text-emerald-400">"Desarrollador Web Junior"</span>
+                      <span class="text-neon-soft">/&gt;</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 48px">
+                      <span class="text-neon-soft">&lt;Habilidades</span>
+                      <span class="text-muted"> categorizadas=</span><span class="text-emerald-400">{true}</span>
+                      <span class="text-neon-soft">/&gt;</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 48px">
+                      <span class="text-neon-soft">&lt;Proyectos</span>
+                      <span class="text-muted"> tabs=</span><span class="text-emerald-400">["Web", "Diseño", "BD"]</span>
+                      <span class="text-neon-soft">/&gt;</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 32px">
+                      <span class="text-neon-soft">&lt;/main&gt;</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 16px">
+                      <span class="text-muted">);</span>
+                    </p>
+                    <p class="whitespace-pre font-mono text-[12px] leading-6 sm:text-[13px]"
+                      style="padding-left: 0px">
+                      <span class="text-muted">}</span>
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-2 border-t border-line pt-4 text-xs text-muted">
+                      <span class="rounded-full bg-cyan/10 px-3 py-1 text-cyan font-semibold">
+                        HTML5 Semántico
+                      </span>
+                      <span class="rounded-full bg-neon/10 px-3 py-1 text-neon-soft font-semibold">
+                        JavaScript Moderno
+                      </span>
+                      <span class="rounded-full bg-violet/15 px-3 py-1 text-violet font-semibold">
+                        Tailwind CSS
+                      </span>
+                      <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-emerald-400 font-semibold">
+                        Responsive 3D
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 2: Diseño Digital -->
+          <div id="tab-diseno" class="project-tab-panel hidden reveal mt-10">
+            <div class="mb-4 flex justify-center">
+              <span
+                class="inline-flex items-center gap-2 rounded-full border border-neon/40 bg-neon/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-neon-soft">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="h-3.5 w-3.5" aria-hidden="true">
+                  <path d="m11 10 3 3"></path>
+                  <path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"></path>
+                  <path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"></path>
+                </svg>
+                Piezas Gráficas, Retoque & Edición Multimedia
+              </span>
+            </div>
+            <div class="grid gap-6 md:grid-cols-3">
+              <!-- Proyecto Diseño 1 -->
+              <div class="overflow-hidden rounded-2xl border border-line bg-panel/60 p-6 flex flex-col justify-between hover:border-cyan/50 transition-all duration-300">
+                <div>
+                  <div class="mb-4 flex items-center justify-between">
+                    <span class="rounded-full bg-cyan/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-cyan">Photoshop</span>
+                    <span class="text-xs text-dim">Retoque Visual</span>
+                  </div>
+                  <h3 class="font-display text-lg font-bold text-ink">Retoque & Montaje Fotográfico</h3>
+                  <p class="mt-3 text-sm text-muted leading-relaxed" style="text-align: justify;">
+                    Edición fotográfica avanzada que incluye recorte de precisión, eliminación y sustitución de fondos, corrección de color y efectos de iluminación artificial.
+                  </p>
+                </div>
+                <div class="mt-6 border-t border-line/60 pt-4 flex flex-wrap gap-2">
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Fotomontaje</span>
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Color Grading</span>
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Restauración</span>
+                </div>
+              </div>
+
+              <!-- Proyecto Diseño 2 -->
+              <div class="overflow-hidden rounded-2xl border border-line bg-panel/60 p-6 flex flex-col justify-between hover:border-neon/50 transition-all duration-300">
+                <div>
+                  <div class="mb-4 flex items-center justify-between">
+                    <span class="rounded-full bg-neon/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-neon-soft">Canva & PS</span>
+                    <span class="text-xs text-dim">Branding & RRSS</span>
+                  </div>
+                  <h3 class="font-display text-lg font-bold text-ink">Identidad & Piezas Publicitarias</h3>
+                  <p class="mt-3 text-sm text-muted leading-relaxed" style="text-align: justify;">
+                    Diseño de piezas visuales y material gráfico para canales digitales. Cuidado de jerarquía tipográfica, márgenes y paletas de colores coherentes.
+                  </p>
+                </div>
+                <div class="mt-6 border-t border-line/60 pt-4 flex flex-wrap gap-2">
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Banners Web</span>
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Post Digital</span>
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Branding</span>
+                </div>
+              </div>
+
+              <!-- Proyecto Diseño 3 -->
+              <div class="overflow-hidden rounded-2xl border border-line bg-panel/60 p-6 flex flex-col justify-between hover:border-violet/50 transition-all duration-300">
+                <div>
+                  <div class="mb-4 flex items-center justify-between">
+                    <span class="rounded-full bg-violet/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-violet">Multimedia</span>
+                    <span class="text-xs text-dim">Edición de Video</span>
+                  </div>
+                  <h3 class="font-display text-lg font-bold text-ink">Edición Multimedia & Clips</h3>
+                  <p class="mt-3 text-sm text-muted leading-relaxed" style="text-align: justify;">
+                    Edición y posproducción de video: ensamblaje de tomas, sincronización de audio, aplicación de transiciones fluidas y exportación para plataformas web.
+                  </p>
+                </div>
+                <div class="mt-6 border-t border-line/60 pt-4 flex flex-wrap gap-2">
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Corte y Ritmo</span>
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Audio Sync</span>
+                  <span class="text-xs text-dim bg-white/5 px-2.5 py-1 rounded-md">Formato Web</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 3: Base de Datos -->
+          <div id="tab-bd" class="project-tab-panel hidden reveal mt-10">
+            <div class="mb-4 flex justify-center">
+              <span
+                class="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-emerald-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="h-3.5 w-3.5" aria-hidden="true">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M3 5v14a9 3 0 0 0 18 0V5"></path>
+                  <path d="M3 12a9 3 0 0 0 18 0"></path>
+                </svg>
+                Modelado Relacional & Consultas SQL Estructuradas
+              </span>
+            </div>
+            <div class="overflow-hidden rounded-2xl border border-line bg-abyss shadow-[0_40px_90px_-40px_rgba(62,224,255,0.35)]">
+              <div class="flex items-center gap-2 border-b border-line bg-panel/70 px-5 py-3.5">
+                <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+                <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+                <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+                <span class="ml-4 flex-1 truncate rounded-md bg-white/5 px-3 py-1 text-xs text-dim font-mono">
+                  mysql://byteforge_db &gt; consulta_relacional.sql
+                </span>
+                <span class="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                  0.003s · Conectado
+                </span>
+              </div>
+              <div class="p-5 sm:p-7">
+                <!-- Query SQL -->
+                <div class="rounded-xl border border-line bg-void/80 p-4 font-mono text-xs sm:text-sm">
+                  <p class="text-dim mb-1">// Consulta de estadísticas de proyectos y tecnologías vinculadas:</p>
+                  <p class="text-neon-soft">SELECT</p>
+                  <p class="pl-4 text-ink">p.id, p.nombre_proyecto, c.nombre_categoria, COUNT(t.tecnologia_id) AS total_tech</p>
+                  <p class="text-neon-soft">FROM</p>
+                  <p class="pl-4 text-ink">proyectos p</p>
+                  <p class="text-cyan">INNER JOIN</p>
+                  <p class="pl-4 text-ink">categorias c ON p.categoria_id = c.id</p>
+                  <p class="text-cyan">LEFT JOIN</p>
+                  <p class="pl-4 text-ink">proyecto_tecnologias t ON p.id = t.proyecto_id</p>
+                  <p class="text-neon-soft">GROUP BY</p>
+                  <p class="pl-4 text-ink">p.id, p.nombre_proyecto, c.nombre_categoria;</p>
+                </div>
+
+                <!-- Resultado de la consulta en tabla -->
+                <div class="mt-5 overflow-x-auto">
+                  <table class="w-full text-left text-xs font-mono">
+                    <thead>
+                      <tr class="border-b border-line text-dim">
+                        <th class="pb-2.5 pr-4 font-semibold">id</th>
+                        <th class="pb-2.5 pr-4 font-semibold">nombre_proyecto</th>
+                        <th class="pb-2.5 pr-4 font-semibold">nombre_categoria</th>
+                        <th class="pb-2.5 pr-4 font-semibold">total_tech</th>
+                        <th class="pb-2.5 font-semibold">estado</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-line/40 text-muted">
+                      <tr>
+                        <td class="py-2.5 pr-4 text-cyan">1</td>
+                        <td class="py-2.5 pr-4 text-ink font-semibold">ByteForge Portafolio</td>
+                        <td class="py-2.5 pr-4">Frontend / Web</td>
+                        <td class="py-2.5 pr-4 text-neon-soft">6</td>
+                        <td class="py-2.5"><span class="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-400 border border-emerald-500/20">PUBLICADO</span></td>
+                      </tr>
+                      <tr>
+                        <td class="py-2.5 pr-4 text-cyan">2</td>
+                        <td class="py-2.5 pr-4 text-ink font-semibold">Inventario & Hardware</td>
+                        <td class="py-2.5 pr-4">Bases de Datos</td>
+                        <td class="py-2.5 pr-4 text-neon-soft">4</td>
+                        <td class="py-2.5"><span class="rounded bg-cyan/10 px-2 py-0.5 text-[10px] text-cyan border border-cyan/20">ESTRUCTURADO</span></td>
+                      </tr>
+                      <tr>
+                        <td class="py-2.5 pr-4 text-cyan">3</td>
+                        <td class="py-2.5 pr-4 text-ink font-semibold">Composición Cyberpunk</td>
+                        <td class="py-2.5 pr-4">Diseño Digital</td>
+                        <td class="py-2.5 pr-4 text-neon-soft">3</td>
+                        <td class="py-2.5"><span class="rounded bg-violet/15 px-2 py-0.5 text-[10px] text-violet border border-violet/30">FINALIZADO</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="mt-4 flex flex-wrap gap-2 border-t border-line pt-4 text-xs text-muted">
+                  <span class="rounded-full bg-cyan/10 px-3 py-1 text-cyan font-semibold">Normalización 3FN</span>
+                  <span class="rounded-full bg-neon/10 px-3 py-1 text-neon-soft font-semibold">JOINs & Agrupamiento</span>
+                  <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-emerald-400 font-semibold">MySQL / SQLite</span>
+                  <span class="rounded-full bg-white/5 px-3 py-1 text-ink font-semibold">Integridad Referencial</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mx-auto mt-6 max-w-xl text-center text-xs text-dim">
+            Todas las muestras están debidamente documentadas con fines demostrativos de acuerdo con mis competencias reales.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== FORTALEZAS ===================== -->
+      <section id="fortalezas" class="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <div class="reveal mx-auto max-w-2xl text-center" style="transition-delay: 0ms">
+            <p class="mb-4 font-display text-xs uppercase tracking-[0.45em] text-neon-soft">
+              Fortalezas
+            </p>
+            <h2 class="font-display text-3xl font-semibold tracking-wide text-ink sm:text-5xl">
+              LO QUE APORTO A UN
+              <span class="text-cyan cyan-glow"> EQUIPO </span>
+            </h2>
+            <p class="mt-5 text-lg text-muted">
+              No son recomendaciones de terceros ni reseñas inventadas: es una
+              descripción propia y honesta de cómo trabajo.
+            </p>
+          </div>
+          <div class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                <div
+                  class="reveal group relative flex flex-col rounded-2xl border border-line bg-panel/50 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan/40 hover:shadow-[0_18px_50px_-22px_rgba(62,224,255,0.4)]"
+                  style="transition-delay: 0ms">
+                  <span
+                    class="mb-5 grid h-12 w-12 place-items-center rounded-xl border border-neon/40 bg-neon/10 text-neon-soft transition-all duration-500 group-hover:scale-110 group-hover:shadow-neon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-scale h-5 w-5" aria-hidden="true">
+                      <path d="M12 3v18"></path>
+                      <path d="m19 8 3 8a5 5 0 0 1-6 0zV7"></path>
+                      <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"></path>
+                      <path d="m5 8 3 8a5 5 0 0 1-6 0zV7"></path>
+                      <path d="M7 21h10"></path>
+                    </svg>
+                  </span>
+                  <h3 class="text-lg font-semibold text-ink">
+                    Honestidad sobre mi nivel
+                  </h3>
+                  <p class="mt-3 flex-1 text-[15px] leading-relaxed text-muted">
+                    Me presento como junior y no exagero experiencia ni
+                    resultados. Prefiero perder una oportunidad a ganarla con
+                    datos inventados.
+                  </p>
+                  <div class="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                    <span
+                      class="grid h-10 w-10 place-items-center rounded-full border border-cyan/40 bg-cyan/10 font-display text-xs font-bold text-cyan">
+                      LM
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-ink">
+                        Leonardo Márquez
+                      </p>
+                      <p class="text-xs text-dim">ByteForge · autopresentación</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="reveal group relative flex flex-col rounded-2xl border border-line bg-panel/50 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan/40 hover:shadow-[0_18px_50px_-22px_rgba(62,224,255,0.4)]"
+                  style="transition-delay: 120ms">
+                  <span
+                    class="mb-5 grid h-12 w-12 place-items-center rounded-xl border border-neon/40 bg-neon/10 text-neon-soft transition-all duration-500 group-hover:scale-110 group-hover:shadow-neon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-heart-handshake h-5 w-5" aria-hidden="true">
+                      <path
+                        d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762">
+                      </path>
+                    </svg>
+                  </span>
+                  <h3 class="text-lg font-semibold text-ink">Responsabilidad</h3>
+                  <p class="mt-3 flex-1 text-[15px] leading-relaxed text-muted">
+                    Cumplo lo que acuerdo, comunico avances y entrego con el
+                    cuidado que el proyecto merece, aunque sea una práctica.
+                  </p>
+                  <div class="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                    <span
+                      class="grid h-10 w-10 place-items-center rounded-full border border-cyan/40 bg-cyan/10 font-display text-xs font-bold text-cyan">
+                      LM
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-ink">
+                        Leonardo Márquez
+                      </p>
+                      <p class="text-xs text-dim">ByteForge · autopresentación</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="reveal group relative flex flex-col rounded-2xl border border-line bg-panel/50 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan/40 hover:shadow-[0_18px_50px_-22px_rgba(62,224,255,0.4)]"
+                  style="transition-delay: 240ms">
+                  <span
+                    class="mb-5 grid h-12 w-12 place-items-center rounded-xl border border-neon/40 bg-neon/10 text-neon-soft transition-all duration-500 group-hover:scale-110 group-hover:shadow-neon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-message-square-text h-5 w-5" aria-hidden="true">
+                      <path
+                        d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z">
+                      </path>
+                      <path d="M7 11h10"></path>
+                      <path d="M7 15h6"></path>
+                      <path d="M7 7h8"></path>
+                    </svg>
+                  </span>
+                  <h3 class="text-lg font-semibold text-ink">
+                    Comunicación clara
+                  </h3>
+                  <p class="mt-3 flex-1 text-[15px] leading-relaxed text-muted">
+                    Pregunto cuando algo no está claro y reporto el estado del
+                    trabajo sin tecnicismos innecesarios.
+                  </p>
+                  <div class="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                    <span
+                      class="grid h-10 w-10 place-items-center rounded-full border border-cyan/40 bg-cyan/10 font-display text-xs font-bold text-cyan">
+                      LM
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-ink">
+                        Leonardo Márquez
+                      </p>
+                      <p class="text-xs text-dim">ByteForge · autopresentación</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="reveal group relative flex flex-col rounded-2xl border border-line bg-panel/50 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan/40 hover:shadow-[0_18px_50px_-22px_rgba(62,224,255,0.4)]"
+                  style="transition-delay: 0ms">
+                  <span
+                    class="mb-5 grid h-12 w-12 place-items-center rounded-xl border border-neon/40 bg-neon/10 text-neon-soft transition-all duration-500 group-hover:scale-110 group-hover:shadow-neon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-lightbulb h-5 w-5" aria-hidden="true">
+                      <path
+                        d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5">
+                      </path>
+                      <path d="M9 18h6"></path>
+                      <path d="M10 22h4"></path>
+                    </svg>
+                  </span>
+                  <h3 class="text-lg font-semibold text-ink">
+                    Curiosidad técnica
+                  </h3>
+                  <p class="mt-3 flex-1 text-[15px] leading-relaxed text-muted">
+                    Disfruto entender el porqué de las cosas: leo documentación,
+                    pruebo herramientas nuevas y aplico lo aprendido.
+                  </p>
+                  <div class="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                    <span
+                      class="grid h-10 w-10 place-items-center rounded-full border border-cyan/40 bg-cyan/10 font-display text-xs font-bold text-cyan">
+                      LM
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-ink">
+                        Leonardo Márquez
+                      </p>
+                      <p class="text-xs text-dim">ByteForge · autopresentación</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="reveal group relative flex flex-col rounded-2xl border border-line bg-panel/50 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan/40 hover:shadow-[0_18px_50px_-22px_rgba(62,224,255,0.4)]"
+                  style="transition-delay: 120ms">
+                  <span
+                    class="mb-5 grid h-12 w-12 place-items-center rounded-xl border border-neon/40 bg-neon/10 text-neon-soft transition-all duration-500 group-hover:scale-110 group-hover:shadow-neon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-eye h-5 w-5" aria-hidden="true">
+                      <path
+                        d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0">
+                      </path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </span>
+                  <h3 class="text-lg font-semibold text-ink">Cuidado visual</h3>
+                  <p class="mt-3 flex-1 text-[15px] leading-relaxed text-muted">
+                    Mi base en diseño gráfico y Photoshop me ayuda a respetar
+                    espaciados, tipografía y detalles que otros pasan por alto.
+                  </p>
+                  <div class="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                    <span
+                      class="grid h-10 w-10 place-items-center rounded-full border border-cyan/40 bg-cyan/10 font-display text-xs font-bold text-cyan">
+                      LM
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-ink">
+                        Leonardo Márquez
+                      </p>
+                      <p class="text-xs text-dim">ByteForge · autopresentación</p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="reveal group relative flex flex-col rounded-2xl border border-line bg-panel/50 p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan/40 hover:shadow-[0_18px_50px_-22px_rgba(62,224,255,0.4)]"
+                  style="transition-delay: 240ms">
+                  <span
+                    class="mb-5 grid h-12 w-12 place-items-center rounded-xl border border-neon/40 bg-neon/10 text-neon-soft transition-all duration-500 group-hover:scale-110 group-hover:shadow-neon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="lucide lucide-sparkles lucide-stars h-5 w-5" aria-hidden="true">
+                      <path
+                        d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z">
+                      </path>
+                      <path d="M20 2v4"></path>
+                      <path d="M22 4h-4"></path>
+                      <circle cx="4" cy="20" r="2"></circle>
+                    </svg>
+                  </span>
+                  <h3 class="text-lg font-semibold text-ink">
+                    IA bien utilizada
+                  </h3>
+                  <p class="mt-3 flex-1 text-[15px] leading-relaxed text-muted">
+                    Aprovecho la inteligencia artificial para acelerar el
+                    aprendizaje y pulir resultados, siempre revisando y
+                    entendiendo lo que entrego.
+                  </p>
+                  <div class="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                    <span
+                      class="grid h-10 w-10 place-items-center rounded-full border border-cyan/40 bg-cyan/10 font-display text-xs font-bold text-cyan">
+                      LM
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold text-ink">
+                        Leonardo Márquez
+                      </p>
+                      <p class="text-xs text-dim">ByteForge · autopresentación</p>
+                    </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== EXPERIENCIA ===================== -->
+      <section id="experiencia" class="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+        <div class="reveal mx-auto max-w-2xl text-center" style="transition-delay: 0ms">
+          <p class="mb-4 font-display text-xs uppercase tracking-[0.45em] text-cyan">
+            Recorrido
+          </p>
+          <h2 class="font-display text-3xl font-semibold tracking-wide text-ink sm:text-5xl">
+            EXPERIENCIA
+            <span class="text-neon text-glow"> REAL </span>
+          </h2>
+          <p class="mt-5 text-lg text-muted">
+            Sin fechas ni logros inventados: los dos antecedentes laborales
+            con los que cuento hoy y el proyecto en el que estoy trabajando.
+          </p>
+        </div>
+        <div class="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
+              <div
+                class="reveal relative flex flex-col rounded-3xl border p-8 transition-all duration-500 hover:-translate-y-2 border-line bg-panel/50 hover:border-cyan/40"
+                style="transition-delay: 0ms">
+                <span
+                  class="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br text-white from-cyan to-violet shadow-cyan">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-briefcase h-5 w-5" aria-hidden="true">
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    <rect width="20" height="14" x="2" y="6" rx="2"></rect>
+                  </svg>
+                </span>
+                <h3 class="font-display text-lg font-bold tracking-[0.15em] text-ink">
+                  SOPORTE TÉCNICO
+                </h3>
+                <p class="mt-1 text-sm text-muted">Trabajo independiente</p>
+                <ul class="mt-7 flex-1 space-y-3.5">
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Atención por cuenta propia a usuarios y equipos
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Configuración básica de computadores y software
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Instalación y ajuste de herramientas digitales
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Diagnóstico y resolución de problemas comunes
+                  </li>
+                </ul>
+                <span
+                  class="mt-8 rounded-full py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] border border-line text-muted">
+                  Antecedente real
+                </span>
+              </div>
+              <div
+                class="reveal relative flex flex-col rounded-3xl border p-8 transition-all duration-500 hover:-translate-y-2 border-neon/70 bg-gradient-to-b from-neon/15 via-panel to-panel shadow-neon lg:scale-[1.04]"
+                style="transition-delay: 130ms">
+                <span
+                  class="absolute -top-3.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-neon px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.15em] text-white shadow-neon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-rocket h-3 w-3" aria-hidden="true">
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09">
+                    </path>
+                    <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z">
+                    </path>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path>
+                  </svg>
+                  Ahora mismo
+                </span>
+                <span
+                  class="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br text-white from-neon to-violet shadow-neon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-rocket h-5 w-5" aria-hidden="true">
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09">
+                    </path>
+                    <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z">
+                    </path>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path>
+                  </svg>
+                </span>
+                <h3 class="font-display text-lg font-bold tracking-[0.15em] text-neon-soft">
+                  PORTAFOLIO BYTEFORGE
+                </h3>
+                <p class="mt-1 text-sm text-muted">
+                  Este sitio, como proyecto de aprendizaje
+                </p>
+                <ul class="mt-7 flex-1 space-y-3.5">
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-neon">
+                    </span>
+                    Diseño y desarrollo de este portafolio personal
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-neon">
+                    </span>
+                    React, Vite, TypeScript y Tailwind CSS
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-neon">
+                    </span>
+                    Práctica de diseño de interfaz y accesibilidad
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-neon">
+                    </span>
+                    Mejora continua con cada nueva sección
+                  </li>
+                </ul>
+                <span
+                  class="mt-8 rounded-full py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] bg-neon text-white">
+                  En progreso
+                </span>
+              </div>
+              <div
+                class="reveal relative flex flex-col rounded-3xl border p-8 transition-all duration-500 hover:-translate-y-2 border-line bg-panel/50 hover:border-cyan/40"
+                style="transition-delay: 260ms">
+                <span
+                  class="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br text-white from-cyan to-violet shadow-cyan">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-cog h-5 w-5" aria-hidden="true">
+                    <path d="M11 10.27 7 3.34"></path>
+                    <path d="m11 13.73-4 6.93"></path>
+                    <path d="M12 22v-2"></path>
+                    <path d="M12 2v2"></path>
+                    <path d="M14 12h8"></path>
+                    <path d="m17 20.66-1-1.73"></path>
+                    <path d="m17 3.34-1 1.73"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="m20.66 17-1.73-1"></path>
+                    <path d="m20.66 7-1.73 1"></path>
+                    <path d="m3.34 17 1.73-1"></path>
+                    <path d="m3.34 7 1.73 1"></path>
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <circle cx="12" cy="12" r="8"></circle>
+                  </svg>
+                </span>
+                <h3 class="font-display text-lg font-bold tracking-[0.15em] text-ink">
+                  PRÁCTICA CNC
+                </h3>
+                <p class="mt-1 text-sm text-muted">Fagrin Ltda.</p>
+                <ul class="mt-7 flex-1 space-y-3.5">
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Operación de maquinaria de control numérico
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Programación CNC aplicada a producción
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Seguimiento de procedimientos y tolerancias
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-muted">
+                    <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan">
+                    </span>
+                    Experiencia en entorno industrial real
+                  </li>
+                </ul>
+                <span
+                  class="mt-8 rounded-full py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] border border-line text-muted">
+                  Antecedente real
+                </span>
+          </div>
+        </div>
+        <div class="reveal mt-10 text-center" style="transition-delay: 200ms">
+          <p class="text-sm text-dim">
+            ¿Buscas un junior con estos antecedentes?
+            <a href="#contacto" class="font-semibold text-neon-soft transition-colors hover:text-neon">
+              Hablemos →
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================== PREGUNTAS FRECUENTES ===================== -->
+      <section id="faq" class="relative border-t border-line bg-abyss/50 py-24 lg:py-32">
+        <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+              <div class="reveal" style="transition-delay: 0ms">
+                <p class="mb-4 flex items-center gap-3 font-display text-xs uppercase tracking-[0.45em] text-neon-soft">
+                  <span class="h-px w-10 bg-neon"> </span>
+                  Preguntas frecuentes
+                </p>
+                <h2 class="font-display text-3xl font-semibold leading-tight tracking-wide text-ink sm:text-5xl">
+                  PARA
+                  <span class="text-cyan cyan-glow"> RECLUTADORES </span>
+                </h2>
+                <p class="mt-5 max-w-sm text-lg text-muted">
+                  Respuestas directas y verificables sobre mi perfil, mi nivel y
+                  mi disponibilidad. Sin letra pequeña.
+                </p>
+                <a href="#contacto"
+                  class="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-neon-soft transition-colors hover:text-neon">
+                  ¿Otra pregunta? Escríbeme →
+                </a>
+              </div>
+              <div class="space-y-3">
+                <div class="reveal" style="transition-delay: 0ms">
+                  <div class="rounded-2xl border transition-colors duration-300 border-neon/50 bg-panel">
+                    <button aria-expanded="true"
+                      class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
+                      <span class="text-base font-semibold text-ink">
+                        ¿Cuál es tu perfil profesional?
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-neon-soft transition-transform duration-300 rotate-180"
+                        aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    <div class="acc-body open">
+                      <div>
+                        <p class="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+                          Soy desarrollador de software junior. Tengo bases en
+                          desarrollo web (HTML, CSS, JavaScript, Tailwind),
+                          programación (Python, Java, PHP) y bases de datos
+                          (MySQL, SQLite, Oracle), además de formación práctica en
+                          diseño digital y soporte técnico. No me presento como
+                          senior ni como experto: estoy en etapa de crecimiento y
+                          busco mi primera oportunidad formal en el sector.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="reveal" style="transition-delay: 70ms">
+                  <div
+                    class="rounded-2xl border transition-colors duration-300 border-line bg-panel/40 hover:border-white/20">
+                    <button aria-expanded="false"
+                      class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
+                      <span class="text-base font-semibold text-ink">
+                        ¿Qué tecnologías manejas hoy?
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-neon-soft transition-transform duration-300"
+                        aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    <div class="acc-body">
+                      <div>
+                        <p class="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+                          En la web: HTML, CSS, JavaScript, diseño responsive y
+                          Tailwind CSS. En programación y datos: Python, Java, PHP
+                          y SQL con MySQL, SQLite y Oracle. Uso Git/GitHub y VS
+                          Code a diario, y conozco herramientas como Draw.io,
+                          StarUML y Vercel. En diseño trabajo con Photoshop y
+                          Canva.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="reveal" style="transition-delay: 140ms">
+                  <div
+                    class="rounded-2xl border transition-colors duration-300 border-line bg-panel/40 hover:border-white/20">
+                    <button aria-expanded="false"
+                      class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
+                      <span class="text-base font-semibold text-ink">
+                        ¿Cuál es tu disponibilidad?
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-neon-soft transition-transform duration-300"
+                        aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    <div class="acc-body">
+                      <div>
+                        <p class="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+                          Inmediata. Tengo horario flexible y puedo adaptarme a
+                          las necesidades del proyecto, ya sea por horas, por
+                          entregables o en un equipo con rutinas definidas.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="reveal" style="transition-delay: 210ms">
+                  <div
+                    class="rounded-2xl border transition-colors duration-300 border-line bg-panel/40 hover:border-white/20">
+                    <button aria-expanded="false"
+                      class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
+                      <span class="text-base font-semibold text-ink">
+                        ¿Puedes trabajar en remoto?
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-neon-soft transition-transform duration-300"
+                        aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    <div class="acc-body">
+                      <div>
+                        <p class="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+                          Sí, es mi modalidad preferida. Trabajo desde Sibaté,
+                          Cundinamarca (Colombia), con conexión estable y
+                          disposición para reuniones en los horarios que el equipo
+                          necesite coordinar.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="reveal" style="transition-delay: 280ms">
+                  <div
+                    class="rounded-2xl border transition-colors duration-300 border-line bg-panel/40 hover:border-white/20">
+                    <button aria-expanded="false"
+                      class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
+                      <span class="text-base font-semibold text-ink">
+                        ¿Tienes proyectos o clientes que pueda revisar?
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-neon-soft transition-transform duration-300"
+                        aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    <div class="acc-body">
+                      <div>
+                        <p class="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+                          Este portafolio es mi proyecto personal más completo y
+                          lo comparto con gusto. Las demás muestras están
+                          etiquetadas como concepto o en desarrollo porque aún no
+                          he trabajado con clientes formales. Mi experiencia
+                          laboral real está en soporte técnico independiente y en
+                          una práctica de operación y programación CNC en Fagrin
+                          Ltda.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="reveal" style="transition-delay: 350ms">
+                  <div
+                    class="rounded-2xl border transition-colors duration-300 border-line bg-panel/40 hover:border-white/20">
+                    <button aria-expanded="false"
+                      class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
+                      <span class="text-base font-semibold text-ink">
+                        ¿Cómo usas la inteligencia artificial en tu trabajo?
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-neon-soft transition-transform duration-300"
+                        aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    <div class="acc-body">
+                      <div>
+                        <p class="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+                          Como apoyo para aprender, resolver dudas, explorar
+                          enfoques y pulir detalles de código o diseño. Reviso y
+                          entiendo todo lo que entrego, y la responsabilidad del
+                          resultado es mía. Nunca presento trabajo generado por IA
+                          como si fuera mérito propio.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="reveal" style="transition-delay: 420ms">
+                  <div
+                    class="rounded-2xl border transition-colors duration-300 border-line bg-panel/40 hover:border-white/20">
+                    <button aria-expanded="false"
+                      class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
+                      <span class="text-base font-semibold text-ink">
+                        ¿Qué idiomas hablas?
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-neon-soft transition-transform duration-300"
+                        aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                    </button>
+                    <div class="acc-body">
+                      <div>
+                        <p class="px-6 pb-6 text-[15px] leading-relaxed text-muted">
+                          Español nativo e inglés básico: puedo leer documentación
+                          técnica y desenvolverme en conversaciones sencillas, y
+                          estoy trabajando en mejorarlo.
+                        </p>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CONTACTO ===================== -->
+      <section id="contacto" class="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-32">
+        <div class="reveal" style="transition-delay: 0ms">
+        <div
+          class="corner relative overflow-hidden rounded-3xl border border-neon/40 bg-gradient-to-br from-panel via-abyss to-panel px-6 py-16 text-center sm:px-12 lg:py-24">
+          <div
+            class="pointer-events-none absolute inset-0 bg-[radial-gradient(40rem_22rem_at_50%_-10%,rgba(255,46,136,0.25),transparent_65%),radial-gradient(30rem_18rem_at_85%_110%,rgba(62,224,255,0.18),transparent_60%)] animate-glow-breathe"
+            aria-hidden="true"></div>
+          <p class="relative mb-4 font-display text-xs uppercase tracking-[0.5em] text-cyan">
+            Disponible para oportunidades junior
+          </p>
+          <h2
+            class="relative mx-auto max-w-3xl font-display text-3xl font-semibold leading-tight tracking-wide text-ink sm:text-5xl">
+            ¿BUSCAS UN JUNIOR
+            <span class="text-neon text-glow"> COMPROMETIDO? </span>
+          </h2>
+          <p class="relative mx-auto mt-5 max-w-xl text-lg text-muted">
+            Escríbeme por LinkedIn o por los canales que deje configurados.
+            Respondo rápido, con honestidad sobre lo que sé y lo que puedo
+            aprender.
+          </p>
+          <div class="relative mx-auto mt-9 flex max-w-2xl flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href="https://www.linkedin.com/in/leonardo-m%C3%A1rquez-097269440/" target="_blank"
+              rel="noopener noreferrer" class="contact-btn contact-btn-linkedin w-full sm:w-auto"
+              title="LinkedIn — Leonardo Márquez">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4">
+                <path
+                  d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm6.5 0H13v1.7h.05c.48-.9 1.65-1.85 3.4-1.85 3.6 0 4.27 2.37 4.27 5.45V21h-4v-5.9c0-1.4-.03-3.2-1.96-3.2-1.96 0-2.26 1.53-2.26 3.1V21h-4V9z">
+                </path>
+              </svg>
+              <span>LinkedIn</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-arrow-up-right h-3.5 w-3.5 opacity-70 transition-transform duration-300"
+                aria-hidden="true">
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path>
+              </svg>
+            </a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=lumar312456@gmail.com&su=Contacto%20desde%20Portafolio%20-%20Leonardo%20M%C3%A1rquez&body=Hola%20Leonardo%2C%0A%0AVi%20tu%20portafolio%20como%20desarrollador%20de%20software%20y%20me%20gustar%C3%ADa%20ponerme%20en%20contacto%20contigo%20para%20conversar%20sobre%20una%20oportunidad%20o%20proyecto.%0A%0ASaludos%20cordiales."
+              target="_blank" rel="noopener noreferrer" class="contact-btn contact-btn-correo w-full sm:w-auto"
+              title="Enviar correo a lumar312456@gmail.com">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-mail h-4 w-4" aria-hidden="true">
+                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              </svg>
+              <span>Correo</span>
+            </a>
+            <a href="https://wa.me/573132049102?text=Hola%20Leonardo%2C%20vi%20tu%20portafolio%20como%20desarrollador%20de%20software%20y%20me%20gustar%C3%ADa%20conversar%20contigo%20sobre%20una%20oportunidad%20o%20proyecto."
+              target="_blank" rel="noopener noreferrer" class="contact-btn contact-btn-whatsapp w-full sm:w-auto"
+              title="Escribir por WhatsApp a +57 313 204 9102">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-message-circle h-4 w-4" aria-hidden="true">
+                <path
+                  d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719">
+                </path>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+
         </div>
       </div>
-      <button class="chat-close" id="chat-close" aria-label="Cerrar">×</button>
-    </header>
-    <div class="chat-body" id="chat-body"></div>
-    <div class="chat-quick" id="chat-quick"></div>
-    <form class="chat-form" id="chat-form" autocomplete="off">
-      <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." aria-label="Mensaje" />
-      <button type="submit" aria-label="Enviar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-        </svg>
-      </button>
-    </form>
-  </aside>
+      </section>
+    </main>
 
-<style>
-    /* Chat widget — estilos propios, no afectan al resto */
-    .chat-fab{position:fixed;bottom:24px;right:24px;z-index:9998;width:64px;height:64px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;box-shadow:0 10px 30px rgba(0,229,255,.35),0 6px 20px rgba(213,0,249,.3);transition:transform .2s ease,opacity .2s ease;font-family:'JetBrains Mono',monospace}
-    .chat-fab svg{width:24px;height:24px}
-    .chat-fab-label{font-size:9px;font-weight:700;letter-spacing:1px;margin-top:2px}
-    .chat-fab:hover{transform:scale(1.08)}
-    .chat-fab.hidden{opacity:0;pointer-events:none;transform:scale(.6)}
-    .chat-window{position:fixed;bottom:24px;right:24px;z-index:9999;width:370px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 100px);background:#0a0a0f;border:1px solid rgba(0,229,255,.3);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 30px rgba(0,229,255,.15);transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:transform .25s ease,opacity .25s ease;font-family:'Poppins',sans-serif}
-    .chat-window.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
-    .chat-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(135deg,rgba(0,229,255,.12),rgba(213,0,249,.12));border-bottom:1px solid rgba(255,255,255,.08)}
-    .chat-header-left{display:flex;align-items:center;gap:12px}
-    .chat-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:'JetBrains Mono',monospace}
-    .chat-title{color:#fff;font-weight:600;font-size:14px;line-height:1}
-    .chat-status{color:#00e5ff;font-size:11px;display:flex;align-items:center;gap:6px;margin-top:4px;font-family:'JetBrains Mono',monospace}
-    .chat-status .dot{width:7px;height:7px;border-radius:50%;background:#00e5ff;box-shadow:0 0 8px #00e5ff;animation:pulse 1.5s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-    .chat-close{background:transparent;border:0;color:#fff;font-size:26px;cursor:pointer;padding:0;width:30px;height:30px;display:flex;align-items:center;justify-content:center;line-height:1;border-radius:6px;transition:background .2s}
-    .chat-close:hover{background:rgba(255,255,255,.1)}
-    .chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#0a0a0f}
-    .chat-body::-webkit-scrollbar{width:6px}
-    .chat-body::-webkit-scrollbar-thumb{background:rgba(0,229,255,.25);border-radius:3px}
-    .msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:13.5px;line-height:1.5;word-wrap:break-word;animation:msgIn .25s ease}
-    @keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-    .msg.bot{background:rgba(255,255,255,.06);color:#e8e8f0;align-self:flex-start;border:1px solid rgba(0,229,255,.15)}
-    .msg.user{background:linear-gradient(135deg,#00e5ff,#d500f9);color:#0a0a0f;align-self:flex-end;font-weight:500}
-    .msg a{color:#00e5ff;text-decoration:underline}
-    .msg.user a{color:#0a0a0f}
-    .typing{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(0,229,255,.15);padding:10px 14px;border-radius:14px;display:flex;gap:4px}
-    .typing span{width:7px;height:7px;border-radius:50%;background:#00e5ff;animation:typing 1.2s infinite ease-in-out}
-    .typing span:nth-child(2){animation-delay:.15s}
-    .typing span:nth-child(3){animation-delay:.3s}
-    @keyframes typing{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
-    .chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px;border-top:1px solid rgba(255,255,255,.06)}
-    .chat-quick button{background:rgba(0,229,255,.08);color:#00e5ff;border:1px solid rgba(0,229,255,.3);padding:6px 11px;border-radius:14px;font-size:11px;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:all .2s;font-weight:500}
-    .chat-quick button:hover{background:rgba(0,229,255,.18);border-color:#00e5ff;transform:translateY(-1px)}
-    .chat-form{display:flex;gap:8px;padding:12px;background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.08)}
-    .chat-form input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 13px;border-radius:10px;font-size:13px;font-family:'Poppins',sans-serif;outline:none;transition:border-color .2s}
-    .chat-form input:focus{border-color:#00e5ff}
-    .chat-form button{background:linear-gradient(135deg,#00e5ff,#d500f9);border:0;color:#0a0a0f;width:42px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s}
-    .chat-form button:hover{transform:scale(1.05)}
-    .chat-form button svg{width:18px;height:18px}
-    @media (max-width:480px){
-      .chat-fab{bottom:max(1rem,env(safe-area-inset-bottom));right:max(1rem,env(safe-area-inset-right));width:clamp(3.25rem,14vw,3.5rem);height:clamp(3.25rem,14vw,3.5rem)}
-      .chat-window{bottom:max(1rem,env(safe-area-inset-bottom));right:max(1rem,env(safe-area-inset-right));left:max(1rem,env(safe-area-inset-left));width:auto;height:min(75vh,42rem);height:min(75dvh,42rem);max-height:calc(100vh - 2rem);max-height:calc(100dvh - 2rem)}
-    }
-  </style>
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="border-t border-line bg-abyss/70">
+      <div
+        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-6 text-xs text-dim sm:flex-row lg:px-8">
+        <p>© 2026 Leonardo Márquez · ByteForge.</p>
+        <p class="flex items-center gap-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-neon animate-pulse-dot">
+          </span>
+          Perfil junior honesto, en crecimiento constante.
+        </p>
+      </div>
+    </footer>
+  </div>
 
-  <script src="js/main.js"></script>
+  <!-- Lógica JavaScript externa -->
+  <script src="script.js"></script>
+  <script src="nebula3d.js" defer></script>
 </body>
+
 </html>
